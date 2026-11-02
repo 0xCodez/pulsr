@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lumen Screens</title>
+<style>
+:root{
+  --green:#2EF2A0;--yellow:#FFD84D;--red:#FF5A6E;--hurts:#FFA845;
+  --sleep1:#8FB4FF;--sleep2:#B49BFF;--strain1:#2FD4FF;--strain2:#4F7BFF;
+  --bg1:#0B1220;--bg2:#05070D;--text:#fff;--sec:rgba(235,240,255,.58);--ter:rgba(235,240,255,.35);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg2);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",sans-serif;-webkit-font-smoothing:antialiased}
+.phone{position:relative;width:390px;height:844px;overflow:hidden;background:var(--bg2)}
+.aurora{position:absolute;inset:0;z-index:0}
+.content{position:relative;z-index:1;padding:0 16px}
+.status{display:flex;justify-content:space-between;align-items:center;height:54px;padding:0 30px 0 34px;font-weight:600;font-size:17px;position:relative;z-index:2}
+.status .icons{display:flex;gap:6px;align-items:center}
+.glass{background:linear-gradient(160deg,rgba(255,255,255,.13),rgba(255,255,255,.04) 45%,rgba(255,255,255,.07));
+  backdrop-filter:blur(22px) saturate(160%);-webkit-backdrop-filter:blur(22px) saturate(160%);
+  border:1px solid rgba(255,255,255,.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),inset 0 -1px 0 rgba(255,255,255,.04),0 10px 30px rgba(0,0,0,.25)}
+.card{border-radius:28px;padding:18px;margin-bottom:14px}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;color:var(--sec)}
+.rounded{font-family:"SF Pro Rounded",ui-rounded,-apple-system,sans-serif}
+.num{font-family:"SF Pro Rounded",ui-rounded,-apple-system,sans-serif;font-weight:700;font-variant-numeric:tabular-nums}
+.row{display:flex;align-items:center}
+.between{justify-content:space-between}
+.circle-btn{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700}
+.pill{border-radius:999px;padding:10px 16px;font-size:15px;font-weight:600;letter-spacing:1.5px}
+.chev{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.tiles{display:flex;gap:10px;margin:14px 0 14px}
+.tile{flex:1;border-radius:26px;padding:14px 0 12px;display:flex;flex-direction:column;align-items:center;gap:9px}
+.tile .label{font-size:12px;font-weight:700;letter-spacing:1.3px}
+.title2{font-size:22px;font-weight:600;margin:6px 4px 12px}
+.callout{font-size:15px;line-height:1.38;color:rgba(255,255,255,.75)}
+.monitors{display:flex;gap:12px}
+.monitors .card{flex:1;padding:15px}
+.badge{border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px}
+.act{display:flex;align-items:center;gap:12px;padding:6px;border-radius:16px;background:rgba(255,255,255,.05);margin-top:10px}
+.act .b{width:92px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;gap:6px;font-weight:700;font-size:15px}
+.act .t{font-size:14px;font-weight:600;letter-spacing:1px;flex:1}
+.act .d{font-size:12px;color:var(--sec);padding-right:8px}
+.tabbar{position:absolute;left:16px;right:16px;bottom:24px;height:64px;border-radius:32px;display:flex;align-items:center;justify-content:space-around;z-index:5;padding:0 8px}
+.tab{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;font-weight:600;color:rgba(255,255,255,.6);width:78px;padding:7px 0;border-radius:24px}
+.tab.on{color:#fff;background:rgba(255,255,255,.12)}
+.navbar{display:flex;align-items:center;justify-content:space-between;height:52px;margin-bottom:4px}
+.navbar .ttl{font-size:15px;font-weight:600;letter-spacing:1.5px}
+.contrib{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.contrib:last-of-type{border-bottom:none}
+.contrib .ic{width:26px;color:var(--sec);display:flex;justify-content:center}
+.contrib .t{font-size:13px;font-weight:600;letter-spacing:1px;flex:1;white-space:nowrap;text-transform:uppercase}
+.contrib .v{font-size:20px}
+.legend{font-size:12px;color:var(--sec);background:rgba(0,0,0,.25);border-radius:10px;padding:10px;margin-top:6px}
+.insight{border-radius:22px;padding:16px;margin-bottom:14px;background:linear-gradient(160deg,rgba(110,123,255,.16),rgba(255,255,255,.04));border:1px solid rgba(110,123,255,.55);backdrop-filter:blur(20px)}
+.insight .act-link{text-transform:uppercase;margin-top:10px;font-size:12px;font-weight:700;letter-spacing:1.2px;background:linear-gradient(90deg,#8FA8FF,#B28CFF);-webkit-background-clip:text;color:transparent}
+.qbar{display:flex;gap:3px;width:70px}
+.qbar i{flex:1;height:4px;border-radius:2px;background:rgba(255,255,255,.12)}
+.bubble-me{align-self:flex-end;max-width:78%;border-radius:18px;padding:10px 14px;font-size:16px;background:linear-gradient(160deg,rgba(110,123,255,.45),rgba(110,123,255,.22));border:1px solid rgba(255,255,255,.14)}
+.bubble-ai{display:flex;gap:10px;font-size:15px;line-height:1.4;max-width:94%}
+.avatar{flex:none;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;border:1.5px solid transparent;background:linear-gradient(var(--bg1),var(--bg1)) padding-box,conic-gradient(#6E7BFF,#2FD4FF,#B28CFF,#6E7BFF) border-box}
+.impact{border-radius:20px;padding:14px 16px;margin-bottom:10px}
+.watch{width:208px;height:248px;border-radius:52px;overflow:hidden;position:relative;background:#000}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+const C={green:'#2EF2A0',yellow:'#FFD84D',red:'#FF5A6E',hurts:'#FFA845',s1:'#8FB4FF',s2:'#B49BFF',t1:'#2FD4FF',t2:'#4F7BFF'};
+let gid=0;
+// --- seeded random
+let seed=7;function rnd(){seed^=seed<<13;seed^=seed>>>17;seed^=seed<<5;return ((seed>>>0)%10000)/10000}
+function sym(name,size=17,color='currentColor'){
+  const p={
+    chevL:'<path d="M15 5l-7 7 7 7" fill="none" stroke="C" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>',
+    chevR:'<path d="M9 5l7 7-7 7" fill="none" stroke="C" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>',
+    watch:'<rect x="7" y="5" width="10" height="14" rx="3" fill="none" stroke="C" stroke-width="1.8"/><path d="M9 5l.6-3h4.8l.6 3M9 19l.6 3h4.8l.6-3" fill="none" stroke="C" stroke-width="1.8"/>',
+    check:'<path d="M5 12.5l4.5 4.5L19 7" fill="none" stroke="C" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>',
+    moon:'<path d="M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z" fill="C"/>',
+    run:'<circle cx="14.5" cy="4" r="2.2" fill="C"/><path d="M8 21l3-6 3 2v5M6 11l4-3 4 1 2 4 3 1M11 15l1.5-5" fill="none" stroke="C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
+    heart:'<path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0112 7.3 4.3 4.3 0 0119.5 10c0 5.4-7.5 10-7.5 10z" fill="none" stroke="C" stroke-width="1.8"/>',
+    heartF:'<path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0112 7.3 4.3 4.3 0 0119.5 10c0 5.4-7.5 10-7.5 10z" fill="C"/>',
+    wave:'<path d="M2 12h4l2-5 4 10 2-6 2 3h6" fill="none" stroke="C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>',
+    lungs:'<path d="M12 4v8M12 10c-2 0-3-3-5-3S3 11 3 16c0 2 1 3 3 3s4-1 4-3v-4M12 10c2 0 3-3 5-3s4 4 4 9c0 2-1 3-3 3s-4-1-4-3v-4" fill="none" stroke="C" stroke-width="1.6" stroke-linecap="round"/>',
+    zzz:'<path d="M4 6h5l-5 6h5M13 11h4l-4 5h4M18 3h3l-3 4h3" fill="none" stroke="C" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>',
+    clock:'<circle cx="12" cy="12" r="8.5" fill="none" stroke="C" stroke-width="1.8"/><path d="M12 7v5l3 2" fill="none" stroke="C" stroke-width="1.8" stroke-linecap="round"/>',
+    cal:'<rect x="4" y="5" width="16" height="15" rx="3" fill="none" stroke="C" stroke-width="1.8"/><path d="M4 10h16M8 3v4M16 3v4" stroke="C" stroke-width="1.8" stroke-linecap="round"/>',
+    bed:'<path d="M3 18V7M3 14h18v4M21 14v-2a3 3 0 00-3-3h-7v5" fill="none" stroke="C" stroke-width="1.8" stroke-linecap="round"/><circle cx="7" cy="11" r="1.8" fill="C"/>',
+    spark:'<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z" fill="C"/>',
+    dumbbell:'<path d="M3 9v6M6 7v10M18 7v10M21 9v6M6 12h12" fill="none" stroke="C" stroke-width="2" stroke-linecap="round"/>',
+    steps:'<path d="M8 3c2 0 3 2 3 5s-1 5-3 5-3-2-3-5 1-5 3-5zM6 15h4v2a2 2 0 01-4 0zM16 7c2 0 3 2 3 5s-1 5-3 5-3-2-3-5 1-5 3-5zM14 19h4v1a2 2 0 01-4 0z" fill="C"/>',
+    flame:'<path d="M12 21c-4 0-6.5-2.7-6.5-6 0-4 3.5-5.5 4-10 3 2 4 4 4 6 1-1 1.5-2 1.5-3 2 1.5 3.5 4 3.5 7 0 3.3-2.5 6-6.5 6z" fill="none" stroke="C" stroke-width="1.8" stroke-linejoin="round"/>',
+    home:'<circle cx="12" cy="12" r="8.5" fill="none" stroke="C" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="C" stroke-width="2"/>',
+    chart:'<path d="M3 20h18M5 16l4-5 4 3 6-8" fill="none" stroke="C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
+    book:'<path d="M5 4h11a3 3 0 013 3v13H8a3 3 0 01-3-3zM5 17a3 3 0 013-3h11" fill="none" stroke="C" stroke-width="1.9" stroke-linejoin="round"/>',
+    up:'<path d="M12 5l7 12H5z" fill="C"/>',down:'<path d="M12 19L5 7h14z" fill="C"/>',
+    arrowR:'<path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>',
+    arrowU:'<path d="M12 19V5M6 11l6-6 6 6" fill="none" stroke="C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>',
+    pencil:'<path d="M4 20h4L19 9l-4-4L4 16zM14 6l4 4" fill="none" stroke="C" stroke-width="1.8" stroke-linejoin="round"/>',
+    battery:'<rect x="1" y="6" width="21" height="12" rx="3.5" fill="none" stroke="C" stroke-opacity=".45" stroke-width="1.3"/><rect x="3" y="8" width="15" height="8" rx="2" fill="C"/><path d="M23.5 10.5v3" stroke="C" stroke-opacity=".45" stroke-width="1.5" stroke-linecap="round"/>',
+    signal:'<rect x="2" y="15" width="3.5" height="5" rx="1" fill="C"/><rect x="7.5" y="11" width="3.5" height="9" rx="1" fill="C"/><rect x="13" y="7" width="3.5" height="13" rx="1" fill="C"/><rect x="18.5" y="3" width="3.5" height="17" rx="1" fill="C"/>',
+    wifi:'<path d="M2 9a14 14 0 0120 0M5.5 12.5a9 9 0 0113 0M9 16a4 4 0 016 0" fill="none" stroke="C" stroke-width="2.4" stroke-linecap="round"/><circle cx="12" cy="19.5" r="1.6" fill="C"/>',
+  }[name]||'';
+  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" style="display:block">${p.replaceAll('"C"',`"${color}"`)}</svg>`;
+}
+function status(){return `<div class="status"><span>9:41</span><span class="icons">${sym('signal',17,'#fff')}${sym('wifi',17,'#fff')}${sym('battery',27,'#fff')}</span></div>`}
+function aurora(a,b='#4F7BFF'){
+  return `<div class="aurora" style="background:
+   radial-gradient(70% 45% at 8% 4%, ${a}88, transparent 70%),
+   radial-gradient(60% 40% at 92% 10%, ${b}55, transparent 70%),
+   radial-gradient(70% 35% at 55% 38%, ${a}2e, transparent 70%),
+   radial-gradient(60% 30% at 95% 45%, ${b}40, transparent 70%),
+   linear-gradient(180deg,#0B1220 0%,#070A12 55%,#05070D 100%)"></div>`}
+function ring(size,lw,progress,colors,center,marker){
+  const id='g'+(gid++), r=(size-lw)/2-3, c=size/2, L=2*Math.PI*r;
+  const p=Math.max(.002,Math.min(1,progress));
+  let m='';
+  if(marker!=null){const a=marker*2*Math.PI-Math.PI/2, x1=c+(r-lw/2-3)*Math.cos(a),y1=c+(r-lw/2-3)*Math.sin(a),x2=c+(r+lw/2+3)*Math.cos(a),y2=c+(r+lw/2+3)*Math.sin(a);
+    m=`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/>`}
+  return `<div style="position:relative;width:${size}px;height:${size}px">
+  <svg width="${size}" height="${size}" style="position:absolute;inset:0;overflow:visible">
+   <defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${colors[0]}"/><stop offset="1" stop-color="${colors[1]}"/></linearGradient>
+   <filter id="f${id}" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="${lw*.75}"/></filter></defs>
+   <circle cx="${c}" cy="${c}" r="${r}" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="${lw}"/>
+   <circle cx="${c}" cy="${c}" r="${r}" fill="none" stroke="${colors[1]}" stroke-opacity=".55" stroke-width="${lw}" stroke-linecap="round" stroke-dasharray="${L*p} ${L}" transform="rotate(-90 ${c} ${c})" filter="url(#f${id})"/>
+   <circle cx="${c}" cy="${c}" r="${r}" fill="none" stroke="url(#${id})" stroke-width="${lw}" stroke-linecap="round" stroke-dasharray="${L*p} ${L}" transform="rotate(-90 ${c} ${c})"/>
+   ${m}
+  </svg>
+  <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center">${center}</div></div>`}
+function big(v,u,s){return `<span class="num" style="font-size:${s}px;line-height:1">${v}${u?`<span style="font-size:${s*.45}px">${u}</span>`:''}</span>`}
+function tabbar(on){
+  const t=[['home','Today'],['chart','Trends'],['book','Journal'],['spark','Coach']];
+  return `<div class="tabbar glass">${t.map(([i,n])=>`<div class="tab ${n==on?'on':''}">${sym(i,22,n==on?'#fff':'rgba(255,255,255,.6)')}${n}</div>`).join('')}</div>`}
+function navbar(title){return `<div class="navbar"><div class="chev glass circle-btn" style="width:44px;height:44px">${sym('chevL',18,'#fff')}</div><div class="ttl">${title}</div><div style="width:44px"></div></div>`}
+function contrib(icon,title,value,arrow,color,bar){
+  return `<div class="contrib"><div class="ic">${sym(icon,19,'rgba(235,240,255,.58)')}</div><div class="t">${title}</div>
+  ${bar!=null?`<div class="qbar">${[0,1,2].map(i=>`<i style="${i==bar?`background:${[C.hurts,'rgba(255,255,255,.7)',C.green][bar]}`:''}"></i>`).join('')}</div>`:''}
+  <div class="v num" style="font-weight:600">${value}</div>
+  ${arrow?sym(arrow,10,color):`<span style="width:6px;height:6px;border-radius:3px;background:rgba(235,240,255,.5);margin:0 2px"></span>`}</div>`}
+function hero(progress,colors,value,unit,caption,marker){
+  return `<div style="display:flex;justify-content:center;margin:6px 0 16px">${ring(270,22,progress,colors,
+   `<div style="font-size:12px;letter-spacing:4px;color:var(--sec);font-weight:500">LUMEN</div>${big(value,unit,64)}<div style="font-size:13px;font-weight:600;letter-spacing:1.5px;margin-top:4px">${caption}</div>`,marker)}</div>`}
+function callout(text,link){return `<div class="insight"><div style="font-size:15px;line-height:1.4">${text}</div>${link?`<div class="act-link">${link} →</div>`:''}</div>`}
+
+// ---------- chart helpers
+function bars(vals,colorFn,h=150,maxV=100,labels){
+  const w=318, bw=w/vals.length;
+  return `<svg width="${w}" height="${h+20}">${[0,.33,.66,1].map(f=>`<line x1="0" x2="${w}" y1="${h-h*f}" y2="${h-h*f}" stroke="rgba(255,255,255,.07)"/>`).join('')}
+  ${vals.map((v,i)=>{const bh=h*v/maxV;const col=colorFn(v,i);return `<rect x="${i*bw+bw*.18}" y="${h-bh}" width="${bw*.64}" height="${bh}" rx="5" fill="${col}"/>`}).join('')}
+  ${labels?labels.map((l,i)=>i%2==0?`<text x="${i*bw+bw/2}" y="${h+15}" fill="rgba(235,240,255,.5)" font-size="10" text-anchor="middle">${l}</text>`:'').join(''):''}</svg>`}
+function linePath(pts){return pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ')}
+function recColor(v){return v>=67?C.green:v>=34?C.yellow:C.red}
+
+// ---------- screens
+const S={};
+S.today=()=>`<div class="phone">${aurora(C.green)}${status()}<div class="content">
+ <div class="row between" style="margin-top:4px">
+  <div class="circle-btn glass">ME</div>
+  <div class="row" style="gap:6px"><div class="chev glass">${sym('chevL',14,'#fff')}</div><div class="pill glass" style="min-width:120px;text-align:center">TODAY</div><div class="chev glass" style="opacity:.45">${sym('chevR',14,'#fff')}</div></div>
+  <div class="circle-btn glass">${sym('watch',20,'#fff')}</div></div>
+ <div class="tiles">
+  ${[[.78,[C.s1,C.s2],'78','%','SLEEP',null],[.71,['#2EF2A0bb',C.green],'71','%','RECOVERY',null],[16.9/21,[C.t1,C.t2],'16.9','','STRAIN',14/21]].map(([p,c,v,u,l,m])=>
+   `<div class="tile glass">${ring(96,9,p,c,big(v,u,26),m)}<div class="label">${l} <span style="color:var(--sec)">›</span></div></div>`).join('')}
+ </div>
+ <div class="card glass" style="background:linear-gradient(160deg,rgba(46,242,160,.16),rgba(255,255,255,.04) 50%,rgba(46,242,160,.06))">
+  <div style="font-size:20px;font-weight:600;margin-bottom:8px">Primed to perform</div>
+  <div class="callout">Your HRV is 14% above your baseline. Your body can take on significant exertion — aim for a Strain of 14–18.</div></div>
+ <div class="monitors">
+  <div class="card glass"><div class="row between"><span class="eyebrow">Health Monitor</span><span style="color:var(--sec)">›</span></div>
+   <div class="row" style="gap:10px;margin-top:12px"><div class="badge" style="width:26px;height:26px;background:rgba(46,242,160,.25)">${sym('check',14,'#fff')}</div>
+   <div><div style="font-size:12px;font-weight:700;letter-spacing:.8px;color:var(--green)">WITHIN RANGE</div><div style="font-size:12px;color:var(--sec)">5/5 metrics</div></div></div></div>
+  <div class="card glass"><div class="row between"><span class="eyebrow">Stress</span><span style="color:var(--sec)">›</span></div>
+   <div class="row" style="gap:10px;margin-top:12px"><div class="badge num" style="width:34px;height:26px;background:rgba(48,224,161,.25)">1.4</div>
+   <div><div style="font-size:12px;font-weight:700;letter-spacing:.8px;color:#30E0A1">MEDIUM</div><div style="font-size:12px;color:var(--sec)">4:15 PM</div></div></div></div>
+ </div>
+ <div class="title2" style="margin-top:8px">My Day</div>
+ <div class="card glass"><div class="eyebrow">Activities</div>
+  <div class="act"><div class="b" style="background:rgba(143,180,255,.35)">${sym('moon',15,'#fff')}<span class="num">8:05</span></div><div class="t">SLEEP</div><div class="d">10:58 PM – 7:31 AM</div></div>
+  <div class="act"><div class="b" style="background:rgba(47,212,255,.35)">${sym('run',16,'#fff')}<span class="num">13.8</span></div><div class="t">RUNNING</div><div class="d">7:24 AM · 52 min</div></div>
+ </div>
+ <div class="card glass"><div class="eyebrow">Tonight's Sleep</div>
+  <div class="row between" style="margin-top:14px;align-items:flex-end"><div><div class="num" style="font-size:28px;font-weight:600">10:48 PM</div><div style="font-size:11px;font-weight:600;letter-spacing:1px;color:var(--sec)">RECOMMENDED BEDTIME</div></div>
+  <div style="text-align:right"><div class="num" style="font-size:28px;font-weight:600">8:27</div><div style="font-size:11px;font-weight:600;letter-spacing:1px;color:var(--sleep1)">SLEEP NEEDED</div></div></div></div>
+</div>${tabbar('Today')}</div>`;
+
+S.recovery=()=>{seed=11;const v=[64,71,58,79,68,53,65,65,82,68,79,71,52,71];
+return `<div class="phone">${aurora(C.green)}${status()}<div class="content">${navbar('TODAY')}
+ ${hero(.71,['#2EF2A0bb',C.green],'71','%','RECOVERY')}
+ <div class="card glass" style="padding:6px 18px 16px">
+  ${contrib('wave','Heart Rate Variability','63','up',C.green)}
+  ${contrib('heart','Resting Heart Rate','51','down',C.green)}
+  ${contrib('lungs','Respiratory Rate','14.6','up','rgba(235,240,255,.58)')}
+  ${contrib('zzz','Sleep Performance','78%')}
+  <div class="legend"><span style="color:${C.green}">▲</span><span style="color:${C.hurts}">▼</span> Today vs. prior 30 days</div></div>
+ ${callout('Your HRV is elevated, your RHR is lower than usual, sleep was sufficient — resulting in a higher Recovery today.','Break down my recovery')}
+ <div class="card glass"><div class="eyebrow" style="margin-bottom:12px">Recovery · 14 days</div>${bars(v,x=>recColor(x),130,100,['M','T','W','T','F','S','S','M','T','W','T','F','S','S'])}</div>
+</div></div>`};
+
+S.sleep=()=>{seed=3;
+ const stages=[];let t=0;const order=[2,3,2,1,2,3,2,1,0,2,3,2,1,2,1,0,2,1,2,1];const dur=[25,38,18,14,22,30,15,20,4,28,12,20,30,25,32,5,20,34,16,25];
+ order.forEach((s,i)=>{stages.push([t,dur[i],s]);t+=dur[i]});const total=t;
+ const cols=['#FFB37A','#5AD8FF','#6E8BFF','#8B5CFF'];
+ const hyp=`<svg width="318" height="150">${['AWAKE','REM','LIGHT','DEEP'].map((n,i)=>`<text x="0" y="${i*34+22}" fill="rgba(235,240,255,.5)" font-size="9" font-weight="600" letter-spacing="1">${n}</text><line x1="44" x2="318" y1="${i*34+18}" y2="${i*34+18}" stroke="rgba(255,255,255,.05)"/>`).join('')}
+ ${stages.map(([s,d,k])=>`<rect x="${44+s/total*274}" y="${k*34+6}" width="${Math.max(2,d/total*274-1)}" height="24" rx="4" fill="${cols[k]}"/>`).join('')}
+ ${['11 PM','1 AM','3 AM','5 AM','7 AM'].map((l,i)=>`<text x="${50+i*64}" y="148" fill="rgba(235,240,255,.5)" font-size="10">${l}</text>`).join('')}</svg>`;
+return `<div class="phone">${aurora(C.s2,C.s1)}${status()}<div class="content">${navbar('TODAY')}
+ ${hero(.78,[C.s1,C.s2],'78','%','SLEEP PERFORMANCE')}
+ <div class="card glass" style="padding:6px 18px 16px">
+  ${contrib('clock','Hours vs. Needed','96%',null,null,2)}
+  ${contrib('cal','Sleep Consistency','46%',null,null,0)}
+  ${contrib('bed','Sleep Efficiency','93%',null,null,2)}
+  ${contrib('spark','Restorative Sleep','41%',null,null,1)}
+  <div class="legend"><span style="color:${C.hurts}">▬</span> Poor &nbsp; <span style="color:#ddd">▬</span> Sufficient &nbsp; <span style="color:${C.green}">▬</span> Optimal</div></div>
+ ${callout('You slept 8:05 of the 8:27 you needed — performance is sufficient. Sleep consistency has the most room to improve.','Dive into my sleep')}
+ <div class="card glass"><div class="row between" style="margin-bottom:10px"><span class="eyebrow">Sleep Stages</span><span style="font-size:12px;color:var(--sec)">10:58 PM – 7:31 AM</span></div>${hyp}</div>
+</div></div>`};
+
+S.strain=()=>{seed=5;const pts=[];let hr=56;
+ for(let m=0;m<=1020;m+=5){let base=m<450?50:62;if(m>440&&m<495)base=150+18*Math.sin((m-440)/55*Math.PI);else if(m>450)base=68+(m>540&&m<720?14:6);if(m>505&&m<530)base=98;
+  hr=hr*.4+(base+(rnd()-.5)*(m>440&&m<495?8:12))*.6;pts.push([m,hr])}
+ const W=318,H=150,x=m=>m/1020*W,y=v=>H-(v-40)/(189-40)*H;
+ const path=linePath(pts.map(([m,v])=>[x(m),y(v)]));
+ const chart=`<svg width="${W}" height="${H+18}"><defs><linearGradient id="hrg" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#2FD4FF"/><stop offset=".45" stop-color="#2EF2A0"/><stop offset=".75" stop-color="#FFB340"/><stop offset="1" stop-color="#FF5A6E"/></linearGradient></defs>
+  <rect x="${x(440)}" y="0" width="${x(495)-x(440)}" height="${H}" fill="rgba(47,212,255,.12)" rx="4"/>
+  ${[60,100,140,180].map(v=>`<line x1="0" x2="${W}" y1="${y(v)}" y2="${y(v)}" stroke="rgba(255,255,255,.07)"/><text x="${W-2}" y="${y(v)-3}" fill="rgba(235,240,255,.4)" font-size="9" text-anchor="end">${v}</text>`).join('')}
+  <path d="${path}" fill="none" stroke="url(#hrg)" stroke-width="1.7" stroke-linejoin="round"/>
+  ${['12 AM','4 AM','8 AM','12 PM','4 PM'].map((l,i)=>`<text x="${i*72}" y="${H+15}" fill="rgba(235,240,255,.5)" font-size="10">${l}</text>`).join('')}</svg>`;
+return `<div class="phone">${aurora(C.t2,C.t1)}${status()}<div class="content">${navbar('TODAY')}
+ ${hero(16.9/21,[C.t1,C.t2],'16.9','','DAY STRAIN',14/21)}
+ <div style="text-align:center;font-size:12px;color:var(--sec);margin:-6px 0 12px">Target 14–18 based on your recovery</div>
+ <div class="card glass" style="padding:6px 18px 10px">
+  ${contrib('heart','Heart Rate Zones 1–3','1:12','up',C.green)}
+  ${contrib('heartF','Heart Rate Zones 4–5','0:53','up',C.green)}
+  ${contrib('dumbbell','Strength Activity Time','0:00','down',C.hurts)}
+  ${contrib('steps','Steps','12,459','up',C.green)}</div>
+ ${callout('Strain between 14 and 17.9 is strenuous — your cardiovascular system has been working hard.','Explore my strain')}
+ <div class="card glass"><div class="eyebrow" style="margin-bottom:10px">Heart Rate</div>${chart}</div>
+</div></div>`};
+
+S.stress=()=>{seed=9;const pts=[];let s=.3;
+ for(let i=0;i<=64;i++){let target=i<28?.25:i<34?1.9:i<44?1.3:i<50?2.4:1.4;s=s*.55+(target+(rnd()-.5)*.6)*.45;pts.push([i,Math.max(0,Math.min(3,s))])}
+ const W=318,H=150,x=i=>i/64*W,y=v=>H-v/3*H;
+ const chart=`<svg width="${W}" height="${H+18}"><defs><linearGradient id="sg" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#5AC8FA"/><stop offset=".5" stop-color="#30E0A1"/><stop offset="1" stop-color="#FFB340"/></linearGradient></defs>
+ <rect x="0" y="0" width="${x(28)}" height="${H}" fill="rgba(255,255,255,.04)"/><rect x="${x(30)}" y="0" width="${x(34)-x(30)}" height="${H}" fill="rgba(47,212,255,.12)"/>
+ ${[0,1,2,3].map(v=>`<line x1="0" x2="${W}" y1="${y(v)}" y2="${y(v)}" stroke="rgba(255,255,255,.07)"/><text x="2" y="${y(v)-3}" fill="rgba(235,240,255,.4)" font-size="9">${v}.0</text>`).join('')}
+ <path d="${linePath(pts.map(([i,v])=>[x(i),y(v)]))}" fill="none" stroke="url(#sg)" stroke-width="2.3" stroke-linejoin="round" stroke-linecap="round"/>
+ <circle cx="${x(64)}" cy="${y(pts[64][1])}" r="5" fill="#30E0A1"/>
+ ${['12 AM','4 AM','8 AM','12 PM','4 PM'].map((l,i)=>`<text x="${i*72}" y="${H+15}" fill="rgba(235,240,255,.5)" font-size="10">${l}</text>`).join('')}</svg>`;
+ const v=1.4,ang=-135+270*v/3;
+ const gauge=`<div style="position:relative;width:210px;height:200px;margin:4px auto 10px">
+ <svg width="210" height="210" style="position:absolute;inset:0"><defs><linearGradient id="gg" x1="0" y1="1" x2="1" y2="1"><stop offset="0" stop-color="#5AC8FA"/><stop offset=".5" stop-color="#30E0A1"/><stop offset="1" stop-color="#FFB340"/></linearGradient></defs>
+ <path d="${(()=>{const c=105,r=95,a0=135*Math.PI/180,a1=405*Math.PI/180;return `M${c+r*Math.cos(a0)} ${c+r*Math.sin(a0)} A${r} ${r} 0 1 1 ${c+r*Math.cos(a1)} ${c+r*Math.sin(a1)}`})()}" fill="none" stroke="url(#gg)" stroke-width="10" stroke-linecap="round"/>
+ <rect x="103" y="0" width="4" height="22" rx="2" fill="#fff" transform="rotate(${ang} 105 105)"/></svg>
+ <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding-bottom:6px">${big('1.4','',56)}<div style="font-size:17px;font-weight:600;letter-spacing:1.5px;color:#30E0A1">MEDIUM</div><div style="font-size:12px;color:var(--sec)">Last updated 4:15 PM</div></div></div>`;
+return `<div class="phone">${aurora('#30E0A1','#5AC8FA')}${status()}<div class="content">${navbar('STRESS MONITOR')}${gauge}
+ <div class="card glass"><div class="eyebrow" style="margin-bottom:10px">Through the day</div>${chart}</div>
+ ${callout('Most of your day was spent in the low stress zone. Your longest high-stress period started at 12:30 PM and lasted 75 minutes.','Learn more with coach')}
+ <div class="card glass"><div class="eyebrow">Total day</div><div class="row" style="gap:3px;margin:12px 0"><i style="flex:44;height:10px;border-radius:5px;background:#5AC8FA"></i><i style="flex:38;height:10px;border-radius:5px;background:#30E0A1"></i><i style="flex:18;height:10px;border-radius:5px;background:#FFB340"></i></div></div>
+</div></div>`};
+
+S.bodyage=()=>{seed=21;let dots='';const n=900,g=Math.PI*(3-Math.sqrt(5)),R=140,c=145;
+ for(let i=0;i<n;i++){const yy=1-2*(i+.5)/n,rr=Math.sqrt(1-yy*yy),th=g*i+.6,sh=.78+.22*Math.abs(Math.sin(i*12.9898));const x=Math.cos(th)*rr*sh,z=Math.sin(th)*rr*sh,d=(z+1)/2;const s=.6+d*2.2*(.5+.5*Math.abs(Math.sin(i)));
+  dots+=`<circle cx="${c+x*R}" cy="${c+yy*sh*R}" r="${s/2+.2}" fill="#2EF2A0" fill-opacity="${.22+.78*d}"/>`}
+ const sphere=`<svg width="290" height="290"><defs><radialGradient id="sph"><stop offset=".3" stop-color="#2EF2A0" stop-opacity="0"/><stop offset=".8" stop-color="#2EF2A0" stop-opacity=".12"/><stop offset="1" stop-color="#2EF2A0" stop-opacity=".38"/></radialGradient></defs><circle cx="145" cy="145" r="140" fill="url(#sph)"/>${dots}</svg>`;
+ const f=[['Resting Heart Rate','51 bpm',-1.4],['Daily Steps','9,812',-0.7],['Heart Rate Variability','59 ms',-0.5],['Sleep Duration','7.6 h',-0.5],['VO₂ Max','47.3',0.2],['Sleep Consistency','42 %',1.5]];
+ const rows=f.map(([n,v,y])=>{const half=55,w=Math.min(half,half*Math.abs(y)/4),col=y<=0?C.green:C.hurts;
+  return `<div class="row" style="gap:10px;padding:8px 0"><div style="flex:1"><div style="font-size:15px;font-weight:600">${n}</div><div style="font-size:12px;color:var(--sec)">${v}</div></div>
+  <svg width="110" height="8"><rect width="110" height="8" rx="4" fill="rgba(255,255,255,.06)"/><rect x="${y<=0?half-w:half}" width="${Math.max(w,3)}" height="8" rx="4" fill="${col}"/><rect x="55" width="1" height="8" fill="rgba(255,255,255,.3)"/></svg>
+  <div class="num" style="width:44px;text-align:right;color:${col};font-weight:600">${y>0?'+':''}${y.toFixed(1)}</div></div>`}).join('');
+return `<div class="phone">${aurora(C.green,'#1C7C6A')}${status()}<div class="content">${navbar('HEALTHSPAN')}
+ <div style="position:relative;display:flex;justify-content:center;margin:0 0 10px">${sphere}
+  <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px">${big('30.0','',60)}<div style="font-size:17px;font-weight:600;letter-spacing:2px;color:rgba(255,255,255,.8)">BODY AGE</div><div style="font-size:15px;font-weight:600;color:var(--green)">1.0 years younger</div></div></div>
+ <div class="card glass"><div class="row between" style="margin-bottom:6px"><span class="eyebrow">What moves it</span><span class="eyebrow" style="font-size:10px">Years</span></div>${rows}</div>
+</div></div>`};
+
+S.journal=()=>{const d=[['Hydration',24],['81%+ Sleep Performance',21],['Read in bed',13],['Sauna',6],['Morning sunlight',4],['Magnesium',1],['Phone in bed',-3],['Worked late',-6],['Caffeine after 2 PM',-9],['Alcohol',-18]];
+ const rows=d.map(([n,p])=>{const col=Math.abs(p)<2?'#8e8e93':p>=0?C.green:C.hurts,half=159,w=Math.min(half,half*Math.abs(p)/25);
+ return `<div class="impact glass"><div class="row between"><span style="font-size:13px;font-weight:600;letter-spacing:1px">${n.toUpperCase()}</span><span class="num" style="color:${Math.abs(p)<2?'var(--sec)':col}">${p>0?'+':''}${p}%</span></div>
+ <svg width="318" height="10" style="margin-top:10px"><rect width="318" height="8" y="1" rx="4" fill="rgba(255,255,255,.06)"/><rect x="${p>=0?half:half-w}" y="1" width="${Math.max(w,4)}" height="8" rx="4" fill="${col}"/><circle cx="${half}" cy="5" r="3" fill="#fff"/></svg></div>`}).join('');
+return `<div class="phone">${aurora('#6E7BFF',C.green)}${status()}<div class="content">${navbar('JOURNAL INSIGHTS')}
+ <div class="eyebrow" style="margin-top:4px">Refreshed daily</div><div style="font-size:22px;font-weight:600;margin:4px 0">Recovery Impact Analysis</div>
+ <div style="font-size:15px;color:var(--sec);margin-bottom:14px">How each behavior changed your next-day Recovery over the past 90 days.</div>
+ <div class="row between" style="font-size:12px;font-weight:700;letter-spacing:1px;margin-bottom:12px"><span style="color:${C.hurts}">▼ HURTS</span><span style="color:var(--sec)">% IMPACT</span><span style="color:${C.green}">HELPS ▲</span></div>${rows}
+</div></div>`};
+
+S.coach=()=>`<div class="phone">${aurora('#8B5CFF','#2FD4FF')}${status()}<div class="content" style="display:flex;flex-direction:column;gap:16px">
+ <div style="text-align:center;margin-top:6px"><div style="font-size:15px;font-weight:600;letter-spacing:3px">LUMEN COACH</div>
+ <span class="glass" style="display:inline-block;margin-top:6px;border-radius:99px;padding:3px 9px;font-size:10px;font-weight:700;letter-spacing:1px">ON-DEVICE · APPLE INTELLIGENCE</span></div>
+ <div class="bubble-ai"><div class="avatar">${sym('spark',13,'#fff')}</div><div>How can I help? I can see your recovery, sleep, strain and trends.</div></div>
+ <div class="bubble-me">Should I train hard today?</div>
+ <div class="bubble-ai"><div class="avatar">${sym('spark',13,'#fff')}</div><div>Yes — you're at 71% recovery with HRV 14% above your baseline, so today is a good day to push. Aim for a Strain of 14–18: a tempo run or intervals fits well. You're already at 16.9 after this morning's run, so keep the evening easy and get to bed by 10:50 PM to cover your 8:27 sleep need.</div></div>
+ <div class="bubble-me">Why is my sleep consistency low?</div>
+ <div class="bubble-ai"><div class="avatar">${sym('spark',13,'#fff')}</div><div>Your bedtime moved by about 70 minutes across the last four nights — weekends were later. Try keeping bed and wake times within 30 minutes of each other, even on Saturday.</div></div>
+ <div class="row" style="position:absolute;left:12px;right:12px;bottom:28px;gap:8px">
+  <div class="circle-btn glass" style="width:46px;height:46px;flex:none">${sym('pencil',18,'#fff')}</div>
+  <div class="glass" style="flex:1;border-radius:22px;padding:13px 16px;font-size:16px;color:var(--ter)">Ask anything about your data</div>
+  <div class="circle-btn" style="width:46px;height:46px;flex:none;background:linear-gradient(160deg,#8A95FF,#5A66F0);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 6px 20px rgba(110,123,255,.4)">${sym('arrowU',18,'#fff')}</div></div>
+</div></div>`;
+
+S.watch=()=>`<div class="watch"><div style="position:absolute;inset:0;background:radial-gradient(90% 60% at 50% 0%,rgba(46,242,160,.45),transparent 75%),#000"></div>
+ <div style="position:relative;padding:12px 18px 0;display:flex;justify-content:space-between;font-size:15px;font-weight:600"><span style="color:${C.green}">Lumen</span><span>9:41</span></div>
+ <div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:6px">
+  ${ring(106,9,.71,['#2EF2A0bb',C.green],`${big('71','%',30)}<div style="font-size:9px;font-weight:600;letter-spacing:1px">RECOVERY</div>`)}
+  <div class="row" style="gap:16px">
+   <div style="display:flex;flex-direction:column;align-items:center;gap:2px">${ring(52,5,.78,[C.s1,C.s2],big('78','%',13))}<span style="font-size:8px;font-weight:600;letter-spacing:1px;color:var(--sec)">SLEEP</span></div>
+   <div style="display:flex;flex-direction:column;align-items:center;gap:2px">${ring(52,5,16.9/21,[C.t1,C.t2],big('16.9','',13),14/21)}<span style="font-size:8px;font-weight:600;letter-spacing:1px;color:var(--sec)">STRAIN</span></div>
+  </div></div></div>`;
+
+const which=(location.hash||'#today').slice(1);
+document.getElementById('root').innerHTML=(S[which]||S.today)();
+if(which==='watch'){document.body.style.background='#000'}
+</script>
+</body>
+</html>
