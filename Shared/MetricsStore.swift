@@ -37,6 +37,8 @@ final class MetricsStore {
         profile = UserProfile.load()
         let defaultSource: Source = HealthKitSource.isAvailable ? .health : .demo
         source = Source(rawValue: UserDefaults.standard.string(forKey: "lumen.source") ?? "") ?? defaultSource
+        // `-demo` launch argument: screenshots and the Simulator, which has no Health data.
+        if ProcessInfo.processInfo.arguments.contains("-demo") { source = .demo }
         hasOnboarded = UserDefaults.standard.bool(forKey: "lumen.onboarded")
     }
 
