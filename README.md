@@ -13,10 +13,21 @@
 
 Lumen turns the heart rate, HRV, sleep stages, respiratory rate and workouts your Apple Watch already records into daily scores you can act on — wrapped in an iOS 26 Liquid Glass interface.
 
+<p align="center">
+  <img src="docs/screenshots/app/today-dark.png" width="200" alt="Today, dark">
+  <img src="docs/screenshots/app/today-light.png" width="200" alt="Today, light">
+  <img src="docs/screenshots/app/recovery-dark.png" width="200" alt="Recovery">
+  <img src="docs/screenshots/app/trends-dark.png" width="200" alt="Trends">
+  <img src="docs/screenshots/app/watch-recovery.png" width="150" alt="Apple Watch">
+</p>
+
+The recovery orb is a Metal shader: ribbons of light inside a glowing volume that beats at a resting heart rhythm and changes colour with your recovery zone. The design prototype lives in [`docs/design/lumen-iris.html`](docs/design/lumen-iris.html).
+
 ## Features
 
 | | |
 |---|---|
+| **Recovery orb** | A living, beating orb whose colour follows your recovery zone, in light and dark mode. |
 | **Recovery** 0–100 % | Overnight HRV, resting heart rate, respiratory rate and sleep, compared with *your own* 30-day baseline. Green / yellow / red, with a strain target for the day. |
 | **Strain** 0–21 | Cardiovascular load from minute-by-minute heart rate (Banister TRIMP), heart-rate zones, strength time, steps, per-workout strain. |
 | **Sleep** | Sleep need for tonight (goal + yesterday's strain + sleep debt), performance, consistency, efficiency, restorative sleep, stage hypnogram, recommended bedtime. |
@@ -59,12 +70,14 @@ The watch app installs automatically alongside the iPhone app (or from the Watch
 ## Project layout
 
 ```
-Shared/        Models, ScoreEngine (all formulas), HealthKit + demo data sources, theme
-iOS/           SwiftUI app — Today, details, Trends, Journal, Coach, Settings
+Shared/        Models, ScoreEngine (all formulas), HealthKit + demo data sources, theme, orb
+iOS/           SwiftUI app — Today, details, Trends, Journal, Coach, Settings; Shaders/Orb.metal
 Watch/         watchOS app
-docs/          ALGORITHMS.md — every formula explained
+docs/          ALGORITHMS.md — every formula explained; design/ prototypes; screenshots/
 project.yml    XcodeGen spec (the .xcodeproj is generated from it and committed)
 ```
+
+Run with the `-demo` launch argument to see demo data in the Simulator.
 
 If you add or move files, regenerate the project with [XcodeGen](https://github.com/yonaskolb/XcodeGen): `brew install xcodegen && xcodegen`.
 
