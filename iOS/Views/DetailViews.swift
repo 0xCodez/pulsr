@@ -99,7 +99,7 @@ struct SleepDetailView: View {
                         Divider().opacity(0.4)
                         row("sparkles", "Restorative Sleep", d.raw.sleep?.restorativeShare.map { min(1, $0 / 0.45) }, display: d.raw.sleep?.restorativeShare)
                         HStack(spacing: 14) {
-                            legend(Theme.hurts, "Poor"); legend(.white.opacity(0.7), "Sufficient"); legend(Theme.helps, "Optimal")
+                            legend(Theme.hurts, "Poor"); legend(Color.primary.opacity(0.7), "Sufficient"); legend(Theme.helps, "Optimal")
                         }
                         .font(.caption)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -141,7 +141,7 @@ struct SleepDetailView: View {
                                     .cornerRadius(5)
                             }
                             LineMark(x: .value("Day", day.date, unit: .day), y: .value("Need", day.sleepNeed / 3600))
-                                .foregroundStyle(.white.opacity(0.6))
+                                .foregroundStyle(Color.primary.opacity(0.6))
                                 .lineStyle(StrokeStyle(lineWidth: 1.5, dash: [4, 3]))
                         }
                         .chartXAxis { AxisMarks(values: .stride(by: .day, count: 2)) { _ in AxisValueLabel(format: .dateTime.weekday(.narrow)) } }
@@ -181,7 +181,7 @@ struct Hypnogram: View {
                 .cornerRadius(3)
         }
         .chartYScale(domain: [SleepStage.awake.title, SleepStage.rem.title, SleepStage.core.title, SleepStage.deep.title])
-        .chartXAxis { AxisMarks(values: .stride(by: .hour, count: 2)) { _ in AxisGridLine().foregroundStyle(.white.opacity(0.08)); AxisValueLabel(format: .dateTime.hour()) } }
+        .chartXAxis { AxisMarks(values: .stride(by: .hour, count: 2)) { _ in AxisGridLine().foregroundStyle(Color.primary.opacity(0.08)); AxisValueLabel(format: .dateTime.hour()) } }
     }
 }
 
@@ -257,7 +257,7 @@ struct ZoneBar: View {
             Text("Z\(zone)").font(.caption.weight(.bold)).frame(width: 24, alignment: .leading)
             GeometryReader { geo in
                 ZStack(alignment: .leading) {
-                    Capsule().fill(.white.opacity(0.06))
+                    Capsule().fill(Color.primary.opacity(0.06))
                     Capsule().fill(zoneColors[zone]).frame(width: max(4, geo.size.width * minutes / total))
                 }
             }
@@ -286,7 +286,7 @@ struct HeartRateChart: View {
             }
         }
         .chartYScale(domain: 40...maxHR)
-        .chartXAxis { AxisMarks(values: .stride(by: .hour, count: 4)) { _ in AxisGridLine().foregroundStyle(.white.opacity(0.08)); AxisValueLabel(format: .dateTime.hour()) } }
+        .chartXAxis { AxisMarks(values: .stride(by: .hour, count: 4)) { _ in AxisGridLine().foregroundStyle(Color.primary.opacity(0.08)); AxisValueLabel(format: .dateTime.hour()) } }
     }
 }
 
@@ -316,7 +316,7 @@ struct TrendLine: View {
             }
             if let baseline {
                 RuleMark(y: .value("Baseline", baseline))
-                    .foregroundStyle(.white.opacity(0.45))
+                    .foregroundStyle(Color.primary.opacity(0.45))
                     .lineStyle(StrokeStyle(lineWidth: 1, dash: [4, 4]))
             }
         }

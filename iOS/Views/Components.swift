@@ -158,11 +158,11 @@ struct QualityBar: View {
     var value: Double
     var body: some View {
         let level = value < 0.6 ? 0 : value < 0.85 ? 1 : 2
-        let colors: [Color] = [Theme.hurts, .white.opacity(0.7), Theme.helps]
+        let colors: [Color] = [Theme.hurts, Color.primary.opacity(0.7), Theme.helps]
         HStack(spacing: 3) {
             ForEach(0..<3) { i in
                 Capsule()
-                    .fill(i == level ? colors[level] : .white.opacity(0.12))
+                    .fill(i == level ? colors[level] : Color.primary.opacity(0.12))
                     .frame(height: 4)
             }
         }

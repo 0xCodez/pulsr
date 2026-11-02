@@ -123,7 +123,7 @@ struct TodayView: View {
                             .glassEffect(.regular.tint(Theme.yellow.opacity(0.3)), in: .capsule)
                     }
                 }
-                Text(text.body).font(.callout).foregroundStyle(.white.opacity(0.75))
+                Text(text.body).font(.callout).foregroundStyle(.secondary)
             }
         }
     }
@@ -341,7 +341,7 @@ struct ActivityRow: View {
             Text(detail).font(.caption).foregroundStyle(.secondary)
         }
         .padding(6)
-        .background(.white.opacity(0.05), in: .rect(cornerRadius: 16))
+        .background(Color.primary.opacity(0.05), in: .rect(cornerRadius: 16))
     }
 }
 

@@ -23,7 +23,7 @@ struct StressView: View {
                             }
                             if let sleep = d.raw.sleep {
                                 RectangleMark(xStart: .value("Start", max(sleep.start, d.date)), xEnd: .value("End", sleep.end))
-                                    .foregroundStyle(.white.opacity(0.05))
+                                    .foregroundStyle(Color.primary.opacity(0.05))
                             }
                             ForEach(d.stress) { p in
                                 LineMark(x: .value("Time", p.date), y: .value("Stress", p.level))
@@ -33,7 +33,7 @@ struct StressView: View {
                             }
                         }
                         .chartYScale(domain: 0...3)
-                        .chartYAxis { AxisMarks(values: [0, 1, 2, 3]) { _ in AxisGridLine().foregroundStyle(.white.opacity(0.08)); AxisValueLabel() } }
+                        .chartYAxis { AxisMarks(values: [0, 1, 2, 3]) { _ in AxisGridLine().foregroundStyle(Color.primary.opacity(0.08)); AxisValueLabel() } }
                         .chartXAxis { AxisMarks(values: .stride(by: .hour, count: 4)) { _ in AxisValueLabel(format: .dateTime.hour()) } }
                         .frame(height: 190)
                     }
@@ -82,7 +82,7 @@ struct StressGauge: View {
                 .rotationEffect(.degrees(135))
                 .shadow(color: Theme.stressColor(value).opacity(0.5), radius: 10)
             Capsule()
-                .fill(.white)
+                .fill(Color.primary)
                 .frame(width: 4, height: 22)
                 .offset(y: -96)
                 .rotationEffect(.degrees(-135 + 270 * value / 3))
@@ -116,7 +116,7 @@ struct BodyAgeView: View {
                         .opacity(0.9)
                     VStack(spacing: 6) {
                         BigNumber(text: age.bodyAge.oneDecimal, size: 60)
-                        Text("BODY AGE").font(.headline).tracking(2).foregroundStyle(.white.opacity(0.8))
+                        Text("BODY AGE").font(.headline).tracking(2).foregroundStyle(Color.primary.opacity(0.8))
                         Text(age.difference <= 0 ? "\(abs(age.difference).oneDecimal) years younger" : "\(age.difference.oneDecimal) years older")
                             .font(.subheadline.weight(.semibold))
                             .foregroundStyle(age.difference <= 0 ? Theme.green : Theme.hurts)
@@ -172,8 +172,8 @@ struct FactorRow: View {
                 let half = geo.size.width / 2
                 let w = min(half, half * abs(factor.years) / 4)
                 ZStack(alignment: .leading) {
-                    Capsule().fill(.white.opacity(0.06))
-                    Rectangle().fill(.white.opacity(0.3)).frame(width: 1).offset(x: half)
+                    Capsule().fill(Color.primary.opacity(0.06))
+                    Rectangle().fill(Color.primary.opacity(0.3)).frame(width: 1).offset(x: half)
                     Capsule()
                         .fill(factor.years <= 0 ? Theme.helps : Theme.hurts)
                         .frame(width: max(w, 3))

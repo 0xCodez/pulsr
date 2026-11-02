@@ -162,7 +162,7 @@ struct BehaviorRow: View {
             Image(systemName: behavior.symbol).frame(width: 26).foregroundStyle(.secondary)
             Text(behavior.title).font(.callout.weight(.medium))
             Spacer()
-            choice("No", selected: answer == false, color: .white) { onChange(answer == false ? nil : false) }
+            choice("No", selected: answer == false, color: .primary) { onChange(answer == false ? nil : false) }
             choice("Yes", selected: answer == true, color: Theme.green) { onChange(answer == true ? nil : true) }
         }
         .padding(.horizontal, 16)
@@ -175,8 +175,8 @@ struct BehaviorRow: View {
             Text(title)
                 .font(.caption.weight(.bold))
                 .frame(width: 44, height: 30)
-                .foregroundStyle(selected ? Color.black : Color.white)
-                .background(selected ? color : .white.opacity(0.08), in: .capsule)
+                .foregroundStyle(selected ? Color(.systemBackground) : Color.primary)
+                .background(selected ? color : Color.primary.opacity(0.08), in: .capsule)
         }
         .buttonStyle(.plain)
     }
@@ -238,11 +238,11 @@ struct ImpactRow: View {
                 let half = geo.size.width / 2
                 let w = min(half, half * abs(impact.percent) / 25)
                 ZStack(alignment: .leading) {
-                    Capsule().fill(.white.opacity(0.06))
+                    Capsule().fill(Color.primary.opacity(0.06))
                     Capsule().fill(abs(impact.percent) < 2 ? .gray : color)
                         .frame(width: max(w, 4))
                         .offset(x: impact.percent >= 0 ? half : half - w)
-                    Circle().fill(.white).frame(width: 6, height: 6).offset(x: half - 3)
+                    Circle().fill(Color.primary).frame(width: 6, height: 6).offset(x: half - 3)
                 }
             }
             .frame(height: 8)
