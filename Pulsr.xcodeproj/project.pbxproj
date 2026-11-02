@@ -1,0 +1,578 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		01C052FFFD704EB44AC8728B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1911B3838185E5D08DA5386 /* Assets.xcassets */; };
+		1D9692AE9530EB9BCA19543D /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4700BD87A91928C4BF2B2CEB /* Theme.swift */; };
+		1E1E60A603DEFFAE6F501338 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 961D76E3941776B8625A7A28 /* Assets.xcassets */; };
+		21451346808F8BDFBA2DE29C /* PulsrWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC325946F69CF79A78C5042C /* PulsrWatchApp.swift */; };
+		24F19C74B7DE8DB14833A2A7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F58D092DB15B2013AC96B6 /* SettingsView.swift */; };
+		3925149408481006B379EC10 /* JournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0338D6E02163BA411643B5 /* JournalView.swift */; };
+		40384C854CCDF81EA1D1A136 /* PulsrWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = EB2C724B0E889BFCD59E56E1 /* PulsrWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		46029FA734BB010E9FC5C210 /* HaloOrb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C612607AED358BA04C90CE /* HaloOrb.swift */; };
+		4F76F6CD23B1F2680A019FCE /* MetricsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98A386BB46328CE80A5C343 /* MetricsStore.swift */; };
+		50C71883022E91BCF4C48A2A /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29BF4C72A80BF1E4BB2157E6 /* Components.swift */; };
+		51EACB2E6E2C8FE5CCA428AF /* PulsrApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15915CCC97FAA2E039701ADE /* PulsrApp.swift */; };
+		541B568689164783DF7E47DC /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4700BD87A91928C4BF2B2CEB /* Theme.swift */; };
+		567ED6A19F59B6DBFF4866D7 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECFE6D85D8B7AB7576B31BB /* Models.swift */; };
+		5B9F03DD73CE419FE7B903F1 /* HealthKitSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA7E55E304445EB5230359D /* HealthKitSource.swift */; };
+		5E4D9DA94988476ABAAE6059 /* DetailViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12F5B15D28878D11C3F41839 /* DetailViews.swift */; };
+		6DDD7696D104CEA76F952260 /* DemoSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208DB54989F2A53542682694 /* DemoSource.swift */; };
+		7B0E58F00C85DAEAF224B8F5 /* DemoSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 208DB54989F2A53542682694 /* DemoSource.swift */; };
+		7B7E0029A642429F10D6276B /* ScoreEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21363E0B3FF9BE85ADA3C69A /* ScoreEngine.swift */; };
+		8497B7A61EAF95F99481BA5D /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49089BEB42391EDA3F288D42 /* TodayView.swift */; };
+		8EE319E0AAFDAE49A54ABDA9 /* HaloOrb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C612607AED358BA04C90CE /* HaloOrb.swift */; };
+		944B892B55F2D20D5BEC6F15 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9993480CBB0283542FD7E9 /* OnboardingView.swift */; };
+		A39690B3AEE0487675A2B4B0 /* Insights.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF541C71B18425D3D82E04A /* Insights.swift */; };
+		A79A8B95D44BA43F86A3F7EB /* MetricsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98A386BB46328CE80A5C343 /* MetricsStore.swift */; };
+		A807E8DE7994361BC7D9AE3F /* HealthKitSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA7E55E304445EB5230359D /* HealthKitSource.swift */; };
+		A826FC2B7A8D6A847001D37F /* TrendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACC48FCDD47F5FA1A38D8 /* TrendsView.swift */; };
+		C620F86A276497FB0B267C48 /* Orb.metal in Sources */ = {isa = PBXBuildFile; fileRef = 6F6936143473B00E29F9FDC9 /* Orb.metal */; };
+		C6BE53F20C494CD62AB3B346 /* ScoreEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21363E0B3FF9BE85ADA3C69A /* ScoreEngine.swift */; };
+		DF9F4E5CAD7E461050601174 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = FECFE6D85D8B7AB7576B31BB /* Models.swift */; };
+		EC562213CE53BC10115A34FF /* CoachView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BCEBC1477E3FFF25136146 /* CoachView.swift */; };
+		F151EF89CA6EB8B848038847 /* Insights.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF541C71B18425D3D82E04A /* Insights.swift */; };
+		F725C5533C1952A88AF39690 /* StressAndBodyAgeViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6F060283B83B120B4B97B9 /* StressAndBodyAgeViews.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		001C500B0CC3CD708D30D219 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0080ACC874085D4AEFD598FE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9D3AF1821A373BF30B88261E;
+			remoteInfo = PulsrWatch;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		98DF0ADB30A188A8C8CBA126 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				40384C854CCDF81EA1D1A136 /* PulsrWatch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		03F58D092DB15B2013AC96B6 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		12F5B15D28878D11C3F41839 /* DetailViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViews.swift; sourceTree = "<group>"; };
+		15915CCC97FAA2E039701ADE /* PulsrApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PulsrApp.swift; sourceTree = "<group>"; };
+		1A6F060283B83B120B4B97B9 /* StressAndBodyAgeViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StressAndBodyAgeViews.swift; sourceTree = "<group>"; };
+		208DB54989F2A53542682694 /* DemoSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoSource.swift; sourceTree = "<group>"; };
+		21363E0B3FF9BE85ADA3C69A /* ScoreEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreEngine.swift; sourceTree = "<group>"; };
+		29BF4C72A80BF1E4BB2157E6 /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
+		4700BD87A91928C4BF2B2CEB /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		49089BEB42391EDA3F288D42 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
+		4F0338D6E02163BA411643B5 /* JournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalView.swift; sourceTree = "<group>"; };
+		50BCEBC1477E3FFF25136146 /* CoachView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachView.swift; sourceTree = "<group>"; };
+		5FA7E55E304445EB5230359D /* HealthKitSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitSource.swift; sourceTree = "<group>"; };
+		61F90C0A3BF83A9CBDB72A37 /* PulsrWatch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PulsrWatch.entitlements; sourceTree = "<group>"; };
+		6F6936143473B00E29F9FDC9 /* Orb.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Orb.metal; sourceTree = "<group>"; };
+		7EF541C71B18425D3D82E04A /* Insights.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Insights.swift; sourceTree = "<group>"; };
+		961D76E3941776B8625A7A28 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9C9993480CBB0283542FD7E9 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		A98A386BB46328CE80A5C343 /* MetricsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsStore.swift; sourceTree = "<group>"; };
+		ABE053FBAD0C3D6A3907F365 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		AE8ACC48FCDD47F5FA1A38D8 /* TrendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendsView.swift; sourceTree = "<group>"; };
+		B8AE0EC236BA92E10837DF7A /* Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Base.xcconfig; sourceTree = "<group>"; };
+		D1911B3838185E5D08DA5386 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DC325946F69CF79A78C5042C /* PulsrWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PulsrWatchApp.swift; sourceTree = "<group>"; };
+		E21922BC0DBB01DF4C850B2F /* Pulsr.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Pulsr.entitlements; sourceTree = "<group>"; };
+		E5C612607AED358BA04C90CE /* HaloOrb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaloOrb.swift; sourceTree = "<group>"; };
+		E8C0647AAF8DB4BE3613D2D4 /* Pulsr.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Pulsr.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB2C724B0E889BFCD59E56E1 /* PulsrWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PulsrWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB4F8254CB662FE4A851AA0B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		FECFE6D85D8B7AB7576B31BB /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		080ABE1888A08C4B28F0E36D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				961D76E3941776B8625A7A28 /* Assets.xcassets */,
+				EB4F8254CB662FE4A851AA0B /* Info.plist */,
+				E21922BC0DBB01DF4C850B2F /* Pulsr.entitlements */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		0A739D1E78EA051ED46E5B6A = {
+			isa = PBXGroup;
+			children = (
+				A7A4C254F9AD3355AEC9628D /* Config */,
+				B27D81A557F01433ABF27D2C /* iOS */,
+				5487F1A2F05A6A4B48F6FBF8 /* Shared */,
+				4C47D72A5DFD31CD07E85A99 /* Watch */,
+				39BC8D0DADC2B6E7F95742B4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		39BC8D0DADC2B6E7F95742B4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E8C0647AAF8DB4BE3613D2D4 /* Pulsr.app */,
+				EB2C724B0E889BFCD59E56E1 /* PulsrWatch.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3F0152E1DD4B6B657054F4BC /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				6F6936143473B00E29F9FDC9 /* Orb.metal */,
+			);
+			path = Shaders;
+			sourceTree = "<group>";
+		};
+		4C47D72A5DFD31CD07E85A99 /* Watch */ = {
+			isa = PBXGroup;
+			children = (
+				D1911B3838185E5D08DA5386 /* Assets.xcassets */,
+				ABE053FBAD0C3D6A3907F365 /* Info.plist */,
+				61F90C0A3BF83A9CBDB72A37 /* PulsrWatch.entitlements */,
+				DC325946F69CF79A78C5042C /* PulsrWatchApp.swift */,
+			);
+			path = Watch;
+			sourceTree = "<group>";
+		};
+		5487F1A2F05A6A4B48F6FBF8 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				208DB54989F2A53542682694 /* DemoSource.swift */,
+				E5C612607AED358BA04C90CE /* HaloOrb.swift */,
+				5FA7E55E304445EB5230359D /* HealthKitSource.swift */,
+				7EF541C71B18425D3D82E04A /* Insights.swift */,
+				A98A386BB46328CE80A5C343 /* MetricsStore.swift */,
+				FECFE6D85D8B7AB7576B31BB /* Models.swift */,
+				21363E0B3FF9BE85ADA3C69A /* ScoreEngine.swift */,
+				4700BD87A91928C4BF2B2CEB /* Theme.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		647B347A45EC03DB5670014B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				50BCEBC1477E3FFF25136146 /* CoachView.swift */,
+				29BF4C72A80BF1E4BB2157E6 /* Components.swift */,
+				12F5B15D28878D11C3F41839 /* DetailViews.swift */,
+				4F0338D6E02163BA411643B5 /* JournalView.swift */,
+				9C9993480CBB0283542FD7E9 /* OnboardingView.swift */,
+				03F58D092DB15B2013AC96B6 /* SettingsView.swift */,
+				1A6F060283B83B120B4B97B9 /* StressAndBodyAgeViews.swift */,
+				49089BEB42391EDA3F288D42 /* TodayView.swift */,
+				AE8ACC48FCDD47F5FA1A38D8 /* TrendsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A7A4C254F9AD3355AEC9628D /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				B8AE0EC236BA92E10837DF7A /* Base.xcconfig */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		B27D81A557F01433ABF27D2C /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				15915CCC97FAA2E039701ADE /* PulsrApp.swift */,
+				080ABE1888A08C4B28F0E36D /* Resources */,
+				3F0152E1DD4B6B657054F4BC /* Shaders */,
+				647B347A45EC03DB5670014B /* Views */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		9D3AF1821A373BF30B88261E /* PulsrWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AC5A0C85223B5E5C6DC2AC81 /* Build configuration list for PBXNativeTarget "PulsrWatch" */;
+			buildPhases = (
+				1430FF1E443A20B497870F88 /* Sources */,
+				ADF3171A9886F199BF46FBB8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PulsrWatch;
+			packageProductDependencies = (
+			);
+			productName = PulsrWatch;
+			productReference = EB2C724B0E889BFCD59E56E1 /* PulsrWatch.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F992E4BA75AFB13188934A42 /* Pulsr */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC5D73E6279BDD28F4A570B0 /* Build configuration list for PBXNativeTarget "Pulsr" */;
+			buildPhases = (
+				7419702B43E9F8656D2C3D9D /* Sources */,
+				94AA9D03F54D7931EBF47045 /* Resources */,
+				98DF0ADB30A188A8C8CBA126 /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5FC3716A2206F7D0382143C0 /* PBXTargetDependency */,
+			);
+			name = Pulsr;
+			packageProductDependencies = (
+			);
+			productName = Pulsr;
+			productReference = E8C0647AAF8DB4BE3613D2D4 /* Pulsr.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0080ACC874085D4AEFD598FE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					9D3AF1821A373BF30B88261E = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					F992E4BA75AFB13188934A42 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 40CD3A52EC43AAC5AD93D1BF /* Build configuration list for PBXProject "Pulsr" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 0A739D1E78EA051ED46E5B6A;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 39BC8D0DADC2B6E7F95742B4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F992E4BA75AFB13188934A42 /* Pulsr */,
+				9D3AF1821A373BF30B88261E /* PulsrWatch */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		94AA9D03F54D7931EBF47045 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E1E60A603DEFFAE6F501338 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ADF3171A9886F199BF46FBB8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01C052FFFD704EB44AC8728B /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1430FF1E443A20B497870F88 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6DDD7696D104CEA76F952260 /* DemoSource.swift in Sources */,
+				8EE319E0AAFDAE49A54ABDA9 /* HaloOrb.swift in Sources */,
+				5B9F03DD73CE419FE7B903F1 /* HealthKitSource.swift in Sources */,
+				A39690B3AEE0487675A2B4B0 /* Insights.swift in Sources */,
+				A79A8B95D44BA43F86A3F7EB /* MetricsStore.swift in Sources */,
+				DF9F4E5CAD7E461050601174 /* Models.swift in Sources */,
+				21451346808F8BDFBA2DE29C /* PulsrWatchApp.swift in Sources */,
+				C6BE53F20C494CD62AB3B346 /* ScoreEngine.swift in Sources */,
+				1D9692AE9530EB9BCA19543D /* Theme.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7419702B43E9F8656D2C3D9D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC562213CE53BC10115A34FF /* CoachView.swift in Sources */,
+				50C71883022E91BCF4C48A2A /* Components.swift in Sources */,
+				7B0E58F00C85DAEAF224B8F5 /* DemoSource.swift in Sources */,
+				5E4D9DA94988476ABAAE6059 /* DetailViews.swift in Sources */,
+				46029FA734BB010E9FC5C210 /* HaloOrb.swift in Sources */,
+				A807E8DE7994361BC7D9AE3F /* HealthKitSource.swift in Sources */,
+				F151EF89CA6EB8B848038847 /* Insights.swift in Sources */,
+				3925149408481006B379EC10 /* JournalView.swift in Sources */,
+				4F76F6CD23B1F2680A019FCE /* MetricsStore.swift in Sources */,
+				567ED6A19F59B6DBFF4866D7 /* Models.swift in Sources */,
+				944B892B55F2D20D5BEC6F15 /* OnboardingView.swift in Sources */,
+				C620F86A276497FB0B267C48 /* Orb.metal in Sources */,
+				51EACB2E6E2C8FE5CCA428AF /* PulsrApp.swift in Sources */,
+				7B7E0029A642429F10D6276B /* ScoreEngine.swift in Sources */,
+				24F19C74B7DE8DB14833A2A7 /* SettingsView.swift in Sources */,
+				F725C5533C1952A88AF39690 /* StressAndBodyAgeViews.swift in Sources */,
+				541B568689164783DF7E47DC /* Theme.swift in Sources */,
+				8497B7A61EAF95F99481BA5D /* TodayView.swift in Sources */,
+				A826FC2B7A8D6A847001D37F /* TrendsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5FC3716A2206F7D0382143C0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9D3AF1821A373BF30B88261E /* PulsrWatch */;
+			targetProxy = 001C500B0CC3CD708D30D219 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		219B185299144CA354F9D4A6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Watch/PulsrWatch.entitlements;
+				INFOPLIST_FILE = Watch/Info.plist;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "$(BUNDLE_ID_PREFIX).pulsr";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).pulsr.watchkitapp";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Release;
+		};
+		2F7A3889072D4598F5A4D772 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = iOS/Resources/Pulsr.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = iOS/Resources/Info.plist;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).pulsr";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		A99BCE5D5EEB964AC5F8DFA1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B8AE0EC236BA92E10837DF7A /* Base.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = minimal;
+				SWIFT_VERSION = 5.0;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Debug;
+		};
+		E8E56494C829525A5B88D4DB /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B8AE0EC236BA92E10837DF7A /* Base.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_STRICT_CONCURRENCY = minimal;
+				SWIFT_VERSION = 5.0;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Release;
+		};
+		EE6AF90EA5472D131B20A8AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = iOS/Resources/Pulsr.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = iOS/Resources/Info.plist;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).pulsr";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		F451B1EC171ED49B98E12059 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Watch/PulsrWatch.entitlements;
+				INFOPLIST_FILE = Watch/Info.plist;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "$(BUNDLE_ID_PREFIX).pulsr";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).pulsr.watchkitapp";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		40CD3A52EC43AAC5AD93D1BF /* Build configuration list for PBXProject "Pulsr" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A99BCE5D5EEB964AC5F8DFA1 /* Debug */,
+				E8E56494C829525A5B88D4DB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		AC5A0C85223B5E5C6DC2AC81 /* Build configuration list for PBXNativeTarget "PulsrWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F451B1EC171ED49B98E12059 /* Debug */,
+				219B185299144CA354F9D4A6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		EC5D73E6279BDD28F4A570B0 /* Build configuration list for PBXNativeTarget "Pulsr" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EE6AF90EA5472D131B20A8AD /* Debug */,
+				2F7A3889072D4598F5A4D772 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0080ACC874085D4AEFD598FE /* Project object */;
+}

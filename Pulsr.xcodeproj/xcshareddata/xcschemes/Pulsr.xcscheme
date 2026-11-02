@@ -15,10 +15,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3604D51825E37895FA8BE7E6"
-               BuildableName = "Lumen.app"
-               BlueprintName = "Lumen"
-               ReferencedContainer = "container:Lumen.xcodeproj">
+               BlueprintIdentifier = "F992E4BA75AFB13188934A42"
+               BuildableName = "Pulsr.app"
+               BlueprintName = "Pulsr"
+               ReferencedContainer = "container:Pulsr.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,10 +29,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C6B063F1FB1BA82CC4370FBC"
-               BuildableName = "LumenWatch.app"
-               BlueprintName = "LumenWatch"
-               ReferencedContainer = "container:Lumen.xcodeproj">
+               BlueprintIdentifier = "9D3AF1821A373BF30B88261E"
+               BuildableName = "PulsrWatch.app"
+               BlueprintName = "PulsrWatch"
+               ReferencedContainer = "container:Pulsr.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -46,10 +46,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3604D51825E37895FA8BE7E6"
-            BuildableName = "Lumen.app"
-            BlueprintName = "Lumen"
-            ReferencedContainer = "container:Lumen.xcodeproj">
+            BlueprintIdentifier = "F992E4BA75AFB13188934A42"
+            BuildableName = "Pulsr.app"
+            BlueprintName = "Pulsr"
+            ReferencedContainer = "container:Pulsr.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <Testables>
@@ -69,10 +69,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3604D51825E37895FA8BE7E6"
-            BuildableName = "Lumen.app"
-            BlueprintName = "Lumen"
-            ReferencedContainer = "container:Lumen.xcodeproj">
+            BlueprintIdentifier = "F992E4BA75AFB13188934A42"
+            BuildableName = "Pulsr.app"
+            BlueprintName = "Pulsr"
+            ReferencedContainer = "container:Pulsr.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <CommandLineArguments>
@@ -88,10 +88,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3604D51825E37895FA8BE7E6"
-            BuildableName = "Lumen.app"
-            BlueprintName = "Lumen"
-            ReferencedContainer = "container:Lumen.xcodeproj">
+            BlueprintIdentifier = "F992E4BA75AFB13188934A42"
+            BuildableName = "Pulsr.app"
+            BlueprintName = "Pulsr"
+            ReferencedContainer = "container:Pulsr.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

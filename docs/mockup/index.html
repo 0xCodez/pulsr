@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lumen Screens</title>
+<title>Pulsr Screens</title>
 <style>
 :root{
   --green:#2EF2A0;--yellow:#FFD84D;--red:#FF5A6E;--hurts:#FFA845;
@@ -139,7 +139,7 @@ function contrib(icon,title,value,arrow,color,bar){
   ${arrow?sym(arrow,10,color):`<span style="width:6px;height:6px;border-radius:3px;background:rgba(235,240,255,.5);margin:0 2px"></span>`}</div>`}
 function hero(progress,colors,value,unit,caption,marker){
   return `<div style="display:flex;justify-content:center;margin:6px 0 16px">${ring(270,22,progress,colors,
-   `<div style="font-size:12px;letter-spacing:4px;color:var(--sec);font-weight:500">LUMEN</div>${big(value,unit,64)}<div style="font-size:13px;font-weight:600;letter-spacing:1.5px;margin-top:4px">${caption}</div>`,marker)}</div>`}
+   `<div style="font-size:12px;letter-spacing:4px;color:var(--sec);font-weight:500">PULSR</div>${big(value,unit,64)}<div style="font-size:13px;font-weight:600;letter-spacing:1.5px;margin-top:4px">${caption}</div>`,marker)}</div>`}
 function callout(text,link){return `<div class="insight"><div style="font-size:15px;line-height:1.4">${text}</div>${link?`<div class="act-link">${link} →</div>`:''}</div>`}
 
 // ---------- chart helpers
@@ -284,7 +284,7 @@ return `<div class="phone">${aurora('#6E7BFF',C.green)}${status()}<div class="co
 </div></div>`};
 
 S.coach=()=>`<div class="phone">${aurora('#8B5CFF','#2FD4FF')}${status()}<div class="content" style="display:flex;flex-direction:column;gap:16px">
- <div style="text-align:center;margin-top:6px"><div style="font-size:15px;font-weight:600;letter-spacing:3px">LUMEN COACH</div>
+ <div style="text-align:center;margin-top:6px"><div style="font-size:15px;font-weight:600;letter-spacing:3px">PULSR COACH</div>
  <span class="glass" style="display:inline-block;margin-top:6px;border-radius:99px;padding:3px 9px;font-size:10px;font-weight:700;letter-spacing:1px">ON-DEVICE · APPLE INTELLIGENCE</span></div>
  <div class="bubble-ai"><div class="avatar">${sym('spark',13,'#fff')}</div><div>How can I help? I can see your recovery, sleep, strain and trends.</div></div>
  <div class="bubble-me">Should I train hard today?</div>
@@ -298,7 +298,7 @@ S.coach=()=>`<div class="phone">${aurora('#8B5CFF','#2FD4FF')}${status()}<div cl
 </div></div>`;
 
 S.watch=()=>`<div class="watch"><div style="position:absolute;inset:0;background:radial-gradient(90% 60% at 50% 0%,rgba(46,242,160,.45),transparent 75%),#000"></div>
- <div style="position:relative;padding:12px 18px 0;display:flex;justify-content:space-between;font-size:15px;font-weight:600"><span style="color:${C.green}">Lumen</span><span>9:41</span></div>
+ <div style="position:relative;padding:12px 18px 0;display:flex;justify-content:space-between;font-size:15px;font-weight:600"><span style="color:${C.green}">Pulsr</span><span>9:41</span></div>
  <div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;margin-top:6px">
   ${ring(106,9,.71,['#2EF2A0bb',C.green],`${big('71','%',30)}<div style="font-size:9px;font-weight:600;letter-spacing:1px">RECOVERY</div>`)}
   <div class="row" style="gap:16px">

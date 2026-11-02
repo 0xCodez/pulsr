@@ -20,7 +20,7 @@ enum Insights {
             let pct = Int(abs(change * 100).rounded())
             hrvText = change >= 0 ? "Your HRV is \(pct)% above your baseline. " : "Your HRV is \(pct)% below your baseline. "
         }
-        let calibrating = d.isCalibrating ? " Lumen is still learning your baseline, so expect scores to settle over the first week." : ""
+        let calibrating = d.isCalibrating ? " Pulsr is still learning your baseline, so expect scores to settle over the first week." : ""
         switch RecoveryZone(recovery) {
         case .green:
             return ("Primed to perform", hrvText + "Your body can take on significant exertion — aim for a Strain of \(targetText)." + calibrating)

@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct LumenWatchApp: App {
+struct PulsrWatchApp: App {
     @State private var store = MetricsStore(historyDays: 30, detailedDays: 2)
     @Environment(\.scenePhase) private var scenePhase
 
@@ -57,7 +57,7 @@ private struct SummaryPage: View {
             }
             .font(.system(size: 12, weight: .medium))
         }
-        .navigationTitle("Lumen")
+        .navigationTitle("Pulsr")
     }
 
     private func mini(progress: Double, colors: [Color], value: String, title: String) -> some View {

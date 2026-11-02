@@ -1,8 +1,8 @@
 <p align="center">
-  <img src="iOS/Resources/Assets.xcassets/AppIcon.appiconset/icon-1024.png" width="128" alt="Lumen icon">
+  <img src="iOS/Resources/Assets.xcassets/AppIcon.appiconset/icon-1024.png" width="128" alt="Pulsr icon">
 </p>
 
-<h1 align="center">Lumen</h1>
+<h1 align="center">Pulsr</h1>
 
 <p align="center">
   <b>Recovery, Strain and Sleep coaching for the Apple Watch you already own.</b><br>
@@ -11,7 +11,7 @@
 
 ---
 
-Lumen turns the heart rate, HRV, sleep stages, respiratory rate and workouts your Apple Watch already records into daily scores you can act on — wrapped in an iOS 26 Liquid Glass interface.
+Pulsr turns the heart rate, HRV, sleep stages, respiratory rate and workouts your Apple Watch already records into daily scores you can act on — wrapped in an iOS 26 Liquid Glass interface.
 
 <p align="center">
   <img src="docs/screenshots/app/today-dark.png" width="200" alt="Today, dark">
@@ -21,7 +21,7 @@ Lumen turns the heart rate, HRV, sleep stages, respiratory rate and workouts you
   <img src="docs/screenshots/app/watch-recovery.png" width="150" alt="Apple Watch">
 </p>
 
-The recovery orb is a Metal shader: ribbons of light inside a glowing volume that beats at a resting heart rhythm and changes colour with your recovery zone. The design prototype lives in [`docs/design/lumen-iris.html`](docs/design/lumen-iris.html).
+The recovery orb is a Metal shader: ribbons of light inside a glowing volume that beats at a resting heart rhythm and changes colour with your recovery zone. The design prototype lives in [`docs/design/pulsr-iris.html`](docs/design/pulsr-iris.html).
 
 ## Features
 
@@ -42,26 +42,26 @@ The recovery orb is a Metal shader: ribbons of light inside a glowing volume tha
 
 ## How it works with your Apple Watch
 
-There is nothing to pair. The watch writes its measurements to Apple Health; Lumen asks for **read-only** access and calculates everything locally. Wear the watch to bed (with Sleep Focus / a sleep schedule) to get Recovery and Sleep scores. Scores improve over the first 7 nights while Lumen learns your baseline.
+There is nothing to pair. The watch writes its measurements to Apple Health; Pulsr asks for **read-only** access and calculates everything locally. Wear the watch to bed (with Sleep Focus / a sleep schedule) to get Recovery and Sleep scores. Scores improve over the first 7 nights while Pulsr learns your baseline.
 
 ## Install it on your own iPhone
 
-Lumen is not on the App Store — you build it yourself with Xcode. It takes about 10 minutes.
+Pulsr is not on the App Store — you build it yourself with Xcode. It takes about 10 minutes.
 
 **You need:** a Mac with **Xcode 26+** (free, Mac App Store) · iPhone on **iOS 26+** · Apple Watch on **watchOS 26+** · an Apple ID (a free one works).
 
 1. Clone the repo
    ```bash
-   git clone https://github.com/0xCodez/lumen.git && cd lumen
+   git clone https://github.com/0xCodez/pulsr.git && cd pulsr
    ```
 2. Set your signing identity
    ```bash
    cp Config/Local.xcconfig.example Config/Local.xcconfig
    ```
    Edit `Config/Local.xcconfig`: set `BUNDLE_ID_PREFIX` to something unique (e.g. `com.yourname`) and `DEVELOPMENT_TEAM` to your Team ID (Xcode → Settings → Accounts → your Apple ID).
-3. Open `Lumen.xcodeproj`, connect your iPhone, pick it as the run destination and press **Run** (⌘R).
+3. Open `Pulsr.xcodeproj`, connect your iPhone, pick it as the run destination and press **Run** (⌘R).
 4. On the iPhone: enable **Settings → Privacy & Security → Developer Mode**, and trust your developer certificate in **Settings → General → VPN & Device Management**. Do the same Developer Mode step on the watch (Settings → Privacy & Security on the watch).
-5. Open Lumen → **Connect Apple Health** → allow all categories.
+5. Open Pulsr → **Connect Apple Health** → allow all categories.
 
 The watch app installs automatically alongside the iPhone app (or from the Watch app on your iPhone → *Available Apps*).
 
@@ -83,7 +83,7 @@ If you add or move files, regenerate the project with [XcodeGen](https://github.
 
 ## Privacy
 
-- Read-only HealthKit access; Lumen never writes to Apple Health.
+- Read-only HealthKit access; Pulsr never writes to Apple Health.
 - No accounts, analytics, trackers or network calls.
 - The Coach uses Apple's on-device Foundation Models framework.
 - Journal answers are stored in a local file on your iPhone.
@@ -101,7 +101,7 @@ Contributions welcome — open an issue or a pull request.
 
 ## Disclaimer
 
-Lumen is a wellness project, **not a medical device**, and does not diagnose, treat or prevent any condition. Scores are estimates. Lumen is an independent open-source project and is not affiliated with or endorsed by Apple or any wearable company.
+Pulsr is a wellness project, **not a medical device**, and does not diagnose, treat or prevent any condition. Scores are estimates. Pulsr is an independent open-source project and is not affiliated with or endorsed by Apple or any wearable company.
 
 ## License
 

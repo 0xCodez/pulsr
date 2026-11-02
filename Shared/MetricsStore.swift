@@ -18,13 +18,13 @@ final class MetricsStore {
 
     var source: Source {
         didSet {
-            UserDefaults.standard.set(source.rawValue, forKey: "lumen.source")
+            UserDefaults.standard.set(source.rawValue, forKey: "pulsr.source")
             Task { await load() }
         }
     }
 
     var hasOnboarded: Bool {
-        didSet { UserDefaults.standard.set(hasOnboarded, forKey: "lumen.onboarded") }
+        didSet { UserDefaults.standard.set(hasOnboarded, forKey: "pulsr.onboarded") }
     }
 
     private var rawDays: [RawDay] = []
@@ -36,10 +36,10 @@ final class MetricsStore {
         self.detailedDays = detailedDays
         profile = UserProfile.load()
         let defaultSource: Source = HealthKitSource.isAvailable ? .health : .demo
-        source = Source(rawValue: UserDefaults.standard.string(forKey: "lumen.source") ?? "") ?? defaultSource
+        source = Source(rawValue: UserDefaults.standard.string(forKey: "pulsr.source") ?? "") ?? defaultSource
         // `-demo` launch argument: screenshots and the Simulator, which has no Health data.
         if ProcessInfo.processInfo.arguments.contains("-demo") { source = .demo }
-        hasOnboarded = UserDefaults.standard.bool(forKey: "lumen.onboarded")
+        hasOnboarded = UserDefaults.standard.bool(forKey: "pulsr.onboarded")
     }
 
     private var dataSource: HealthDataSource {

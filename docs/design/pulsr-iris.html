@@ -1,4 +1,4 @@
-<title>Lumen Iris</title>
+<title>Pulsr Iris</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -136,7 +136,7 @@ footer{padding-block:40px 70px;color:var(--page-dim);font-size:14px;line-height:
 </style>
 
 <div class="wrap top">
-  <span class="brand">Lumen · Iris · final direction</span>
+  <span class="brand">Pulsr · Iris · final direction</span>
   <div class="themes" role="group" aria-label="Theme">
     <button id="t-auto" type="button" aria-pressed="true">Auto</button>
     <button id="t-light" type="button" aria-pressed="false">Light</button>
@@ -155,7 +155,7 @@ footer{padding-block:40px 70px;color:var(--page-dim);font-size:14px;line-height:
 <main id="sections"></main>
 
 <footer class="wrap">
-  The orb is a real-time GPU shader. In the app it becomes a Metal shader on a SwiftUI view, so it looks the same on iPhone and Apple Watch. All numbers are Lumen demo data.
+  The orb is a real-time GPU shader. In the app it becomes a Metal shader on a SwiftUI view, so it looks the same on iPhone and Apple Watch. All numbers are Pulsr demo data.
 </footer>
 
 <script>
@@ -203,7 +203,7 @@ const zoneVar=v=>v>=67?'var(--green)':v>=34?'var(--yellow)':'var(--red)';
 const S={};
 S.onboarding=phone(`<div class="body" style="display:flex;flex-direction:column;align-items:center;height:620px">
  <div style="margin-top:34px">${orb('spectral',220,{energy:.9,hero:1})}</div>
- <div style="font:500 12px var(--font-mono);letter-spacing:.4em;margin-top:30px;color:var(--dim)">LUMEN</div>
+ <div style="font:500 12px var(--font-mono);letter-spacing:.4em;margin-top:30px;color:var(--dim)">PULSR</div>
  <div style="font-size:30px;font-weight:300;letter-spacing:-.03em;line-height:1.1;text-align:center;margin-top:10px;text-wrap:balance">Your Apple Watch,<br>fully understood.</div>
  <div style="font-size:13px;color:var(--dim);text-align:center;margin-top:12px;line-height:1.5;max-width:250px">Recovery, strain and sleep from the data your watch already records. Open source, and nothing leaves your iPhone.</div>
  <div style="margin-top:auto;width:100%;display:flex;flex-direction:column;gap:10px">
@@ -317,7 +317,7 @@ S.journal=phone(`<div class="body">
 </div>${tabs('Journal')}`);
 
 S.coach=phone(`<div class="body" style="display:flex;flex-direction:column;gap:12px">
- <div style="display:flex;flex-direction:column;align-items:center;margin-top:2px">${orb('spectral',96,{energy:1,speed:1.4})}<div class="ttl" style="margin-top:8px">Lumen coach</div><span class="pill" style="margin-top:6px">On-device · Apple Intelligence</span></div>
+ <div style="display:flex;flex-direction:column;align-items:center;margin-top:2px">${orb('spectral',96,{energy:1,speed:1.4})}<div class="ttl" style="margin-top:8px">Pulsr coach</div><span class="pill" style="margin-top:6px">On-device · Apple Intelligence</span></div>
  <div style="align-self:flex-end;max-width:78%;border-radius:18px 18px 4px 18px;padding:9px 13px;font-size:14px" class="gl">Should I train hard today?</div>
  <div style="font-size:13.5px;line-height:1.45;max-width:96%">Yes. Recovery is 71% and HRV is 14% above baseline, so today can take a strain of 14–18. You're at 16.9 after this morning's run, so keep the evening easy and be in bed by 10:48 PM.</div>
  <div style="align-self:flex-end;max-width:78%;border-radius:18px 18px 4px 18px;padding:9px 13px;font-size:14px" class="gl">Why is my consistency low?</div>
@@ -360,9 +360,9 @@ document.getElementById('sections').innerHTML=sections.map(s=>`<section class="s
 /* theme toggle */
 const btns={auto:document.getElementById('t-auto'),light:document.getElementById('t-light'),dark:document.getElementById('t-dark')};
 function setTheme(m){if(m==='auto')document.documentElement.removeAttribute('data-theme');else document.documentElement.setAttribute('data-theme',m);
- for(const k in btns)btns[k].setAttribute('aria-pressed',String(k===m));try{localStorage.setItem('lumen-theme',m)}catch(e){}}
+ for(const k in btns)btns[k].setAttribute('aria-pressed',String(k===m));try{localStorage.setItem('pulsr-theme',m)}catch(e){}}
 for(const k in btns)btns[k].addEventListener('click',()=>setTheme(k));
-try{const m=localStorage.getItem('lumen-theme');if(m)setTheme(m)}catch(e){}
+try{const m=localStorage.getItem('pulsr-theme');if(m)setTheme(m)}catch(e){}
 
 /* ================= ORB: one WebGL renderer shared by every orb on the page */
 const PAL={

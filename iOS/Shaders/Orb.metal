@@ -2,7 +2,7 @@
 #include <SwiftUI/SwiftUI_Metal.h>
 using namespace metal;
 
-// The "Halo" recovery orb. Mirrors the WebGL prototype in docs/design/lumen-iris.html.
+// The "Halo" recovery orb. Mirrors the WebGL prototype in docs/design/pulsr-iris.html.
 // The view this is applied to is 1.8x the sphere's diameter so the glow can spread into the screen.
 
 static float orbBand(float2 q, float t, float amp, float fr, float sp, float ph, float th) {

@@ -23,7 +23,7 @@ final class Coach {
     #endif
 
     private static let instructions = """
-    You are Lumen Coach, a concise, encouraging health and fitness coach inside an open-source Apple Watch app. \
+    You are Pulsr Coach, a concise, encouraging health and fitness coach inside an open-source Apple Watch app. \
     Recovery (0-100%) comes from overnight HRV, resting heart rate, respiratory rate and sleep. Strain (0-21) is cardiovascular load. \
     Answer in 2-5 short sentences using the user's numbers below. Be specific and practical. \
     You are not a doctor: for symptoms or medical questions, suggest seeing a professional. \
@@ -109,7 +109,7 @@ struct CoachView: View {
                         HaloOrb(palette: .spectral, energy: 1, speed: coach.isThinking ? 2.2 : 1.3)
                             .frame(width: 96, height: 96)
                             .padding(.vertical, 26)
-                        Text("LUMEN COACH").font(.subheadline.weight(.semibold)).tracking(3)
+                        Text("PULSR COACH").font(.subheadline.weight(.semibold)).tracking(3)
                         Text(coach.isOnDevice ? "ON-DEVICE · APPLE INTELLIGENCE" : "OFFLINE MODE")
                             .font(.caption2.weight(.bold)).tracking(1)
                             .padding(.horizontal, 8).padding(.vertical, 3)

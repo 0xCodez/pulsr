@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct LumenApp: App {
+struct PulsrApp: App {
     @State private var store = MetricsStore()
     @State private var journal = JournalStore()
     @State private var coach = Coach()

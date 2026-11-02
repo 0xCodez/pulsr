@@ -185,7 +185,7 @@ struct UserProfile: Codable, Hashable {
         return s.isEmpty ? "ME" : s.uppercased()
     }
 
-    private static let key = "lumen.profile"
+    private static let key = "pulsr.profile"
 
     static func load() -> UserProfile {
         guard let data = UserDefaults.standard.data(forKey: key),

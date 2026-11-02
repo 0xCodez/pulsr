@@ -1,4 +1,4 @@
-# How Lumen calculates its scores
+# How Pulsr calculates its scores
 
 All formulas live in [`Shared/ScoreEngine.swift`](../Shared/ScoreEngine.swift). They are transparent, simple and tunable — improvements backed by research are very welcome.
 
