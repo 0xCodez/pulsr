@@ -1,0 +1,472 @@
+<title>Lumen Iris</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@200;300;400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a presentation board. Header with the orb's four states, then the app's screens grouped by flow; the whole board and every screen follow light / dark. */
+:root{
+  --page:#F4F5F7; --page-ink:#0C1015; --page-dim:#5D6570; --page-line:rgba(12,16,21,.09); --page-card:#FFFFFF;
+  --scr-bg:#F2F4F7; --ink:#0B0F14; --dim:rgba(11,15,20,.56); --faint:rgba(11,15,20,.34);
+  --glass:linear-gradient(155deg,rgba(255,255,255,.88),rgba(255,255,255,.55) 52%,rgba(255,255,255,.72));
+  --glass-line:rgba(255,255,255,.95); --glass-shadow:inset 0 1px 0 #fff,0 10px 28px rgba(20,32,52,.08),0 1px 2px rgba(20,32,52,.06);
+  --leak-a:rgba(13,184,119,.26); --leak-b:rgba(10,143,209,.18); --leak-c:rgba(107,92,230,.16);
+  --grain-op:.10; --grain-blend:multiply;
+  --grid:rgba(11,15,20,.07); --track:rgba(11,15,20,.08); --tab-on:rgba(11,15,20,.07); --chip:rgba(11,15,20,.05);
+  --green:#0DB877; --yellow:#C98F00; --red:#E0364F; --strain:#0A8FD1; --sleep:#6B5CE6;
+  --s-low:#1E9BD7; --s-mid:#0DB877; --s-high:#D98200; --helps:#0DB877; --hurts:#D9731A;
+  --deep:#3F37B8; --light-stage:#6F69E8; --rem:#A39FF5; --awake:#C9A27A;
+  --prom:linear-gradient(160deg,#18C98A,#0A9E68); --prom-ink:#fff;
+  --orb-shadow:drop-shadow(0 22px 30px rgba(30,40,60,.22));
+  --font-ui:-apple-system,BlinkMacSystemFont,"SF Pro Display","Geist","Helvetica Neue",sans-serif;
+  --font-page:"Geist",-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;
+  --font-mono:"Geist Mono","SF Mono",ui-monospace,Menlo,monospace;
+  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --page:#07080A; --page-ink:#ECEFF3; --page-dim:#8B93A0; --page-line:rgba(255,255,255,.08); --page-card:#0E1014;
+  --scr-bg:#020306; --ink:#F2F5F8; --dim:rgba(242,245,248,.58); --faint:rgba(242,245,248,.34);
+  --glass:linear-gradient(155deg,rgba(255,255,255,.13),rgba(255,255,255,.03) 50%,rgba(255,255,255,.07));
+  --glass-line:rgba(255,255,255,.13); --glass-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 12px 30px rgba(0,0,0,.35);
+  --leak-a:rgba(46,242,160,.20); --leak-b:rgba(47,212,255,.20); --leak-c:rgba(123,108,255,.24);
+  --grain-op:.22; --grain-blend:overlay;
+  --grid:rgba(255,255,255,.07); --track:rgba(255,255,255,.10); --tab-on:rgba(255,255,255,.12); --chip:rgba(255,255,255,.08);
+  --green:#2EF2A0; --yellow:#FFD84D; --red:#FF5A6E; --strain:#2FD4FF; --sleep:#A9A0FF;
+  --s-low:#5AC8FA; --s-mid:#30E0A1; --s-high:#FFB340; --helps:#2EF2A0; --hurts:#FFA845;
+  --deep:#5B54F0; --light-stage:#8A85FF; --rem:#C3C0FF; --awake:#E2B98E;
+  --prom:linear-gradient(160deg,#3BF5AC,#13B97C); --prom-ink:#02140C;
+  --orb-shadow:none; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --page:#07080A; --page-ink:#ECEFF3; --page-dim:#8B93A0; --page-line:rgba(255,255,255,.08); --page-card:#0E1014;
+  --scr-bg:#020306; --ink:#F2F5F8; --dim:rgba(242,245,248,.58); --faint:rgba(242,245,248,.34);
+  --glass:linear-gradient(155deg,rgba(255,255,255,.13),rgba(255,255,255,.03) 50%,rgba(255,255,255,.07));
+  --glass-line:rgba(255,255,255,.13); --glass-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 12px 30px rgba(0,0,0,.35);
+  --leak-a:rgba(46,242,160,.20); --leak-b:rgba(47,212,255,.20); --leak-c:rgba(123,108,255,.24);
+  --grain-op:.22; --grain-blend:overlay;
+  --grid:rgba(255,255,255,.07); --track:rgba(255,255,255,.10); --tab-on:rgba(255,255,255,.12); --chip:rgba(255,255,255,.08);
+  --green:#2EF2A0; --yellow:#FFD84D; --red:#FF5A6E; --strain:#2FD4FF; --sleep:#A9A0FF;
+  --s-low:#5AC8FA; --s-mid:#30E0A1; --s-high:#FFB340; --helps:#2EF2A0; --hurts:#FFA845;
+  --deep:#5B54F0; --light-stage:#8A85FF; --rem:#C3C0FF; --awake:#E2B98E;
+  --prom:linear-gradient(160deg,#3BF5AC,#13B97C); --prom-ink:#02140C;
+  --orb-shadow:none; color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--page-ink);font-family:var(--font-page);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1360px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--strain);outline-offset:3px}
+
+/* ---------- page chrome */
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:22px 0;flex-wrap:wrap}
+.brand{font:500 12px var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--page-dim)}
+.themes{display:flex;gap:2px;padding:3px;border-radius:99px;border:1px solid var(--page-line);background:var(--page-card)}
+.themes button{border:0;background:none;border-radius:99px;padding:7px 14px;font-size:13px;cursor:pointer;color:var(--page-dim)}
+.themes button[aria-pressed="true"]{background:var(--page-ink);color:var(--page)}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:40px;align-items:center;padding-block:40px 30px}
+.hero h1{font-weight:200;font-size:clamp(44px,6vw,84px);letter-spacing:-.045em;line-height:.95;margin:0 0 18px;text-wrap:balance}
+.hero p{font-size:16px;line-height:1.6;color:var(--page-dim);max-width:56ch;margin:0}
+.states{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.state{display:flex;flex-direction:column;align-items:center;gap:10px;padding:18px 8px 16px;border-radius:24px;background:var(--page-card);border:1px solid var(--page-line)}
+.state .t{font-size:13px;font-weight:500}
+.state .r{font:500 11px var(--font-mono);color:var(--page-dim);letter-spacing:.06em}
+.section{padding-block:34px 10px;border-top:1px solid var(--page-line)}
+.section h2{font-weight:300;font-size:30px;letter-spacing:-.02em;margin:0 0 6px}
+.section > .wrap > p{color:var(--page-dim);margin:0 0 26px;max-width:70ch;line-height:1.55}
+.row{display:flex;flex-wrap:wrap;gap:34px 30px;align-items:flex-start}
+figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:14px}
+figcaption{font-size:13px;color:var(--page-dim);text-align:center;max-width:300px;line-height:1.45}
+figcaption b{display:block;color:var(--page-ink);font-weight:500;font-size:14px;margin-bottom:2px}
+footer{padding-block:40px 70px;color:var(--page-dim);font-size:14px;line-height:1.6;border-top:1px solid var(--page-line);margin-top:30px}
+
+/* ---------- devices */
+.phone{flex:none;width:340px;height:712px;border-radius:58px;padding:10px;background:linear-gradient(150deg,#4a4d52,#16171a 30%,#0b0b0c 70%,#3a3c40);box-shadow:0 40px 80px rgba(10,14,20,.28),inset 0 0 0 1px rgba(255,255,255,.06)}
+.scr{position:relative;width:320px;height:692px;border-radius:48px;overflow:hidden;background:var(--scr-bg);color:var(--ink);font-family:var(--font-ui)}
+.scr .bg{position:absolute;inset:0;background:radial-gradient(70% 36% at 50% 25%,var(--leak-a),transparent 70%),radial-gradient(55% 30% at 0% 0%,var(--leak-b),transparent 70%),radial-gradient(60% 30% at 100% 6%,var(--leak-c),transparent 70%),radial-gradient(80% 40% at 50% 112%,var(--leak-a),transparent 70%)}
+.scr .bg::after{content:"";position:absolute;inset:0;background-image:var(--grain);opacity:var(--grain-op);mix-blend-mode:var(--grain-blend)}
+.island{position:absolute;top:11px;left:50%;width:104px;height:30px;margin-left:-52px;border-radius:20px;background:#000;z-index:20}
+.sb{position:relative;z-index:10;display:flex;justify-content:space-between;align-items:center;height:50px;padding:6px 28px 0 34px;font:600 15px var(--font-ui)}
+.sb .ic{display:flex;gap:5px;align-items:center}
+.body{position:relative;z-index:2;padding:0 16px}
+.gl{background:var(--glass);border:1px solid var(--glass-line);box-shadow:var(--glass-shadow);backdrop-filter:blur(24px) saturate(170%);-webkit-backdrop-filter:blur(24px) saturate(170%)}
+.bar{display:flex;justify-content:space-between;align-items:center;margin-top:4px}
+.circ{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex:none}
+.cap{display:flex;align-items:center;gap:10px;border-radius:99px;padding:9px 14px;font-size:13px;font-weight:500}
+.ttl{font:500 11px var(--font-mono);letter-spacing:.18em;text-transform:uppercase}
+.eyebrow{font:500 9.5px var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.big{font-weight:200;letter-spacing:-.05em;line-height:.9}
+.big small{font-weight:300;letter-spacing:0;margin-left:2px}
+.card{border-radius:24px;padding:14px 15px}
+.card h4{margin:0 0 5px;font-weight:600;font-size:15px}
+.card p{margin:0;font-size:12.5px;line-height:1.45;color:var(--dim)}
+.tabs{position:absolute;left:14px;right:14px;bottom:18px;height:58px;border-radius:30px;display:flex;justify-content:space-around;align-items:center;z-index:5}
+.tab{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:9.5px;font-weight:500;width:66px;padding:6px 0;border-radius:22px;color:var(--dim)}
+.tab.on{color:var(--ink);background:var(--tab-on)}
+.mrow{border-radius:20px;padding:10px 13px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:1px 10px}
+.mrow .v{font-size:22px;font-weight:300;letter-spacing:-.02em}
+.mrow .v small{font-size:11px;color:var(--dim);margin-left:3px}
+.pill{font:500 10px var(--font-mono);padding:3px 7px;border-radius:99px;background:var(--chip)}
+.qb{display:flex;gap:3px;width:58px}.qb i{flex:1;height:4px;border-radius:2px;background:var(--track)}
+.crow{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--grid);font-size:12px}
+.crow:last-child{border-bottom:0}
+.crow .n{flex:1;font-weight:500}
+.crow .v{font-size:17px;font-weight:400;min-width:42px;text-align:right}
+.yn{display:flex;gap:4px}.yn span{font-size:11px;font-weight:600;border-radius:99px;padding:6px 11px;background:var(--chip)}
+.yn span.on{background:var(--ink);color:var(--scr-bg)}
+.prom{border-radius:99px;padding:14px;text-align:center;font-weight:600;font-size:15px;background:var(--prom);color:var(--prom-ink);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 10px 24px rgba(13,184,119,.25)}
+.watch{flex:none;position:relative;width:206px;height:250px;border-radius:60px;padding:11px;background:linear-gradient(145deg,#5a5d62,#1b1c1f 35%,#0c0c0d 70%,#45474b);box-shadow:0 30px 60px rgba(10,14,20,.3)}
+.watch::before{content:"";position:absolute;right:-8px;top:64px;width:10px;height:40px;border-radius:5px;background:linear-gradient(90deg,#26282b,#6a6d72 60%,#2d2f33)}
+.watch::after{content:"";position:absolute;right:-5px;top:124px;width:6px;height:46px;border-radius:3px;background:linear-gradient(90deg,#26282b,#55585d)}
+.ws{position:relative;width:100%;height:100%;border-radius:50px;overflow:hidden;background:#000;color:#fff;font-family:var(--font-ui)}
+
+/* ---------- orb host */
+.orb{position:relative;flex:none;display:block}
+.orb canvas{position:absolute;left:-9%;top:-9%;width:118%;height:118%;filter:var(--orb-shadow);will-change:transform}
+.orb.watchorb canvas{filter:none}
+
+@media (max-width:900px){.hero{grid-template-columns:minmax(0,1fr)}.states{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+</style>
+
+<div class="wrap top">
+  <span class="brand">Lumen · Iris · final direction</span>
+  <div class="themes" role="group" aria-label="Theme">
+    <button id="t-auto" type="button" aria-pressed="true">Auto</button>
+    <button id="t-light" type="button" aria-pressed="false">Light</button>
+    <button id="t-dark" type="button" aria-pressed="false">Dark</button>
+  </div>
+</div>
+
+<header class="wrap hero">
+  <div>
+    <h1>The orb is your recovery.</h1>
+    <p>A glass sphere with ribbons of light moving through it. It beats at a resting heart rhythm, and its colours shift with your recovery zone. Every screen below works in light and dark. Switch the theme in the top right corner.</p>
+  </div>
+  <div class="states" id="states"></div>
+</header>
+
+<main id="sections"></main>
+
+<footer class="wrap">
+  The orb is a real-time GPU shader. In the app it becomes a Metal shader on a SwiftUI view, so it looks the same on iPhone and Apple Watch. All numbers are Lumen demo data.
+</footer>
+
+<script>
+/* ================= icons */
+const ic={
+ chevL:'<path d="M15 5l-7 7 7 7" fill="none" stroke="C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>',
+ chevR:'<path d="M9 5l7 7-7 7" fill="none" stroke="C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>',
+ watch:'<rect x="7" y="5" width="10" height="14" rx="3" fill="none" stroke="C" stroke-width="1.8"/><path d="M9 5l.6-3h4.8l.6 3M9 19l.6 3h4.8l.6-3" fill="none" stroke="C" stroke-width="1.8"/>',
+ orb:'<circle cx="12" cy="12" r="8.5" fill="none" stroke="C" stroke-width="1.9"/><path d="M4.5 12.5c2.5-3 5-3 7.5 0s5 3 7.5 0" fill="none" stroke="C" stroke-width="1.9" stroke-linecap="round"/>',
+ chart:'<path d="M3 20h18M5 16l4-5 4 3 6-8" fill="none" stroke="C" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>',
+ book:'<path d="M5 4h11a3 3 0 013 3v13H8a3 3 0 01-3-3zM5 17a3 3 0 013-3h11" fill="none" stroke="C" stroke-width="1.8" stroke-linejoin="round"/>',
+ spark:'<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z" fill="C"/>',
+ moon:'<path d="M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z" fill="C"/>',
+ flame:'<path d="M12 21c-4 0-6.5-2.7-6.5-6 0-4 3.5-5.5 4-10 3 2 4 4 4 6 1-1 1.5-2 1.5-3 2 1.5 3.5 4 3.5 7 0 3.3-2.5 6-6.5 6z" fill="none" stroke="C" stroke-width="1.8" stroke-linejoin="round"/>',
+ heart:'<path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0112 7.3 4.3 4.3 0 0119.5 10c0 5.4-7.5 10-7.5 10z" fill="none" stroke="C" stroke-width="1.8"/>',
+ wave:'<path d="M2 12h4l2-5 4 10 2-6 2 3h6" fill="none" stroke="C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>',
+ lungs:'<path d="M12 4v8M12 10c-2 0-3-3-5-3S3 11 3 16c0 2 1 3 3 3s4-1 4-3v-4M12 10c2 0 3-3 5-3s4 4 4 9c0 2-1 3-3 3s-4-1-4-3v-4" fill="none" stroke="C" stroke-width="1.6" stroke-linecap="round"/>',
+ q:'<circle cx="12" cy="12" r="9" fill="none" stroke="C" stroke-width="1.6"/><path d="M9.5 9.5a2.5 2.5 0 114 2c-1 .6-1.5 1.2-1.5 2.3M12 17h.01" fill="none" stroke="C" stroke-width="1.8" stroke-linecap="round"/>',
+ up:'<path d="M12 19V5M6 11l6-6 6 6" fill="none" stroke="C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>',
+ pen:'<path d="M4 20h4L19 9l-4-4L4 16zM14 6l4 4" fill="none" stroke="C" stroke-width="1.8" stroke-linejoin="round"/>',
+ check:'<path d="M5 12.5l4.5 4.5L19 7" fill="none" stroke="C" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>',
+ run:'<circle cx="14.5" cy="4" r="2.2" fill="C"/><path d="M8 21l3-6 3 2v5M6 11l4-3 4 1 2 4 3 1M11 15l1.5-5" fill="none" stroke="C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
+ signal:'<rect x="2" y="15" width="3.5" height="5" rx="1" fill="C"/><rect x="7.5" y="11" width="3.5" height="9" rx="1" fill="C"/><rect x="13" y="7" width="3.5" height="13" rx="1" fill="C"/><rect x="18.5" y="3" width="3.5" height="17" rx="1" fill="C"/>',
+ wifi:'<path d="M2 9a14 14 0 0120 0M5.5 12.5a9 9 0 0113 0M9 16a4 4 0 016 0" fill="none" stroke="C" stroke-width="2.4" stroke-linecap="round"/><circle cx="12" cy="19.5" r="1.6" fill="C"/>',
+ batt:'<rect x="1" y="6" width="21" height="12" rx="3.5" fill="none" stroke="C" stroke-opacity=".45" stroke-width="1.3"/><rect x="3" y="8" width="15" height="8" rx="2" fill="C"/>',
+};
+const I=(n,s=16,c='currentColor')=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" aria-hidden="true">${ic[n].replaceAll('"C"','"'+c+'"')}</svg>`;
+const sb=()=>`<div class="sb"><span>9:41</span><span class="ic">${I('signal',15)}${I('wifi',15)}${I('batt',24)}</span></div>`;
+const orb=(pal,size,o={})=>`<span class="orb ${o.watch?'watchorb':''}" data-pal="${pal}" data-size="${size}" data-energy="${o.energy??0.5}" data-speed="${o.speed??1}" ${o.watch?'data-dark="1"':''} style="width:${size}px;height:${size}px"></span>`;
+const phone=inner=>`<div class="phone"><div class="scr"><div class="bg"></div>${sb()}${inner}<div class="island"></div></div></div>`;
+const watch=inner=>`<div class="watch"><div class="ws">${inner}</div></div>`;
+const tabs=on=>`<div class="tabs gl">${[['orb','Today'],['chart','Trends'],['book','Journal'],['spark','Coach']].map(([i,n])=>`<div class="tab ${n===on?'on':''}">${I(i,20)}${n}</div>`).join('')}</div>`;
+const header=(t,left='chevL',right='q')=>`<div class="bar"><div class="circ gl">${I(left,14)}</div><span class="ttl">${t}</span><div class="circ gl">${I(right,15)}</div></div>`;
+function arc(size,w,p,col){const r=(size-w)/2,L=2*Math.PI*r;return `<svg width="${size}" height="${size}" aria-hidden="true"><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" style="stroke:var(--track)" stroke-width="${w}"/><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" style="stroke:${col}" stroke-width="${w}" stroke-linecap="round" stroke-dasharray="${L*p} ${L}" transform="rotate(-90 ${size/2} ${size/2})"/></svg>`}
+function spark(v,w,h,col){const mn=Math.min(...v),mx=Math.max(...v);const pts=v.map((y,i)=>[i/(v.length-1)*(w-6)+3,h-4-(y-mn)/(mx-mn||1)*(h-8)]);const d=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+ return `<svg width="${w}" height="${h}" aria-hidden="true"><path d="${d}" fill="none" style="stroke:${col}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="${pts.at(-1)[0]}" cy="${pts.at(-1)[1]}" r="3" style="fill:${col};stroke:var(--scr-bg)" stroke-width="1.5"/></svg>`}
+const P=a=>a.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+
+/* ================= demo data (same numbers as the app's demo source) */
+const D={rec:71,sleep:78,strain:16.9,hrv:63,rhr:51,resp:14.6,body:30.0,
+ week:{d:['M','T','W','T','F','S','S'],rec:[70,8,78,50,79,68,71],strain:[11.8,15.4,10.9,4.3,16.2,17.2,16.9]}};
+const zoneVar=v=>v>=67?'var(--green)':v>=34?'var(--yellow)':'var(--red)';
+
+/* ================= screens */
+const S={};
+S.onboarding=phone(`<div class="body" style="display:flex;flex-direction:column;align-items:center;height:620px">
+ <div style="margin-top:34px">${orb('spectral',220,{energy:.9})}</div>
+ <div style="font:500 12px var(--font-mono);letter-spacing:.4em;margin-top:30px;color:var(--dim)">LUMEN</div>
+ <div style="font-size:30px;font-weight:300;letter-spacing:-.03em;line-height:1.1;text-align:center;margin-top:10px;text-wrap:balance">Your Apple Watch,<br>fully understood.</div>
+ <div style="font-size:13px;color:var(--dim);text-align:center;margin-top:12px;line-height:1.5;max-width:250px">Recovery, strain and sleep from the data your watch already records. Open source, and nothing leaves your iPhone.</div>
+ <div style="margin-top:auto;width:100%;display:flex;flex-direction:column;gap:10px">
+  <div class="prom">Connect Apple Health</div>
+  <div class="gl" style="border-radius:99px;padding:14px;text-align:center;font-weight:600;font-size:15px">Explore with demo data</div>
+ </div></div>`);
+
+S.today=phone(`<div class="body">
+ <div class="bar"><div class="circ gl">ME</div><div class="cap gl">${I('chevL',12)}<span>Sunday, Nov 2</span><span style="opacity:.35">${I('chevR',12)}</span></div><div class="circ gl">${I('watch',17)}</div></div>
+ <div style="display:flex;flex-direction:column;align-items:center;margin-top:14px">${orb('green',212)}
+  <div class="big" style="font-size:72px;margin-top:16px">71<small style="font-size:26px">%</small></div>
+  <div class="eyebrow" style="margin-top:8px">Recovery · primed</div></div>
+ <div style="display:flex;gap:10px;margin-top:18px">
+  <div class="gl" style="flex:1;border-radius:24px;padding:11px 12px;display:flex;align-items:center;gap:10px">${arc(36,4,.78,'var(--sleep)')}<div><div style="font-size:19px;font-weight:500;letter-spacing:-.02em">78%</div><div class="eyebrow">Sleep</div></div></div>
+  <div class="gl" style="flex:1;border-radius:24px;padding:11px 12px;display:flex;align-items:center;gap:10px">${arc(36,4,16.9/21,'var(--strain)')}<div><div style="font-size:19px;font-weight:500;letter-spacing:-.02em">16.9</div><div class="eyebrow">Strain</div></div></div>
+ </div>
+ <div class="card gl" style="margin-top:10px"><h4>Primed to perform</h4><p>HRV is 14% above your baseline. Aim for a strain of 14–18 and be in bed by 10:48 PM.</p></div>
+</div>${tabs('Today')}`);
+
+S.recovery=phone(`<div class="body">${header('Recovery')}
+ <div style="display:flex;align-items:center;gap:14px;margin-top:16px">${orb('green',96)}<div><div class="big" style="font-size:56px">71<small style="font-size:22px">%</small></div><div class="eyebrow" style="margin-top:7px;color:var(--green)">Green · primed</div></div></div>
+ <div style="display:flex;flex-direction:column;gap:7px;margin-top:14px">
+ ${[['Heart rate variability','63','ms',[52,55,49,58,56,59,63],'+14%','var(--green)'],['Resting heart rate','51','bpm',[54,53,55,52,52,51,51],'−2 bpm','var(--green)'],['Respiratory rate','14.6','/min',[14.4,14.7,14.5,14.6,14.8,14.5,14.6],'typical','var(--dim)'],['Sleep performance','78','%',[89,76,93,83,79,88,78],'−6%','var(--hurts)']].map(([l,v,u,s,d,c])=>
+ `<div class="mrow gl"><div class="eyebrow">${l}</div><span class="pill" style="color:${c}">${d}</span><div class="v">${v}<small>${u}</small></div>${spark(s,92,26,c)}</div>`).join('')}
+ </div>
+ <div class="card gl" style="margin-top:8px"><div class="eyebrow" style="margin-bottom:8px">Recovery · last 7 days</div>
+  <svg width="258" height="92" role="img" aria-label="Recovery for the last 7 days">
+   ${[0,50,100].map(v=>`<line x1="0" x2="258" y1="${76-v/100*66}" y2="${76-v/100*66}" style="stroke:var(--grid)"/>`).join('')}
+   ${D.week.rec.map((v,i)=>{const x=6+i*36,h=v/100*66;return `<rect x="${x}" y="${76-h}" width="22" height="${h}" rx="4" style="fill:${zoneVar(v)}" opacity="${i===6?1:.55}"/><text x="${x+11}" y="90" text-anchor="middle" font-size="9" style="fill:var(--dim)">${D.week.d[i]}</text>`}).join('')}
+   <text x="${6+6*36+11}" y="${76-71/100*66-5}" text-anchor="middle" font-size="10" font-weight="600" style="fill:var(--ink)">71</text>
+  </svg></div>
+</div>`);
+
+S.sleep=phone(`<div class="body">${header('Sleep')}
+ <div style="display:flex;align-items:center;gap:14px;margin-top:16px">${orb('sleep',96,{energy:.3,speed:.6})}<div><div class="big" style="font-size:56px">78<small style="font-size:22px">%</small></div><div class="eyebrow" style="margin-top:7px">Performance · 8:05 of 8:27</div></div></div>
+ <div class="card gl" style="margin-top:14px;padding:4px 15px">
+ ${[['Hours vs. needed','96%',2],['Sleep consistency','46%',0],['Sleep efficiency','93%',2],['Restorative sleep','41%',1]].map(([n,v,q])=>`<div class="crow"><span class="n">${n}</span><span class="qb">${[0,1,2].map(i=>`<i style="${i===q?`background:${['var(--hurts)','var(--dim)','var(--helps)'][q]}`:''}"></i>`).join('')}</span><span class="v">${v}</span></div>`).join('')}
+ </div>
+ <div class="card gl" style="margin-top:8px"><div style="display:flex;justify-content:space-between"><span class="eyebrow">Stages</span><span style="font-size:11px;color:var(--dim)">10:58 PM – 7:31 AM</span></div>
+  ${(()=>{const seq=[[2,25],[3,38],[2,18],[1,14],[2,22],[3,30],[2,15],[1,20],[0,4],[2,28],[3,12],[2,20],[1,30],[2,25],[1,32],[0,5],[2,20],[1,34],[2,16],[1,25]];const tot=seq.reduce((a,b)=>a+b[1],0);let t=0;
+   const names=['Awake','REM','Light','Deep'],cols=['var(--awake)','var(--rem)','var(--light-stage)','var(--deep)'];
+   return `<svg width="258" height="128" role="img" aria-label="Sleep stages through the night">${names.map((n,i)=>`<text x="0" y="${i*28+24}" font-size="9" font-weight="600" letter-spacing=".8" style="fill:var(--dim)">${n.toUpperCase()}</text><line x1="44" x2="258" y1="${i*28+20}" y2="${i*28+20}" style="stroke:var(--grid)"/>`).join('')}
+   ${seq.map(([k,d])=>{const x=44+t/tot*214;t+=d;return `<rect x="${x.toFixed(1)}" y="${k*28+10}" width="${Math.max(2,d/tot*214-2).toFixed(1)}" height="20" rx="4" style="fill:${cols[k]}"/>`}).join('')}
+   ${['11P','1A','3A','5A','7A'].map((l,i)=>`<text x="${48+i*50}" y="124" font-size="9" style="fill:var(--dim)">${l}</text>`).join('')}</svg>`})()}
+  <div style="display:flex;justify-content:space-between;margin-top:6px">${[['0:09','Awake'],['2:05','REM'],['4:01','Light'],['1:20','Deep']].map(([v,n])=>`<div style="text-align:center;flex:1"><div style="font-size:15px;font-weight:500">${v}</div><div class="eyebrow" style="font-size:8.5px">${n}</div></div>`).join('')}</div>
+ </div>
+</div>`);
+
+S.strain=phone(`<div class="body">${header('Strain')}
+ <div style="display:flex;flex-direction:column;align-items:center;margin-top:10px">${orb('strain',150,{energy:.85,speed:1.3})}
+  <div class="big" style="font-size:64px;margin-top:10px">16.9</div><div class="eyebrow" style="margin-top:6px">Day strain · target 14–18</div></div>
+ <div class="card gl" style="margin-top:12px"><div class="eyebrow" style="margin-bottom:8px">Time in heart-rate zones</div>
+  ${[[5,18],[4,35],[3,25],[2,22],[1,48]].map(([z,m])=>`<div style="display:flex;align-items:center;gap:8px;margin:5px 0;font-size:11px"><span style="width:20px;font-weight:600">Z${z}</span><span style="flex:1;height:8px;border-radius:4px;background:var(--track);position:relative;overflow:hidden"><i style="position:absolute;left:0;top:0;bottom:0;width:${m/48*100}%;border-radius:4px;background:var(--strain);opacity:${.3+z*.14}"></i></span><span style="width:34px;text-align:right;color:var(--dim)">${Math.floor(m/60)}:${String(m%60).padStart(2,'0')}</span></div>`).join('')}
+ </div>
+ <div class="card gl" style="margin-top:8px"><div style="display:flex;justify-content:space-between"><span class="eyebrow">Heart rate</span><span style="font-size:11px;color:var(--dim)">Run 7:24 AM · 13.8</span></div>
+  ${(()=>{let s=7,hr=56;const rnd=()=>{s=(s*16807)%2147483647;return s/2147483647};const pts=[];for(let m=0;m<=1020;m+=6){let b=m<450?50:68;if(m>440&&m<495)b=150+18*Math.sin((m-440)/55*Math.PI);else if(m>540&&m<720)b=82;hr=hr*.4+(b+(rnd()-.5)*10)*.6;pts.push([m/1020*258,96-(hr-40)/150*86])}
+   return `<svg width="258" height="110" role="img" aria-label="Heart rate today"><rect x="${440/1020*258}" y="0" width="${55/1020*258}" height="96" rx="3" style="fill:var(--strain)" opacity=".12"/>${[60,120,180].map(v=>`<line x1="0" x2="258" y1="${96-(v-40)/150*86}" y2="${96-(v-40)/150*86}" style="stroke:var(--grid)"/><text x="256" y="${93-(v-40)/150*86}" text-anchor="end" font-size="8.5" style="fill:var(--dim)">${v}</text>`).join('')}<path d="${P(pts)}" fill="none" style="stroke:var(--strain)" stroke-width="2" stroke-linejoin="round"/>${['12A','4A','8A','12P','4P'].map((l,i)=>`<text x="${i*61}" y="108" font-size="9" style="fill:var(--dim)">${l}</text>`).join('')}</svg>`})()}
+ </div>
+</div>`);
+
+S.stress=phone(`<div class="body">${header('Stress')}
+ <div style="position:relative;width:200px;height:170px;margin:14px auto 0">
+  <svg width="200" height="200" style="position:absolute;inset:0" aria-hidden="true"><defs><linearGradient id="sg1" x1="0" x2="1"><stop offset="0" style="stop-color:var(--s-low)"/><stop offset=".5" style="stop-color:var(--s-mid)"/><stop offset="1" style="stop-color:var(--s-high)"/></linearGradient></defs>
+   <path d="M${100+88*Math.cos(2.356)} ${100+88*Math.sin(2.356)} A88 88 0 1 1 ${100+88*Math.cos(.785)} ${100+88*Math.sin(.785)}" fill="none" stroke="url(#sg1)" stroke-width="9" stroke-linecap="round"/>
+   <rect x="98" y="6" width="4" height="20" rx="2" style="fill:var(--ink)" transform="rotate(${-135+270*1.4/3} 100 100)"/></svg>
+  <div style="position:absolute;inset:0 0 -30px;display:flex;flex-direction:column;align-items:center;justify-content:center"><div class="big" style="font-size:58px">1.4</div><div style="font-weight:600;letter-spacing:.12em;font-size:13px;color:var(--s-mid)">MEDIUM</div><div style="font-size:11px;color:var(--dim)">Updated 4:15 PM</div></div>
+ </div>
+ <div class="card gl" style="margin-top:22px"><div class="eyebrow" style="margin-bottom:6px">Through the day · 0–3</div>
+  ${(()=>{let s=9,v=.3;const rnd=()=>{s=(s*16807)%2147483647;return s/2147483647};const pts=[];for(let i=0;i<=64;i++){const tg=i<28?.25:i<34?1.9:i<44?1.3:i<50?2.4:1.4;v=v*.55+(tg+(rnd()-.5)*.6)*.45;v=Math.max(0,Math.min(3,v));pts.push([i/64*258,96-v/3*90])}
+   return `<svg width="258" height="112" role="img" aria-label="Stress through the day">${[0,1,2,3].map(l=>`<line x1="0" x2="258" y1="${96-l/3*90}" y2="${96-l/3*90}" style="stroke:var(--grid)"/>`).join('')}<rect x="0" y="0" width="${28/64*258}" height="96" style="fill:var(--sleep)" opacity=".07"/><path d="${P(pts)}" fill="none" stroke="url(#sg2)" stroke-width="2" stroke-linejoin="round"/><defs><linearGradient id="sg2" x1="0" y1="1" x2="0" y2="0" gradientUnits="objectBoundingBox"><stop offset="0" style="stop-color:var(--s-low)"/><stop offset=".55" style="stop-color:var(--s-mid)"/><stop offset="1" style="stop-color:var(--s-high)"/></linearGradient></defs><circle cx="${pts.at(-1)[0]}" cy="${pts.at(-1)[1]}" r="4" style="fill:var(--s-mid);stroke:var(--scr-bg)" stroke-width="2"/>${['12A','4A','8A','12P','4P'].map((l,i)=>`<text x="${i*61}" y="110" font-size="9" style="fill:var(--dim)">${l}</text>`).join('')}</svg>`})()}
+ </div>
+ <div class="card gl" style="margin-top:8px"><p style="color:var(--ink);font-size:13px">Most of your day was low stress. The longest high stretch started at 12:30 PM and lasted 75 minutes.</p>
+  <div style="display:flex;gap:3px;margin-top:10px">${[['var(--s-low)',44,'Low'],['var(--s-mid)',38,'Medium'],['var(--s-high)',18,'High']].map(([c,w])=>`<i style="flex:${w};height:8px;border-radius:4px;background:${c}"></i>`).join('')}</div>
+  <div style="display:flex;justify-content:space-between;font-size:10.5px;color:var(--dim);margin-top:6px"><span>Low 44%</span><span>Medium 38%</span><span>High 18%</span></div></div>
+</div>`);
+
+S.healthspan=phone(`<div class="body">${header('Healthspan')}
+ <div style="display:flex;flex-direction:column;align-items:center;margin-top:12px">${orb('green',176,{energy:.35,speed:.45})}
+  <div class="big" style="font-size:62px;margin-top:12px">30.0</div><div class="eyebrow" style="margin-top:6px">Body age · 1.0 year younger</div></div>
+ <div class="card gl" style="margin-top:14px;padding:6px 15px 8px">
+  <div style="display:flex;justify-content:space-between;padding:6px 0 2px"><span class="eyebrow" style="color:var(--helps)">Younger</span><span class="eyebrow">Years</span><span class="eyebrow" style="color:var(--hurts)">Older</span></div>
+  ${[['Resting heart rate','51 bpm',-1.4],['Daily steps','9,812',-.7],['HRV','59 ms',-.5],['Sleep duration','7.6 h',-.5],['VO₂ max','47.3',.2],['Sleep consistency','42%',1.5]].map(([n,v,y])=>{const half=40,w=Math.max(3,Math.min(half,half*Math.abs(y)/2));const c=y<=0?'var(--helps)':'var(--hurts)';
+  return `<div class="crow"><span class="n">${n}<br><span style="font-weight:400;color:var(--dim);font-size:10.5px">${v}</span></span><svg width="80" height="8" aria-hidden="true"><rect width="80" height="8" rx="4" style="fill:var(--track)"/><rect x="${y<=0?half-w:half}" width="${w}" height="8" rx="4" style="fill:${c}"/><rect x="39.5" width="1" height="8" style="fill:var(--dim)"/></svg><span class="v" style="font-size:14px">${y>0?'+':''}${y.toFixed(1)}</span></div>`}).join('')}
+ </div>
+</div>`);
+
+S.trends=phone(`<div class="body">
+ <div class="bar"><span style="font-size:28px;font-weight:300;letter-spacing:-.03em">Trends</span><div class="gl" style="display:flex;border-radius:99px;padding:3px;font-size:12px"><span style="padding:6px 12px;border-radius:99px;background:var(--tab-on);font-weight:600">7 days</span><span style="padding:6px 12px;color:var(--dim)">30 days</span></div></div>
+ <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px">${[['63%','Avg recovery','var(--green)'],['13.2','Avg strain','var(--strain)'],['7:41','Avg sleep','var(--sleep)']].map(([v,l,c])=>`<div class="gl" style="border-radius:20px;padding:12px 6px;text-align:center"><div style="display:flex;align-items:center;justify-content:center;gap:5px"><i style="width:6px;height:6px;border-radius:3px;background:${c}"></i><span style="font-size:20px;font-weight:400">${v}</span></div><div class="eyebrow" style="font-size:8px;margin-top:4px">${l}</div></div>`).join('')}</div>
+ <div class="card gl" style="margin-top:8px"><div class="eyebrow" style="margin-bottom:6px">Strain · 0–21</div>
+  <svg width="258" height="104" role="img" aria-label="Daily strain, last 7 days">${[0,7,14,21].map(v=>`<line x1="18" x2="258" y1="${86-v/21*76}" y2="${86-v/21*76}" style="stroke:var(--grid)"/><text x="0" y="${89-v/21*76}" font-size="8.5" style="fill:var(--dim)">${v}</text>`).join('')}
+  ${D.week.strain.map((v,i)=>{const x=26+i*33,h=v/21*76;return `<rect x="${x}" y="${86-h}" width="20" height="${h}" rx="4" style="fill:var(--strain)" opacity="${i===6?1:.5}"/><text x="${x+10}" y="100" text-anchor="middle" font-size="9" style="fill:var(--dim)">${D.week.d[i]}</text>`}).join('')}
+  <text x="${26+6*33+10}" y="${86-16.9/21*76-5}" text-anchor="middle" font-size="10" font-weight="600" style="fill:var(--ink)">16.9</text></svg></div>
+ <div class="card gl" style="margin-top:8px"><div class="eyebrow" style="margin-bottom:6px">Recovery · 0–100%</div>
+  <svg width="258" height="96" role="img" aria-label="Daily recovery, last 7 days">${[0,50,100].map(v=>`<line x1="22" x2="258" y1="${80-v/100*70}" y2="${80-v/100*70}" style="stroke:var(--grid)"/><text x="0" y="${83-v/100*70}" font-size="8.5" style="fill:var(--dim)">${v}</text>`).join('')}
+  <path d="${P(D.week.rec.map((v,i)=>[36+i*33,80-v/100*70]))}" fill="none" style="stroke:var(--dim)" stroke-width="1.5" opacity=".6"/>
+  ${D.week.rec.map((v,i)=>`<circle cx="${36+i*33}" cy="${80-v/100*70}" r="5" style="fill:${zoneVar(v)};stroke:var(--scr-bg)" stroke-width="2"/><text x="${36+i*33}" y="94" text-anchor="middle" font-size="9" style="fill:var(--dim)">${D.week.d[i]}</text>`).join('')}
+  <text x="${36+6*33}" y="${80-71/100*70-9}" text-anchor="middle" font-size="10" font-weight="600" style="fill:var(--ink)">71%</text></svg></div>
+ <div class="card gl" style="margin-top:8px;display:flex;justify-content:space-between;align-items:center"><div><div class="eyebrow">HRV · 30 days</div><div style="font-size:22px;font-weight:300">58 <small style="font-size:11px;color:var(--dim)">ms avg</small></div></div>${spark([48,51,50,53,55,52,56,54,57,58,56,59,61,58,63],120,34,'var(--green)')}</div>
+</div>${tabs('Trends')}`);
+
+S.journal=phone(`<div class="body">
+ <div class="bar"><span style="font-size:28px;font-weight:300;letter-spacing:-.03em">Journal</span><div class="circ gl">${I('chart',15)}</div></div>
+ <div class="card gl" style="margin-top:12px"><div class="eyebrow" style="margin-bottom:8px">Recovery impact · 90 days</div>
+  ${[['Hydrated well',24],['Read in bed',13],['Caffeine after 2 PM',-9],['Alcohol',-18]].map(([n,p])=>{const half=60,w=Math.min(half,half*Math.abs(p)/25),c=p>=0?'var(--helps)':'var(--hurts)';return `<div style="display:flex;align-items:center;gap:8px;margin:7px 0;font-size:12px"><span style="flex:1">${n}</span><svg width="120" height="8" aria-hidden="true"><rect width="120" height="8" rx="4" style="fill:var(--track)"/><rect x="${p>=0?half:half-w}" width="${w}" height="8" rx="4" style="fill:${c}"/><rect x="59.5" width="1" height="8" style="fill:var(--dim)"/></svg><span style="width:34px;text-align:right;font-weight:600">${p>0?'+':''}${p}%</span></div>`}).join('')}
+ </div>
+ <div class="eyebrow" style="margin:16px 4px 8px">Today · Sunday, Nov 2</div>
+ <div style="display:flex;flex-direction:column;gap:7px">
+ ${[['Alcohol','no'],['Caffeine after 2 PM','no'],['Hydrated well','yes'],['Read in bed','yes'],['Phone in bed',''],['Meditation','']].map(([n,a])=>`<div class="gl" style="border-radius:18px;padding:8px 8px 8px 14px;display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:500">${n}<span class="yn"><span class="${a==='no'?'on':''}">No</span><span class="${a==='yes'?'on':''}">Yes</span></span></div>`).join('')}
+ </div>
+</div>${tabs('Journal')}`);
+
+S.coach=phone(`<div class="body" style="display:flex;flex-direction:column;gap:12px">
+ <div style="display:flex;flex-direction:column;align-items:center;margin-top:2px">${orb('spectral',96,{energy:1,speed:1.4})}<div class="ttl" style="margin-top:8px">Lumen coach</div><span class="pill" style="margin-top:6px">On-device · Apple Intelligence</span></div>
+ <div style="align-self:flex-end;max-width:78%;border-radius:18px 18px 4px 18px;padding:9px 13px;font-size:14px" class="gl">Should I train hard today?</div>
+ <div style="font-size:13.5px;line-height:1.45;max-width:96%">Yes. Recovery is 71% and HRV is 14% above baseline, so today can take a strain of 14–18. You're at 16.9 after this morning's run, so keep the evening easy and be in bed by 10:48 PM.</div>
+ <div style="align-self:flex-end;max-width:78%;border-radius:18px 18px 4px 18px;padding:9px 13px;font-size:14px" class="gl">Why is my consistency low?</div>
+ <div style="font-size:13.5px;line-height:1.45;max-width:96%">Your bedtime moved by about 70 minutes over the last four nights. Keep bed and wake times within 30 minutes, weekends included.</div>
+ <div style="position:absolute;left:12px;right:12px;top:578px;display:flex;gap:8px;align-items:center">
+  <div class="circ gl" style="width:44px;height:44px">${I('pen',17)}</div>
+  <div class="gl" style="flex:1;border-radius:22px;padding:12px 15px;font-size:14px;color:var(--faint)">Ask about your data</div>
+  <div class="circ" style="width:44px;height:44px;background:var(--prom);color:var(--prom-ink)">${I('up',17)}</div></div>
+</div>`);
+
+/* ---- watch */
+const W={};
+W.today=watch(`<div style="display:flex;justify-content:space-between;padding:12px 18px 0;font:600 13px var(--font-ui)"><span style="color:#2EF2A0">Recovery</span><span>9:41</span></div>
+ <div style="display:flex;justify-content:center;margin-top:2px">${orb('green',118,{watch:1})}</div>
+ <div style="text-align:center;font:200 40px var(--font-ui);letter-spacing:-.05em;line-height:1;margin-top:4px">71<span style="font-size:16px;font-weight:300">%</span></div>
+ <div style="display:flex;justify-content:center;gap:14px;font-size:10px;color:rgba(255,255,255,.6);margin-top:4px"><span><b style="color:#B4ADFF;font-weight:600">78%</b> sleep</span><span><b style="color:#5BDDFF;font-weight:600">16.9</b> strain</span></div>`);
+W.strain=watch(`<div style="display:flex;justify-content:space-between;padding:12px 18px 0;font:600 13px var(--font-ui)"><span style="color:#2FD4FF">Strain</span><span>9:41</span></div>
+ <div style="display:flex;align-items:center;gap:8px;padding:10px 12px 0">${orb('strain',86,{watch:1,energy:.9,speed:1.3})}<div><div style="font:200 38px var(--font-ui);letter-spacing:-.04em;line-height:1">16.9</div><div style="font-size:10px;color:rgba(255,255,255,.6)">target 14–18</div></div></div>
+ <div style="padding:10px 16px 0;display:flex;flex-direction:column;gap:5px">${[['Zones 4–5','0:53',.55],['Zones 1–3','1:35',.9]].map(([n,v,p])=>`<div style="font-size:10.5px;display:flex;justify-content:space-between;color:rgba(255,255,255,.75)"><span>${n}</span><b style="color:#fff;font-weight:600">${v}</b></div><div style="height:5px;border-radius:3px;background:rgba(255,255,255,.12)"><i style="display:block;height:5px;border-radius:3px;width:${p*100}%;background:#2FD4FF"></i></div>`).join('')}</div>`);
+W.sleep=watch(`<div style="display:flex;justify-content:space-between;padding:12px 18px 0;font:600 13px var(--font-ui)"><span style="color:#B4ADFF">Sleep</span><span>9:41</span></div>
+ <div style="display:flex;justify-content:center;margin-top:6px">${orb('sleep',100,{watch:1,energy:.3,speed:.6})}</div>
+ <div style="text-align:center;font:200 36px var(--font-ui);letter-spacing:-.04em;line-height:1;margin-top:6px">8:05</div>
+ <div style="text-align:center;font-size:10px;color:rgba(255,255,255,.6);margin-top:3px">of 8:27 needed · bed by 10:48 PM</div>`);
+
+/* ================= assemble page */
+const states=[['green','Recovered','67–100%'],['yellow','Maintaining','34–66%'],['red','Rest day','0–33%'],['spectral','Coach','listening']];
+document.getElementById('states').innerHTML=states.map(([p,t,r])=>`<div class="state">${orb(p,120,{energy:p==='spectral'?1:.5})}<span class="t">${t}</span><span class="r">${r}</span></div>`).join('');
+const sections=[
+ {t:'First run & today',p:'Onboarding asks for Health access once. Today is the orb plus the two numbers you act on, sleep and strain, and one sentence on what to do.',
+  items:[[S.onboarding,'Onboarding','The coach orb in full spectrum. Connect Apple Health, or explore demo data.'],[S.today,'Today','The orb colour follows your recovery. Sleep and strain sit in two glass capsules below it.'],[S.recovery,'Recovery','Each contributor against your 30-day baseline, plus the last seven days.']]},
+ {t:'Load & rest',p:'The same orb carries every metric. It is violet and slow for sleep, and blue and fast for strain.',
+  items:[[S.sleep,'Sleep','Performance contributors and stages. Stages run from light to dark by depth.'],[S.strain,'Strain','Zones as one ramp from light to intense, and heart rate with workouts highlighted.'],[S.stress,'Stress','A 0–3 gauge, the day as a line and the share of the day in each level.']]},
+ {t:'Long term & habits',p:'Strain and recovery have separate charts, each on its own axis.',
+  items:[[S.healthspan,'Healthspan','Body age, and how many years each factor adds or removes.'],[S.trends,'Trends','Averages, strain, recovery and 30-day HRV.'],[S.journal,'Journal','Yes or no answers each day, and their measured effect on next-day recovery.']]},
+ {t:'Coach & Apple Watch',p:'The coach orb takes the full spectrum while it listens. Watch faces are always dark, as watchOS expects, so the orb glows on true black.',
+  items:[[S.coach,'Coach','On-device answers grounded in your numbers.'],[W.today,'Watch · Recovery','The default screen.'],[W.strain,'Strain','Live during workouts.'],[W.sleep,'Sleep','In the morning.']]},
+];
+document.getElementById('sections').innerHTML=sections.map(s=>`<section class="section"><div class="wrap"><h2>${s.t}</h2><p>${s.p}</p><div class="row">${s.items.map(([d,t,c])=>`<figure>${d}<figcaption><b>${t}</b>${c}</figcaption></figure>`).join('')}</div></div></section>`).join('');
+
+/* theme toggle */
+const btns={auto:document.getElementById('t-auto'),light:document.getElementById('t-light'),dark:document.getElementById('t-dark')};
+function setTheme(m){if(m==='auto')document.documentElement.removeAttribute('data-theme');else document.documentElement.setAttribute('data-theme',m);
+ for(const k in btns)btns[k].setAttribute('aria-pressed',String(k===m));try{localStorage.setItem('lumen-theme',m)}catch(e){}}
+for(const k in btns)btns[k].addEventListener('click',()=>setTheme(k));
+try{const m=localStorage.getItem('lumen-theme');if(m)setTheme(m)}catch(e){}
+
+/* ================= ORB: one WebGL renderer shared by every orb on the page */
+const PAL={
+ green:   ['#2FD4FF','#2EF2A0','#7B6CFF','#FFB25B'],
+ yellow:  ['#FFD84D','#FF8A3D','#FF5FA2','#7B6CFF'],
+ red:     ['#FF4D6A','#FF8A3D','#B44BFF','#FF2D9B'],
+ spectral:['#3D7BFF','#FF4FD8','#2FE6FF','#FF8A1F'],
+ sleep:   ['#8C7BFF','#5AD8FF','#C08BFF','#3D5BFF'],
+ strain:  ['#2FD4FF','#3D6BFF','#00F0FF','#9C7BFF'],
+};
+const VS=`attribute vec2 a;varying vec2 vUv;void main(){vUv=a*.5+.5;gl_Position=vec4(a,0.,1.);}`;
+const FS=`precision highp float;
+varying vec2 vUv;
+uniform vec2 uRes;uniform float uTime,uBeat,uLight,uEnergy;
+uniform vec3 uC0,uC1,uC2,uC3;
+float band(vec2 q,float t,float amp,float fr,float sp,float ph,float th){
+  float x=q.x;
+  float env=pow(clamp(1.-x*x,0.,1.),1.35);
+  float y0=env*(amp*sin(fr*x+t*sp+ph)+amp*.38*sin(fr*2.1*x-t*sp*1.37+ph*1.7));
+  float h=(th*(.55+.45*sin(1.3*x+t*.8+ph))+.012)*env+.002;
+  float d=(q.y-y0)/h;
+  float crest=exp(-d*d*1.5);
+  float under=q.y<y0?exp((q.y-y0)/(h*3.8+.03))*.55:0.;
+  return (crest+under)*env;
+}
+void main(){
+  vec2 p=(vUv*2.-1.)*1.18;
+  float r=length(p);
+  float px=2.36/uRes.x;
+  float inside=1.-smoothstep(1.-px*1.6,1.,r);
+  float rr=min(r,1.);
+  float t=uTime;
+  vec2 q=p*(1.+.30*rr*rr);
+  float e=.72+.3*uEnergy+.32*uBeat;
+  float amp=.19*e;
+  vec3 L=uC0*band(q,t,amp,2.4,.9,0.,.14)
+        +uC1*band(q,t,amp*.85,3.0,-.75,1.9,.12)
+        +uC2*band(q,t,amp*1.1,2.0,.55,3.7,.10)
+        +uC3*band(q,t,amp*.6,3.6,1.15,5.2,.05)*.8;
+  float lum=dot(L,vec3(.3333));
+  L+=vec3(1.)*smoothstep(.8,2.,lum)*.9;
+  L*=.88+.42*uBeat;
+  float z=sqrt(max(1.-rr*rr,0.));
+  float fres=pow(1.-z,2.2);
+  float ang=atan(p.y,p.x);
+  vec3 spectral=.55+.45*cos(6.2831*(vec3(0.,.33,.67)+ang*.32+t*.03));
+  float edge=smoothstep(.86,.995,r)*(1.-smoothstep(.995,1.,r));
+  float side=exp(-pow(p.y*2.6,2.));
+  vec3 tint=(uC0+uC1+uC2)*.3333;
+  vec3 col;
+  if(uLight<.5){
+    vec3 body=vec3(.010,.012,.018)+vec3(.02,.025,.04)*fres;
+    vec3 rimCol=mix(vec3(.75),spectral,.6)*.32+tint*side*1.1;
+    col=body+L*(1.-.3*fres)+rimCol*edge*(.55+.7*fres);
+    float cres=smoothstep(.55,.95,r)*smoothstep(.1,-.75,p.y)*(1.-smoothstep(.96,1.,r));
+    col+=vec3(.09,.10,.12)*cres*.7;
+    vec2 hp=p-vec2(-.32,.55);
+    col+=vec3(1.)*.07*exp(-dot(hp,hp)*9.);
+  }else{
+    float s=smoothstep(.35,-.45,q.y-amp*sin(2.4*q.x+t*.9));
+    vec3 body=mix(vec3(.30,.31,.35),vec3(.93,.94,.96),s);
+    body=mix(body,body*.86,fres*.5);
+    vec3 Ls=L*.85;
+    col=body*(1.-clamp(lum*.35,0.,.45))+Ls;
+    col+=(vec3(1.)*.55+spectral*.45)*edge*(.5+.6*fres)+tint*side*edge*.6;
+    vec2 hp=p-vec2(-.3,.58);
+    col+=vec3(1.)*.22*exp(-dot(hp,hp)*7.);
+    float cres=smoothstep(.6,.97,r)*smoothstep(0.,-.8,p.y)*(1.-smoothstep(.97,1.,r));
+    col+=vec3(1.)*.25*cres;
+  }
+  col=min(col,vec3(1.));
+  float g=exp(-max(r-1.,0.)*10.)*step(1.,r)*(1.-smoothstep(1.04,1.16,r))*(uLight<.5?1.:.55);
+  float ga=g*.32*(.65+.6*uBeat);
+  vec3 outCol=col*inside+tint*ga*(1.-inside);
+  float a=inside+ga*(1.-inside);
+  gl_FragColor=vec4(outCol,a);
+}`;
+const MAX=640;
+const glc=document.createElement('canvas');glc.width=glc.height=MAX;
+const gl=glc.getContext('webgl',{premultipliedAlpha:true,preserveDrawingBuffer:true,alpha:true,antialias:false});
+let prog,U={};
+function sh(type,src){const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(s));return s}
+if(gl){
+  prog=gl.createProgram();gl.attachShader(prog,sh(gl.VERTEX_SHADER,VS));gl.attachShader(prog,sh(gl.FRAGMENT_SHADER,FS));gl.linkProgram(prog);gl.useProgram(prog);
+  const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+  const loc=gl.getAttribLocation(prog,'a');gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+  ['uRes','uTime','uBeat','uLight','uEnergy','uC0','uC1','uC2','uC3'].forEach(n=>U[n]=gl.getUniformLocation(prog,n));
+}
+const rgb=h=>{const n=parseInt(h.slice(1),16);return [(n>>16&255)/255,(n>>8&255)/255,(n&255)/255]};
+const orbs=[...document.querySelectorAll('.orb')].map((el,i)=>{
+  const size=+el.dataset.size,dpr=Math.min(2,window.devicePixelRatio||1);
+  const c=document.createElement('canvas');const px=Math.min(MAX,Math.round(size*1.18*dpr));c.width=c.height=px;el.appendChild(c);
+  return {el,c,ctx:c.getContext('2d'),px,pal:PAL[el.dataset.pal].map(rgb),energy:+el.dataset.energy,speed:+el.dataset.speed,dark:!!el.dataset.dark,off:i*.37};
+});
+const isLight=()=>{const dt=document.documentElement.dataset.theme;if(dt)return dt==='light';return !matchMedia('(prefers-color-scheme: dark)').matches};
+const PERIOD=60/52;
+function beat(t){const ph=((t%PERIOD)+PERIOD)%PERIOD;const g=(x,c,w)=>Math.exp(-Math.pow((x-c)/w,2));return Math.min(1,g(ph,0,.07)+g(ph,PERIOD,.07)+.55*g(ph,.3,.08))}
+function render(o,t){
+  if(!gl){o.ctx.clearRect(0,0,o.px,o.px);const g=o.ctx.createRadialGradient(o.px/2,o.px/2,0,o.px/2,o.px/2,o.px/2.36);g.addColorStop(0,'#3a4a66');g.addColorStop(1,'#06080c');o.ctx.fillStyle=g;o.ctx.beginPath();o.ctx.arc(o.px/2,o.px/2,o.px/2.36,0,7);o.ctx.fill();return}
+  const w=o.px,tt=t*o.speed+o.off*10,b=beat(t+o.off*.0);
+  gl.viewport(0,0,w,w);gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT);
+  gl.uniform2f(U.uRes,w,w);gl.uniform1f(U.uTime,tt);gl.uniform1f(U.uBeat,b);gl.uniform1f(U.uLight,(!o.dark&&isLight())?1:0);gl.uniform1f(U.uEnergy,o.energy);
+  gl.uniform3fv(U.uC0,o.pal[0]);gl.uniform3fv(U.uC1,o.pal[1]);gl.uniform3fv(U.uC2,o.pal[2]);gl.uniform3fv(U.uC3,o.pal[3]);
+  gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
+  o.ctx.clearRect(0,0,w,w);o.ctx.drawImage(glc,0,MAX-w,w,w,0,0,w,w);
+  o.c.style.transform=`scale(${1+.022*b})`;
+}
+const vis=new Set();
+const io=new IntersectionObserver(es=>es.forEach(e=>{const o=orbs.find(x=>x.el===e.target);if(e.isIntersecting)vis.add(o);else vis.delete(o)}),{rootMargin:'100px'});
+orbs.forEach(o=>{io.observe(o.el);render(o,2.2)});
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const redrawAll=()=>orbs.forEach(o=>render(o,reduce?2.2:performance.now()/1000));
+new MutationObserver(redrawAll).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',redrawAll);
+if(!reduce){let last=0;const loop=ts=>{if(ts-last>30){last=ts;const t=ts/1000;vis.forEach(o=>render(o,t))}requestAnimationFrame(loop)};requestAnimationFrame(loop)}
+</script>
