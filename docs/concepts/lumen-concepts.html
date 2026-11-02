@@ -1,0 +1,466 @@
+<title>Lumen Design Directions</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@200;300;400;500;600;700&family=Geist+Mono:wght@400;500&family=Hanken+Grotesk:wght@200;300;400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Outfit:wght@200;300;400;500;600&display=swap">
+<style>
+/* Layout: a dark presentation board; each direction is a full-width atmospheric band holding two iPhones and a watch. */
+:root{
+  --board:#0A0B0D; --ink:#EDEFF2; --ink-dim:#9298A3; --line:rgba(255,255,255,.08);
+  --font-ui:"Geist",-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;
+  --font-mono:"Geist Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--board);color:var(--ink);font-family:var(--font-ui);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1320px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.intro{padding-block:56px 40px}
+.intro h1{font-weight:300;font-size:clamp(34px,5vw,58px);letter-spacing:-.03em;line-height:1.02;margin:0 0 14px;text-wrap:balance}
+.intro p{color:var(--ink-dim);max-width:62ch;font-size:16px;line-height:1.55;margin:0}
+.intro .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.chip{font-family:var(--font-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);border-radius:99px;padding:6px 10px;color:var(--ink-dim)}
+
+.band{position:relative;overflow:hidden;isolation:isolate}
+.band::after{content:"";position:absolute;inset:0;background-image:var(--grain);opacity:.18;mix-blend-mode:overlay;pointer-events:none;z-index:0}
+.band .wrap{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:40px;padding-block:64px;align-items:center}
+.about{display:flex;flex-direction:column;gap:16px;min-width:0}
+.about .no{font-family:var(--font-mono);font-size:12px;letter-spacing:.12em}
+.about h2{font-size:44px;font-weight:300;letter-spacing:-.03em;margin:0;line-height:1}
+.about p{margin:0;font-size:15px;line-height:1.55;max-width:42ch}
+.about ul{margin:0;padding-left:18px;font-size:14px;line-height:1.6}
+.swatches{display:flex;gap:6px}
+.swatches i{width:28px;height:28px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
+.devices{display:flex;gap:28px;align-items:center;overflow-x:auto;padding:12px 4px 18px;scrollbar-width:thin;min-width:0}
+
+/* ---------- device frames */
+.phone{flex:none;width:340px;height:712px;border-radius:58px;padding:10px;background:linear-gradient(150deg,#4a4d52,#16171a 30%,#0b0b0c 70%,#3a3c40);box-shadow:0 40px 80px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.06) inset}
+.screen{position:relative;width:320px;height:692px;border-radius:48px;overflow:hidden}
+.island{position:absolute;top:11px;left:50%;width:104px;height:30px;margin-left:-52px;border-radius:20px;background:#000;z-index:20}
+.sb{position:relative;z-index:10;display:flex;justify-content:space-between;align-items:center;height:50px;padding:6px 28px 0 34px;font:600 15px var(--font-ui)}
+.sb .ic{display:flex;gap:5px;align-items:center}
+.watch{flex:none;position:relative;width:206px;height:250px;border-radius:60px;padding:11px;background:linear-gradient(145deg,#5a5d62,#1b1c1f 35%,#0c0c0d 70%,#45474b);box-shadow:0 30px 60px rgba(0,0,0,.45)}
+.watch::before{content:"";position:absolute;right:-8px;top:64px;width:10px;height:40px;border-radius:5px;background:linear-gradient(90deg,#26282b,#6a6d72 60%,#2d2f33)}
+.watch::after{content:"";position:absolute;right:-5px;top:124px;width:6px;height:46px;border-radius:3px;background:linear-gradient(90deg,#26282b,#55585d)}
+.wscreen{position:relative;width:100%;height:100%;border-radius:50px;overflow:hidden;background:#000}
+
+/* ---------- the orb */
+.orb{position:relative;flex:none}
+.orb .halo{position:absolute;inset:-28%;border-radius:50%;background:radial-gradient(closest-side,var(--halo),transparent 72%);filter:blur(var(--hb));opacity:.5;animation:halo 1.15s ease-in-out infinite}
+.orb .ball{position:absolute;inset:0;border-radius:50%;overflow:hidden;animation:beat 1.15s cubic-bezier(.3,.6,.3,1) infinite;box-shadow:inset 0 2px 8px rgba(255,255,255,.35),inset 0 -16px 40px rgba(0,0,0,.45)}
+.orb.light .ball{box-shadow:inset 0 3px 10px rgba(255,255,255,.75),inset 0 -14px 36px rgba(60,20,10,.18),0 18px 40px rgba(90,40,20,.18)}
+.orb canvas.blobs{position:absolute;inset:-6%;width:112%;height:112%;filter:blur(var(--blur)) saturate(1.25)}
+.orb canvas.fib{position:absolute;inset:0;width:100%;height:100%;mix-blend-mode:screen;opacity:.9;animation:spin 70s linear infinite}
+.orb.light canvas.fib{mix-blend-mode:soft-light;opacity:1}
+.orb .limbus{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,transparent 58%,rgba(0,0,0,.28) 86%,rgba(0,0,0,.62) 100%)}
+.orb.light .limbus{background:radial-gradient(circle,transparent 64%,color-mix(in srgb,var(--pupil) 22%,transparent) 100%)}
+.orb .pupil{position:absolute;left:50%;top:50%;width:36%;height:36%;margin:-18% 0 0 -18%;border-radius:50%;background:radial-gradient(circle,var(--pupil) 0 50%,color-mix(in srgb,var(--pupil) 55%,transparent) 62%,transparent 72%);animation:dilate 1.15s ease-in-out infinite}
+.orb .spec{position:absolute;left:24%;top:16%;width:22%;height:12%;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.85),transparent);transform:rotate(-28deg);opacity:.75}
+.orb .spec2{position:absolute;left:60%;top:60%;width:6%;height:6%;border-radius:50%;background:radial-gradient(closest-side,rgba(255,255,255,.9),transparent);opacity:.6}
+.orb .streak{position:absolute;left:-55%;right:-55%;top:50%;height:1.5px;margin-top:-.75px;background:linear-gradient(90deg,transparent,var(--flare) 30%,#fff 50%,var(--flare) 70%,transparent);mix-blend-mode:screen;opacity:.85;animation:flare 1.15s ease-in-out infinite;pointer-events:none}
+.orb .streak.wide{height:22%;margin-top:-11%;filter:blur(calc(var(--blur) * 1.2));opacity:.35;background:linear-gradient(90deg,transparent,var(--flare) 35%,var(--flare) 65%,transparent)}
+.orb.light .streak{mix-blend-mode:normal;opacity:.55}
+.orb.light .streak.wide{opacity:.25}
+.orb canvas.sparks{position:absolute;left:-38%;top:-38%;width:176%;height:176%;pointer-events:none}
+.orb .center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:3;pointer-events:none}
+@keyframes beat{0%{transform:scale(1)}9%{transform:scale(1.045)}19%{transform:scale(.995)}29%{transform:scale(1.022)}46%,100%{transform:scale(1)}}
+@keyframes halo{0%{opacity:.42;transform:scale(1)}9%{opacity:.85;transform:scale(1.06)}30%{opacity:.6}100%{opacity:.42;transform:scale(1)}}
+@keyframes dilate{0%{transform:scale(1)}9%{transform:scale(.84)}29%{transform:scale(.92)}60%,100%{transform:scale(1)}}
+@keyframes flare{0%,100%{opacity:.55}9%{opacity:1}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes drift{0%{transform:translate(0,0) scale(1)}50%{transform:translate(4%,3%) scale(1.08)}100%{transform:translate(0,0) scale(1)}}
+@media (prefers-reduced-motion:reduce){.orb *,.band *{animation:none!important}}
+
+/* ===== 1 IRIS ===== */
+.b1{background:#030407;color:#E9EEF5}
+.b1::before{content:"";position:absolute;inset:-20%;background:radial-gradient(40% 50% at 20% 30%,rgba(46,242,160,.18),transparent 70%),radial-gradient(35% 45% at 80% 70%,rgba(123,108,255,.20),transparent 70%),radial-gradient(30% 30% at 60% 20%,rgba(47,212,255,.12),transparent 70%);animation:drift 18s ease-in-out infinite;z-index:0}
+.b1 .about .no,.b1 .about ul{color:#8D97A6}
+.c1{font-family:var(--font-ui);color:#F2F5F8;background:#020306}
+.c1 .bg{position:absolute;inset:0;background:
+ radial-gradient(70% 38% at 50% 26%,rgba(46,242,160,.22),transparent 70%),
+ radial-gradient(50% 30% at 0% 0%,rgba(47,212,255,.25),transparent 70%),
+ radial-gradient(60% 30% at 100% 8%,rgba(123,108,255,.28),transparent 70%),
+ radial-gradient(80% 40% at 50% 110%,rgba(46,242,160,.10),transparent 70%),#020306}
+.c1 .bg::after{content:"";position:absolute;inset:0;background-image:var(--grain);opacity:.22;mix-blend-mode:overlay}
+.c1 .g{background:linear-gradient(155deg,rgba(255,255,255,.14),rgba(255,255,255,.03) 50%,rgba(255,255,255,.07));border:1px solid rgba(255,255,255,.13);box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 12px 30px rgba(0,0,0,.35);backdrop-filter:blur(24px) saturate(170%);-webkit-backdrop-filter:blur(24px) saturate(170%)}
+.c1 .body{position:relative;z-index:2;padding:0 16px}
+.c1 .top{display:flex;justify-content:space-between;align-items:center;margin-top:4px}
+.circ{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600}
+.cap{display:flex;align-items:center;gap:10px;border-radius:99px;padding:9px 14px;font-size:13px;font-weight:500}
+.c1 .hero{display:flex;flex-direction:column;align-items:center;margin-top:18px}
+.c1 .big{font-weight:200;font-size:76px;letter-spacing:-.05em;line-height:.9;margin-top:22px}
+.c1 .big small{font-size:28px;font-weight:300;letter-spacing:0;margin-left:2px}
+.c1 .cap2{font:500 11px var(--font-mono);letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:8px}
+.c1 .pair{display:flex;gap:10px;margin-top:20px}
+.c1 .pair .g{flex:1;border-radius:24px;padding:12px;display:flex;align-items:center;gap:10px}
+.c1 .pair b{display:block;font-weight:500;font-size:19px;letter-spacing:-.02em}
+.c1 .pair span{font:500 9.5px var(--font-mono);letter-spacing:.14em;color:rgba(255,255,255,.5)}
+.c1 .card{border-radius:26px;padding:15px 16px;margin-top:10px}
+.c1 .card h4{margin:0 0 6px;font-weight:500;font-size:16px}
+.c1 .card p{margin:0;font-size:12.5px;line-height:1.45;color:rgba(255,255,255,.66)}
+.tabs{position:absolute;left:14px;right:14px;bottom:18px;height:58px;border-radius:30px;display:flex;justify-content:space-around;align-items:center;z-index:5}
+.tab{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:9.5px;font-weight:500;width:66px;padding:6px 0;border-radius:22px;opacity:.55}
+.tab.on{opacity:1;background:rgba(255,255,255,.12)}
+.c1 .rows{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.c1 .mrow{border-radius:20px;padding:11px 14px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:2px 10px}
+.c1 .mrow .l{font:500 9.5px var(--font-mono);letter-spacing:.14em;color:rgba(255,255,255,.5);text-transform:uppercase}
+.c1 .mrow .v{font-size:22px;font-weight:300;letter-spacing:-.02em}
+.c1 .mrow .v small{font-size:11px;color:rgba(255,255,255,.5);margin-left:3px}
+.delta{font:500 10px var(--font-mono);padding:3px 7px;border-radius:99px}
+
+/* ===== 2 DUNE ===== */
+.b2{background:linear-gradient(125deg,#cdbfb2 0%,#a98a76 38%,#7a5a4b 70%,#4c3830 100%);color:#2A1E18}
+.b2::before{content:"";position:absolute;inset:-10%;background:radial-gradient(40% 50% at 15% 20%,rgba(255,240,228,.55),transparent 70%),radial-gradient(35% 40% at 85% 85%,rgba(255,120,80,.25),transparent 70%);filter:blur(10px);animation:drift 22s ease-in-out infinite;z-index:0}
+.b2 .about .no,.b2 .about ul{color:#4b372d}
+.b2 .about h2{font-family:"Hanken Grotesk",var(--font-ui);font-weight:200}
+.c2{font-family:"Hanken Grotesk",var(--font-ui);color:#1B1512;background:#F2EFEB}
+.c2 .bg{position:absolute;inset:0;background:radial-gradient(90% 40% at 50% 30%,rgba(255,163,128,.32),transparent 70%),radial-gradient(60% 30% at 0% 0%,#fff,transparent 70%),linear-gradient(#F4F1ED,#ECE7E1)}
+.c2 .bg::after{content:"";position:absolute;inset:0;background-image:var(--grain);opacity:.25;mix-blend-mode:multiply}
+.c2 .body{position:relative;z-index:2;padding:0 16px}
+.c2 .dates{display:flex;justify-content:space-between;align-items:flex-end;padding:6px 8px 0}
+.c2 .dates div{display:flex;flex-direction:column;align-items:center;font-size:11px;color:#9b928b;gap:2px}
+.c2 .dates div b{font-weight:300;font-size:20px;color:#b7aea7}
+.c2 .dates div.on{color:#1B1512}.c2 .dates div.on b{color:#1B1512;font-weight:400}
+.seg{display:inline-flex;gap:2px;border-radius:99px;padding:3px;font-size:12px}
+.seg span{padding:6px 12px;border-radius:99px;color:#857a73}
+.seg span.on{background:#fff;color:#1B1512;box-shadow:0 2px 8px rgba(60,30,20,.08)}
+.c2 .w{background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.9);box-shadow:0 8px 24px rgba(80,40,20,.06);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.c2 .tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.c2 .tile{border-radius:20px;padding:12px;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px;color:#857a73}
+.c2 .tile b{font-weight:500;font-size:15px;color:#1B1512}
+.c2 h5{font-weight:500;font-size:14px;margin:14px 2px 8px}
+.c2 .sig{border-radius:20px;padding:11px 12px;font-size:11.5px}
+.c2 .sig .v{font-size:26px;font-weight:300;letter-spacing:-.03em;color:#1B1512}
+.c2 .sig .v small{font-size:11px;color:#857a73;margin-left:2px}
+.c2 .tabs{left:70px;right:70px;height:52px;background:#fff;box-shadow:0 10px 30px rgba(80,40,20,.12)}
+.c2 .tabs .tab{opacity:.75;width:auto}
+.coral{width:40px;height:40px;border-radius:50%;background:#F26B4F;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(242,107,79,.45)}
+
+/* ===== 3 EMBER ===== */
+.b3{background:#0B0A09;color:#F1E7DA}
+.b3::before{content:"";position:absolute;inset:-20%;background:radial-gradient(35% 40% at 25% 25%,rgba(232,170,90,.20),transparent 70%),radial-gradient(40% 40% at 80% 75%,rgba(255,110,60,.14),transparent 70%);animation:drift 20s ease-in-out infinite;z-index:0}
+.b3 .about .no,.b3 .about ul{color:#a8957f}
+.b3 .about h2{font-family:"Plus Jakarta Sans",var(--font-ui);font-weight:300}
+.c3{font-family:"Plus Jakarta Sans",var(--font-ui);color:#F6EFE6;background:#0E0D0C}
+.c3 .bg{position:absolute;inset:0;background:radial-gradient(80% 36% at 50% 22%,rgba(214,150,70,.20),transparent 70%),linear-gradient(#141210,#0c0b0a)}
+.c3 .bg::after{content:"";position:absolute;inset:0;background-image:var(--grain);opacity:.2;mix-blend-mode:overlay}
+.c3 .body{position:relative;z-index:2;padding:0 14px}
+.c3 .k{background:#1C1A18;border:1px solid rgba(255,255,255,.05);border-radius:24px}
+.c3 .hero{border-radius:34px;padding:10px 0 16px;display:flex;flex-direction:column;align-items:center;background:radial-gradient(90% 60% at 50% 40%,#1d1814,#121110);border:1px solid rgba(255,255,255,.05);margin-top:4px}
+.goldpill{border:1px solid rgba(232,183,106,.55);border-radius:99px;padding:6px 13px;font-size:12px;color:#F3D9A9;background:rgba(232,183,106,.08)}
+.ticks{display:flex;gap:4px;align-items:flex-end;height:16px;margin-top:12px}
+.ticks i{width:1px;background:rgba(255,255,255,.25);height:7px}
+.ticks i.m{height:12px;background:rgba(255,255,255,.5)}
+.ticks i.c{height:16px;width:2px;background:#F3D9A9}
+.c3 .snap{padding:16px;margin-top:8px;display:flex;justify-content:space-between;align-items:flex-start}
+.c3 .snap h4{margin:0;font-size:17px;font-weight:500;line-height:1.2}
+.c3 .snap p{margin:6px 0 0;font-size:11px;color:#8f877e}
+.arrowc{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;flex:none}
+.c3 .gt{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.c3 .gt div{height:118px;border-radius:24px;padding:14px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.c3 .gt h4{margin:0;font-size:16px;font-weight:500;line-height:1.15;position:relative}
+.c3 .gt span{position:relative;align-self:flex-start;font-size:11px;font-weight:600;background:rgba(255,255,255,.9);color:#1a1512;border-radius:99px;padding:5px 10px}
+.c3 .lab{padding:13px 15px;display:grid;grid-template-columns:1fr auto;gap:6px;align-items:center;margin-top:8px}
+.c3 .lab .n{font-size:12px;color:#a59c92}
+.c3 .lab .v{font-size:20px;font-weight:500;letter-spacing:-.01em}
+.badge{font-size:10.5px;font-weight:600;border-radius:7px;padding:4px 8px}
+
+/* ===== 4 SAGE ===== */
+.b4{background:#D9E3D1;color:#1F2B1D}
+.b4 .leaves{position:absolute;inset:0;z-index:0;filter:blur(26px);opacity:.75}
+.b4 .about .no,.b4 .about ul{color:#4c5c48}
+.b4 .about h2{font-family:"Outfit",var(--font-ui);font-weight:300}
+.c4{font-family:"Outfit",var(--font-ui);color:#1E2A1C;background:#EEF2EA}
+.c4 .bg{position:absolute;inset:0;background:linear-gradient(#F3F6F0,#E7EDE2)}
+.c4 .bg svg{position:absolute;inset:0;filter:blur(22px);opacity:.55}
+.c4 .bg::after{content:"";position:absolute;inset:0;background-image:var(--grain);opacity:.2;mix-blend-mode:multiply}
+.c4 .body{position:relative;z-index:2;padding:0 14px}
+.c4 .fr{background:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.85);box-shadow:0 10px 30px rgba(40,60,35,.07),inset 0 1px 0 #fff;backdrop-filter:blur(20px) saturate(140%);-webkit-backdrop-filter:blur(20px) saturate(140%)}
+.c4 .grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.c4 .t{border-radius:22px;padding:12px;height:122px;display:flex;flex-direction:column}
+.c4 .t .l{font-size:11px;color:#5d6b59}
+.c4 .t .v{font-size:26px;font-weight:300;letter-spacing:-.02em;margin-top:2px}
+.c4 .t .v small{font-size:12px;color:#5d6b59;margin-left:2px}
+.c4 .t .d{font-size:10px;color:#5d6b59}
+.c4 .tabs{left:46px;right:46px;gap:6px;height:auto;background:none;justify-content:center}
+.c4 .tabs .cb{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.c4 .tabs .cb.on{background:#5E7F55}
+
+/* responsive */
+@media (max-width:900px){.band .wrap{grid-template-columns:minmax(0,1fr);gap:20px;padding-block:44px}}
+footer{padding-block:40px 60px;color:var(--ink-dim);font-size:14px;line-height:1.6}
+footer b{color:var(--ink);font-weight:500}
+</style>
+
+<header class="intro wrap">
+  <div class="chip" style="display:inline-block;margin-bottom:18px">Lumen · design directions</div>
+  <h1>Four directions for Lumen</h1>
+  <p>Each direction replaces the three plain rings with a living recovery orb: an iris that pulses at a resting heart rhythm, dilates on every beat and throws an anamorphic light streak. Same data in all four (recovery 71 %, sleep 78 %, strain 16.9). Pick one and the app gets rebuilt around it.</p>
+  <div class="meta"><span class="chip">iPhone · iOS 26</span><span class="chip">Apple Watch · watchOS 26</span><span class="chip">Demo data</span></div>
+</header>
+
+<main id="bands"></main>
+
+<footer class="wrap">
+  Reply with the number you like (<b>1 Iris</b>, <b>2 Dune</b>, <b>3 Ember</b> or <b>4 Sage</b>). You can also mix them, for example Ember's orb with Sage's layout. Fonts here are stand-ins; the app itself uses SF Pro.
+</footer>
+
+<script>
+const ic={
+ chevL:'<path d="M15 5l-7 7 7 7" fill="none" stroke="C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>',
+ chevR:'<path d="M9 5l7 7-7 7" fill="none" stroke="C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>',
+ arrowUR:'<path d="M7 17L17 7M9 7h8v8" fill="none" stroke="C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
+ arrowR:'<path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
+ watch:'<rect x="7" y="5" width="10" height="14" rx="3" fill="none" stroke="C" stroke-width="1.8"/><path d="M9 5l.6-3h4.8l.6 3M9 19l.6 3h4.8l.6-3" fill="none" stroke="C" stroke-width="1.8"/>',
+ home:'<path d="M4 11l8-7 8 7v9H4z" fill="none" stroke="C" stroke-width="1.9" stroke-linejoin="round"/>',
+ orb:'<circle cx="12" cy="12" r="8.5" fill="none" stroke="C" stroke-width="1.9"/><circle cx="12" cy="12" r="3.2" fill="C"/>',
+ chart:'<path d="M3 20h18M5 16l4-5 4 3 6-8" fill="none" stroke="C" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>',
+ book:'<path d="M5 4h11a3 3 0 013 3v13H8a3 3 0 01-3-3zM5 17a3 3 0 013-3h11" fill="none" stroke="C" stroke-width="1.8" stroke-linejoin="round"/>',
+ spark:'<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z" fill="C"/>',
+ moon:'<path d="M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z" fill="C"/>',
+ flame:'<path d="M12 21c-4 0-6.5-2.7-6.5-6 0-4 3.5-5.5 4-10 3 2 4 4 4 6 1-1 1.5-2 1.5-3 2 1.5 3.5 4 3.5 7 0 3.3-2.5 6-6.5 6z" fill="none" stroke="C" stroke-width="1.8" stroke-linejoin="round"/>',
+ heart:'<path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0112 7.3 4.3 4.3 0 0119.5 10c0 5.4-7.5 10-7.5 10z" fill="C"/>',
+ cal:'<rect x="4" y="5" width="16" height="15" rx="3" fill="none" stroke="C" stroke-width="1.8"/><path d="M4 10h16M8 3v4M16 3v4" stroke="C" stroke-width="1.8" stroke-linecap="round"/>',
+ user:'<circle cx="12" cy="8" r="4" fill="none" stroke="C" stroke-width="1.8"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6" fill="none" stroke="C" stroke-width="1.8" stroke-linecap="round"/>',
+ bell:'<path d="M6 16V11a6 6 0 0112 0v5l1.5 2h-15zM10 20a2 2 0 004 0" fill="none" stroke="C" stroke-width="1.8" stroke-linejoin="round"/>',
+ q:'<circle cx="12" cy="12" r="9" fill="none" stroke="C" stroke-width="1.6"/><path d="M9.5 9.5a2.5 2.5 0 114 2c-1 .6-1.5 1.2-1.5 2.3M12 17h.01" fill="none" stroke="C" stroke-width="1.8" stroke-linecap="round"/>',
+ gear:'<circle cx="12" cy="12" r="3" fill="none" stroke="C" stroke-width="1.8"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1" stroke="C" stroke-width="1.8" stroke-linecap="round"/>',
+ signal:'<rect x="2" y="15" width="3.5" height="5" rx="1" fill="C"/><rect x="7.5" y="11" width="3.5" height="9" rx="1" fill="C"/><rect x="13" y="7" width="3.5" height="13" rx="1" fill="C"/><rect x="18.5" y="3" width="3.5" height="17" rx="1" fill="C"/>',
+ wifi:'<path d="M2 9a14 14 0 0120 0M5.5 12.5a9 9 0 0113 0M9 16a4 4 0 016 0" fill="none" stroke="C" stroke-width="2.4" stroke-linecap="round"/><circle cx="12" cy="19.5" r="1.6" fill="C"/>',
+ batt:'<rect x="1" y="6" width="21" height="12" rx="3.5" fill="none" stroke="C" stroke-opacity=".45" stroke-width="1.3"/><rect x="3" y="8" width="15" height="8" rx="2" fill="C"/>',
+};
+const I=(n,s=16,c='currentColor')=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" aria-hidden="true">${ic[n].replaceAll('"C"','"'+c+'"')}</svg>`;
+const sb=c=>`<div class="sb" style="color:${c}"><span>9:41</span><span class="ic">${I('signal',15,c)}${I('wifi',15,c)}${I('batt',24,c)}</span></div>`;
+const orb=(p,size,extra={})=>`<div data-orb='${JSON.stringify({p,size,...extra}).replaceAll("'",'&#39;')}' style="width:${size}px;height:${size}px"></div>`;
+function arc(size,w,p,col,track){const r=(size-w)/2,L=2*Math.PI*r;return `<svg width="${size}" height="${size}"><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${track}" stroke-width="${w}"/><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${col}" stroke-width="${w}" stroke-linecap="round" stroke-dasharray="${L*p} ${L}" transform="rotate(-90 ${size/2} ${size/2})"/></svg>`}
+function spark(v,w,h,col,fill){const mn=Math.min(...v),mx=Math.max(...v);const pts=v.map((y,i)=>[i/(v.length-1)*w,h-3-(y-mn)/(mx-mn||1)*(h-6)]);const d=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+ return `<svg width="${w}" height="${h}">${fill?`<path d="${d} L${w} ${h} L0 ${h}Z" fill="${fill}"/>`:''}<path d="${d}" fill="none" stroke="${col}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="${pts.at(-1)[0]}" cy="${pts.at(-1)[1]}" r="2.6" fill="${col}"/></svg>`}
+const phone=(cls,inner)=>`<div class="phone"><div class="screen ${cls}"><div class="bg"></div>${inner}<div class="island"></div></div></div>`;
+const watch=(inner,bg='#000')=>`<div class="watch"><div class="wscreen" style="background:${bg}">${inner}</div></div>`;
+const leafSVG=(cols)=>`<svg viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice" width="100%" height="100%">${[[80,140,-30,1.1],[330,240,40,1.3],[60,520,20,1.4],[310,640,-50,1.2],[200,380,70,.9]].map(([x,y,r,s],i)=>`<g transform="translate(${x} ${y}) rotate(${r}) scale(${s})"><path d="M0 -110 C70 -60 70 60 0 110 C-70 60 -70 -60 0 -110Z" fill="${cols[i%cols.length]}"/></g>`).join('')}</svg>`;
+
+/* ---------------- concept 1: IRIS */
+const c1a=phone('c1',`${sb('#fff')}<div class="body">
+ <div class="top"><div class="circ g">ME</div><div class="cap g">${I('chevL',12,'#fff')}<span>Sunday, Nov 2</span>${I('chevR',12,'rgba(255,255,255,.35)')}</div><div class="circ g">${I('watch',17,'#fff')}</div></div>
+ <div class="hero">${orb('iris',214)}<div class="big">71<small>%</small></div><div class="cap2">Recovery · primed</div></div>
+ <div class="pair">
+  <div class="g">${arc(38,4,.78,'#A9A0FF','rgba(255,255,255,.1)')}<div><b>78%</b><span>SLEEP</span></div></div>
+  <div class="g">${arc(38,4,16.9/21,'#2FD4FF','rgba(255,255,255,.1)')}<div><b>16.9</b><span>STRAIN</span></div></div>
+ </div>
+ <div class="card g"><h4>Primed to perform</h4><p>HRV is 14% above your baseline. Aim for a strain of 14–18 today.</p></div>
+</div>
+<div class="tabs g">${[['orb','Today',1],['chart','Trends'],['book','Journal'],['spark','Coach']].map(([i,n,on])=>`<div class="tab ${on?'on':''}">${I(i,20,'#fff')}${n}</div>`).join('')}</div>`);
+
+const c1b=phone('c1',`${sb('#fff')}<div class="body">
+ <div class="top"><div class="circ g">${I('chevL',14,'#fff')}</div><div style="font:500 11px var(--font-mono);letter-spacing:.18em">RECOVERY</div><div class="circ g">${I('q',16,'#fff')}</div></div>
+ <div style="display:flex;align-items:center;gap:16px;margin-top:18px">${orb('iris',96)}<div><div style="font-size:54px;font-weight:200;letter-spacing:-.05em;line-height:.9">71<span style="font-size:22px">%</span></div><div class="cap2" style="margin-top:6px;color:#2EF2A0">Green · day 38</div></div></div>
+ <div class="rows">
+  ${[['Heart rate variability','63','ms',[52,55,49,58,56,59,63],'+14%','#2EF2A0'],['Resting heart rate','51','bpm',[54,53,55,52,52,51,51],'−2 bpm','#2EF2A0'],['Respiratory rate','14.6','/min',[14.4,14.7,14.5,14.6,14.8,14.5,14.6],'typical','#9aa4b2'],['Sleep performance','78','%',[89,76,93,83,79,88,78],'−6%','#FFB86B']].map(([l,v,u,s,d,c])=>
+  `<div class="mrow g"><div class="l">${l}</div><span class="delta" style="color:${c};background:${c}22">${d}</span><div class="v">${v}<small>${u}</small></div>${spark(s,92,26,c)}</div>`).join('')}
+ </div>
+ <div class="card g" style="margin-top:8px"><div class="cap2" style="margin:0 0 6px">7 days · strain & recovery</div>
+  <svg width="256" height="70"><defs><filter id="gl1"><feGaussianBlur stdDeviation="2.5"/></filter></defs>
+  ${(()=>{const r=[65,82,79,71,68,79,71],s=[11.8,15.4,10.9,4.3,16.2,17.2,16.9];const x=i=>8+i*40,yr=v=>64-v/100*58,ys=v=>64-v/21*58;
+   const pr=r.map((v,i)=>[x(i),yr(v)]),ps=s.map((v,i)=>[x(i),ys(v)]);const P=a=>a.map((p,i)=>(i?'L':'M')+p.join(' ')).join(' ');
+   return `<path d="${P(ps)}" stroke="#2FD4FF" stroke-width="3" fill="none" filter="url(#gl1)" opacity=".7"/><path d="${P(ps)}" stroke="#2FD4FF" stroke-width="1.6" fill="none"/><path d="${P(pr)}" stroke="#2EF2A0" stroke-width="1.6" fill="none" stroke-dasharray="2 3"/>${pr.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="2.6" fill="#2EF2A0"/>`).join('')}${ps.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="2.6" fill="#0a1220" stroke="#2FD4FF" stroke-width="1.4"/>`).join('')}`})()}
+  </svg></div>
+</div>`);
+
+const w1=watch(`<div style="position:absolute;inset:0;background:radial-gradient(70% 50% at 50% 45%,rgba(46,242,160,.18),transparent 70%)"></div>
+ <div style="position:relative;display:flex;justify-content:space-between;padding:12px 18px 0;font:600 13px var(--font-ui)"><span style="color:#2EF2A0">Lumen</span><span style="color:#fff">9:41</span></div>
+ <div style="position:relative;display:flex;justify-content:center;margin-top:6px">${orb('iris',128,{center:'<div style="font:300 34px var(--font-ui);letter-spacing:-.04em;color:#fff;text-shadow:0 0 12px rgba(0,0,0,.6)">71</div>'})}</div>
+ <div style="position:relative;display:flex;justify-content:space-between;padding:10px 18px 0;font:500 9px var(--font-mono);letter-spacing:.12em;color:rgba(255,255,255,.55)">
+  <div style="display:flex;align-items:center;gap:5px">${arc(18,2.5,.78,'#A9A0FF','rgba(255,255,255,.12)')}<span><b style="color:#fff;font:600 12px var(--font-ui);letter-spacing:0">78</b> SLP</span></div>
+  <div style="display:flex;align-items:center;gap:5px">${arc(18,2.5,.8,'#2FD4FF','rgba(255,255,255,.12)')}<span><b style="color:#fff;font:600 12px var(--font-ui);letter-spacing:0">16.9</b> STR</span></div></div>`);
+
+/* ---------------- concept 2: DUNE */
+const c2a=phone('c2',`${sb('#1B1512')}<div class="body">
+ <div class="dates">${[['Thu','30'],['Fri','31'],['Sat','1'],['Sun','2',1],['Mon','3']].map(([d,n,on],i)=>`<div class="${on?'on':''}" style="${i==4?'opacity:.4':''}">${d}<b>${n}</b></div>`).join('')}</div>
+ <div style="display:flex;justify-content:center;margin-top:12px"><div class="seg w"><span class="on">Recovery</span><span>Strain</span><span>Sleep</span></div></div>
+ <div style="display:flex;flex-direction:column;align-items:center;margin-top:10px">${orb('dune',148)}
+  <div style="font-size:72px;font-weight:200;letter-spacing:-.06em;line-height:.9;margin-top:12px">71<span style="font-size:30px;letter-spacing:0">%</span></div><div style="font-size:13px;color:#857a73;margin-top:4px">Recovery · primed to perform</div></div>
+ <div class="tiles" style="margin-top:12px"><div class="tile w">${I('moon',16,'#1B1512')}<span>Sleep</span><b>8h 05m</b></div><div class="tile w">${I('flame',16,'#1B1512')}<span>Strain</span><b>16.9 / 21</b></div></div>
+ <h5>Overnight signals</h5>
+ <div class="tiles">
+  <div class="sig w"><div style="display:flex;justify-content:space-between"><span>HRV</span><span style="color:#F26B4F">+14%</span></div><div class="v">63<small>ms</small></div>
+   <svg width="118" height="22">${Array.from({length:13},(_,i)=>{const h=6+Math.abs(Math.sin(i*1.7))*14;return `<rect x="${i*9}" y="${22-h}" width="4" height="${h}" rx="2" fill="#F26B4F" opacity="${.35+i/20}"/>`}).join('')}</svg></div>
+  <div class="sig w"><div style="display:flex;justify-content:space-between"><span>Resting HR</span><span style="color:#857a73">−2</span></div><div class="v">51<small>bpm</small></div>
+   <svg width="118" height="22"><path d="M0 14 L22 14 L28 12 L34 15 L40 14 L50 14 L54 4 L58 20 L62 13 L80 14 L86 11 L92 15 L118 14" fill="none" stroke="#F26B4F" stroke-width="1.5" stroke-linejoin="round"/></svg></div>
+ </div>
+</div>
+<div class="tabs">${I('cal',19,'#1B1512')}<div class="coral">${I('orb',18,'#fff')}</div>${I('user',19,'#1B1512')}</div>`);
+
+const c2b=phone('c2',`${sb('#1B1512')}<div class="body">
+ <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px"><div class="circ w">${I('cal',15,'#1B1512')}</div><b style="font-weight:500;font-size:15px">Strain</b><div class="circ w">${I('gear',15,'#1B1512')}</div></div>
+ <div style="display:flex;justify-content:center;margin-top:14px"><div class="seg w"><span>Month</span><span class="on">Week</span></div></div>
+ <div style="text-align:center;margin-top:12px"><div style="font-size:88px;font-weight:200;letter-spacing:-.06em;line-height:.95">16.9</div><div style="font-size:13px;color:#857a73">Day strain · target 14–18</div></div>
+ <div style="position:relative;margin-top:16px;height:330px">
+  ${(()=>{const v=[11.8,15.4,10.9,4.3,16.2,17.2,16.9],days=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];let s='';const cols=7,rows=14,cw=40,gap=4;
+   v.forEach((val,c)=>{const filled=Math.round(val/21*rows);for(let r=0;r<rows;r++){const on=r<filled;const op=on?(.35+.65*r/rows):.13;s+=`<i style="position:absolute;left:${c*(cw+gap)+2}px;bottom:${24+r*(18+3)}px;width:${cw-4}px;height:18px;border-radius:5px;background:${on?'#F26B4F':'#E8A08C'};opacity:${op}"></i>`}
+    s+=`<span style="position:absolute;left:${c*(cw+gap)}px;width:${cw}px;bottom:0;text-align:center;font-size:10.5px;color:${c==6?'#1B1512':'#9b928b'};font-weight:${c==6?600:400}">${days[c]}</span>`});
+   s+=`<span style="position:absolute;right:6px;top:2px;font-size:12px">Sat: <b style="font-weight:600">17.2</b></span><span style="position:absolute;left:4px;top:132px;font-size:12px">Thu: <b style="font-weight:600">4.3</b></span>`;return s})()}
+ </div>
+</div>
+<div class="tabs">${I('cal',19,'#1B1512')}<div class="coral">${I('chart',18,'#fff')}</div>${I('user',19,'#1B1512')}</div>`);
+
+const w2=watch(`<div style="position:absolute;inset:0;background:radial-gradient(80% 60% at 50% 35%,#3a2018,#120b08 75%)"></div>
+ <div style="position:relative;display:flex;justify-content:space-between;padding:12px 18px 0;font:500 13px 'Hanken Grotesk',var(--font-ui)"><span style="color:#FF9C80">Recovery</span><span style="color:#fff">9:41</span></div>
+ <div style="position:relative;display:flex;justify-content:center;margin-top:4px">${orb('duneDark',100)}</div>
+ <div style="position:relative;text-align:center;color:#fff;font:200 52px 'Hanken Grotesk',var(--font-ui);letter-spacing:-.05em;line-height:1;margin-top:6px">71<span style="font-size:20px">%</span></div>
+ <div style="position:relative;display:flex;justify-content:center;gap:14px;font:400 11px 'Hanken Grotesk',var(--font-ui);color:#c9b3a8;margin-top:2px"><span>Sleep <b style="color:#fff;font-weight:500">8h05</b></span><span>Strain <b style="color:#fff;font-weight:500">16.9</b></span></div>`);
+
+/* ---------------- concept 3: EMBER */
+const c3a=phone('c3',`${sb('#fff')}<div class="body">
+ <div class="hero">
+  <div style="display:flex;justify-content:space-between;width:100%;padding:0 12px"><div class="circ" style="background:linear-gradient(135deg,#E8B76A,#9a5b2a);color:#1a1512">ME</div><div style="text-align:center;font-size:15px;font-weight:500;line-height:1.2">Today's<br>Recovery</div><div class="circ" style="border:1px solid rgba(255,255,255,.15)">${I('q',16,'#bbb')}</div></div>
+  <div style="margin-top:8px">${orb('ember',190,{sparks:1,center:'<div style="font-size:64px;font-weight:300;letter-spacing:-.04em;color:#fff;text-shadow:0 2px 20px rgba(0,0,0,.8)">71</div>'})}</div>
+  <div class="goldpill" style="margin-top:6px">Primed · HRV +14%</div>
+  <div class="ticks">${Array.from({length:41},(_,i)=>`<i class="${i==20?'c':i%5==0?'m':''}"></i>`).join('')}</div>
+ </div>
+ <div class="k snap"><div><h4>Your day,<br>in one breath</h4><p>Strain target 14–18 · bed by 10:48 PM</p></div><div class="arrowc">${I('arrowUR',14,'#ddd')}</div></div>
+ <div class="gt">
+  <div style="background:radial-gradient(70% 70% at 20% 90%,#d8c6ff 0,transparent 60%),radial-gradient(80% 80% at 90% 10%,#ff7a3d 0,transparent 65%),#7b3a20"><h4>Your<br>Insights</h4><span>3 tips →</span></div>
+  <div style="background:radial-gradient(70% 70% at 80% 90%,#7fb3ff 0,transparent 60%),radial-gradient(80% 80% at 10% 10%,#f1b98a 0,transparent 65%),#5a3a3a"><h4>Action<br>Plan</h4><span>Details →</span></div>
+ </div>
+</div>`);
+
+const c3b=phone('c3',`${sb('#fff')}<div class="body">
+ <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px"><div class="arrowc">${I('chevL',14,'#ddd')}</div><div style="font-size:16px;font-weight:500;text-align:center;line-height:1.2">Healthspan</div><div class="arrowc">${I('q',15,'#ddd')}</div></div>
+ <div class="k" style="padding:16px;margin-top:14px;background:radial-gradient(90% 90% at 100% 0%,rgba(232,183,106,.18),transparent 60%),#1C1A18">
+  <div style="display:flex;gap:14px;align-items:center">${orb('ember',74)}<div><div style="font-size:12px;color:#a59c92">Body age</div><div style="font-size:40px;font-weight:300;letter-spacing:-.03em;line-height:1">30.0</div></div></div>
+  <div style="font-size:17px;font-weight:500;line-height:1.3;margin-top:12px;background:linear-gradient(90deg,#fff,#F3D9A9);-webkit-background-clip:text;background-clip:text;color:transparent">You're aging slower than the calendar — a year younger than your age.</div>
+  <div style="font-size:11.5px;color:#8f877e;margin-top:6px;line-height:1.45">Built from VO₂ max, resting heart rate, HRV, sleep and activity over 30 days.</div>
+ </div>
+ ${[['Resting heart rate','51 bpm','Excellent','#7BE0A0'],['VO₂ max','47.3 ml/kg/min','Good','#E8B76A'],['Heart rate variability','59 ms','Normal','#d9c9b0'],['Sleep consistency','42 %','Needs work','#FF8A5C']].map(([n,v,b,c])=>
+ `<div class="k lab"><div class="n">${n}</div><span class="badge" style="color:${c};background:${c}22">${b}</span><div class="v">${v}</div><div class="arrowc" style="width:24px;height:24px">${I('arrowUR',11,'#aaa')}</div></div>`).join('')}
+</div>`);
+
+const w3=watch(`<div style="position:absolute;inset:0;background:radial-gradient(70% 50% at 50% 50%,rgba(214,150,70,.16),transparent 70%)"></div>
+ <div style="position:relative;display:flex;justify-content:space-between;padding:12px 18px 0;font:500 12px 'Plus Jakarta Sans',var(--font-ui);color:#E8B76A"><span>Recovery</span><span style="color:#fff">9:41</span></div>
+ <div style="position:relative;display:flex;justify-content:center;margin-top:10px">${orb('ember',120,{sparks:1,center:'<div style="font:300 36px \'Plus Jakarta Sans\',var(--font-ui);color:#fff;text-shadow:0 2px 14px #000">71</div>'})}</div>
+ <div style="position:relative;display:flex;justify-content:center;margin-top:16px"><span class="goldpill" style="font-size:10px;padding:4px 10px">Strain 16.9 · Sleep 78%</span></div>`);
+
+/* ---------------- concept 4: SAGE */
+const c4a=phone('c4',`${sb('#1E2A1C')}<div class="body">
+ <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2px"><div style="width:36px;height:36px;border-radius:12px;background:linear-gradient(145deg,#8FAF7E,#4F6E47);display:flex;align-items:center;justify-content:center">${I('orb',18,'#fff')}</div><div style="display:flex;gap:8px"><div class="circ fr">${I('bell',15,'#1E2A1C')}</div><div class="circ" style="background:linear-gradient(135deg,#c8d8bf,#7c9a6b);color:#fff">ME</div></div></div>
+ <div style="font-size:12px;color:#5d6b59;margin-top:14px">Your recovery score</div>
+ <div style="font-size:30px;font-weight:300;letter-spacing:-.02em">Overview</div>
+ <div class="fr" style="border-radius:26px;padding:14px;margin-top:10px;display:flex;gap:14px;align-items:center">${orb('sage',92,{center:'<div style="font-size:24px;font-weight:400;color:#fff">71</div>'})}
+  <div><div style="font-size:11px;color:#5d6b59;display:flex;align-items:center;gap:5px">${I('spark',11,'#5E7F55')} Insight</div><div style="font-size:14px;line-height:1.35;margin-top:4px">You're recovering well, but sleep consistency dipped this week.</div></div></div>
+ <div class="grid">
+  <div class="t fr"><span class="l">Sleep quality</span><span class="v">78<small>%</small></span><span class="d">↘ 6% vs. last week</span><div style="margin-top:auto;align-self:center">${(()=>{const L=Math.PI*44;return `<svg width="110" height="34"><path d="M11 33 A44 44 0 0 1 99 33" fill="none" stroke="rgba(94,127,85,.15)" stroke-width="8" stroke-linecap="round"/><path d="M11 33 A44 44 0 0 1 99 33" fill="none" stroke="#7C9A6B" stroke-width="8" stroke-linecap="round" stroke-dasharray="${L*.78} ${L}"/></svg>`})()}</div></div>
+  <div class="t fr"><span class="l">Strain</span><span class="v">16.9</span><span class="d">↗ target 14–18</span><svg width="128" height="34" style="margin-top:auto">${[11.8,15.4,10.9,4.3,16.2,17.2,16.9].map((v,i)=>`<rect x="${i*18+4}" y="${34-v/21*34}" width="9" height="${v/21*34}" rx="3" fill="${i==6?'#5E7F55':'rgba(94,127,85,.28)'}"/>`).join('')}</svg></div>
+  <div class="t fr"><span class="l">Resting heart</span><span class="v">51<small>bpm</small></span><span class="d">↘ 2 bpm this month</span><svg width="128" height="30" style="margin-top:auto">${Array.from({length:22},(_,i)=>{const h=4+Math.abs(Math.sin(i*.9))*20;return `<rect x="${i*5.8}" y="${30-h}" width="2" height="${h}" rx="1" fill="#5E7F55" opacity=".55"/>`}).join('')}</svg></div>
+  <div class="t fr"><span class="l">HRV</span><span class="v">63<small>ms</small></span><span class="d">↗ 14% vs. baseline</span><div style="margin-top:auto">${spark([52,55,49,58,56,59,63],128,30,'#5E7F55','rgba(94,127,85,.12)')}</div></div>
+ </div>
+</div>
+<div class="tabs">${[['home',0],['orb',1],['chart',0],['book',0],['gear',0]].map(([i,on])=>`<div class="cb ${on?'on':'fr'}">${I(i,17,on?'#fff':'#1E2A1C')}</div>`).join('')}</div>`);
+
+const c4b=`<div class="phone"><div class="screen c4" style="color:#fff"><div class="bg" style="background:radial-gradient(60% 40% at 30% 30%,#9cbc86,transparent 70%),radial-gradient(60% 50% at 80% 60%,#3f6a3c,transparent 70%),linear-gradient(#6f8f60,#2f4a2c)">${leafSVG(['#2a4a28','#a9c98f','#3d6238','#c9e0b3','#1f3a1e'])}</div>
+ ${sb('#fff')}<div class="body">
+ <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2px"><div class="circ" style="background:rgba(255,255,255,.18);backdrop-filter:blur(10px)">${I('chevL',14,'#fff')}</div><div style="font-size:14px">Stress</div><div class="circ" style="background:rgba(255,255,255,.18)">${I('gear',15,'#fff')}</div></div>
+ <div style="text-align:center;margin-top:28px"><div style="font-size:78px;font-weight:200;letter-spacing:-.05em;line-height:.9">1.4</div><div style="font-size:14px;opacity:.85;margin-top:6px">Medium · steady since 3 PM</div></div>
+ <div style="display:flex;justify-content:center;margin-top:26px">${orb('sageDark',150,{center:`<div style="width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.95);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 8px rgba(255,255,255,.18),0 0 0 18px rgba(255,255,255,.08)">${I('heart',15,'#E2554B')}</div>`})}</div>
+ <div style="display:flex;justify-content:center;margin-top:18px"><span style="font-size:11px;background:rgba(255,255,255,.2);border-radius:99px;padding:5px 11px;backdrop-filter:blur(8px)">4 PM</span></div>
+ <svg width="292" height="110" style="margin-top:4px">
+  ${(()=>{const v=[.3,.35,.28,.25,.3,1.9,1.4,1.2,1.5,1.3,2.4,1.6,1.4,1.5,1.4];const x=i=>i/(v.length-1)*292,y=s=>96-s/3*86;const d=v.map((s,i)=>(i?'L':'M')+x(i).toFixed(1)+' '+y(s).toFixed(1)).join(' ');
+  return `<path d="${d} L292 110 L0 110Z" fill="rgba(255,255,255,.14)"/><path d="${d}" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/><line x1="${x(12)}" x2="${x(12)}" y1="0" y2="110" stroke="rgba(255,255,255,.5)" stroke-dasharray="2 3"/><circle cx="${x(12)}" cy="${y(1.4)}" r="5" fill="#fff"/>`})()}
+ </svg>
+ <div style="display:flex;justify-content:space-between;font-size:10px;opacity:.7;padding:0 2px"><span>12 AM</span><span>6 AM</span><span>12 PM</span><span>6 PM</span></div>
+</div>
+<div class="tabs">${[['home',0],['orb',0],['heart',1],['book',0],['gear',0]].map(([i,on])=>`<div class="cb" style="background:${on?'#fff':'rgba(255,255,255,.18)'};backdrop-filter:blur(10px)">${I(i,17,on?'#3f6a3c':'#fff')}</div>`).join('')}</div>
+<div class="island"></div></div></div>`;
+
+const w4=watch(`<div style="position:absolute;inset:0;background:radial-gradient(90% 70% at 50% 30%,#2c4a2a,#0b140b 80%)"></div>
+ <div style="position:relative;display:flex;justify-content:space-between;padding:12px 18px 0;font:400 13px Outfit,var(--font-ui);color:#cfe3c0"><span>Overview</span><span style="color:#fff">9:41</span></div>
+ <div style="position:relative;display:flex;align-items:center;gap:10px;padding:14px 14px 0">${orb('sageDark',86,{center:'<div style="font:400 26px Outfit,var(--font-ui);color:#fff">71</div>'})}
+  <div style="font:300 11px Outfit,var(--font-ui);color:#cfe3c0;line-height:1.35">Recovery<br><b style="font-weight:500;color:#fff;font-size:14px">Primed</b><br>HRV +14%</div></div>
+ <div style="position:relative;display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:12px 12px 0">
+  <div style="background:rgba(255,255,255,.1);border-radius:14px;padding:7px 9px;font:300 10px Outfit;color:#cfe3c0">Sleep<div style="font:400 17px Outfit;color:#fff">78%</div></div>
+  <div style="background:rgba(255,255,255,.1);border-radius:14px;padding:7px 9px;font:300 10px Outfit;color:#cfe3c0">Strain<div style="font:400 17px Outfit;color:#fff">16.9</div></div></div>`);
+
+/* ---------------- bands */
+const bands=[
+ {cls:'b1',no:'01',name:'Iris',sw:['#020306','#2EF2A0','#2FD4FF','#7B6CFF','#F2F5F8'],
+  text:'The current dark Liquid Glass look, taken further. Deep space black, film grain and coloured light leaks behind real refractive glass. The orb is a living iris whose colour follows your recovery: green, amber or red.',
+  list:['Thin, oversized numerals','Glass rows with 7-day sparklines','Watch face: the iris fills the screen'],devices:[c1a,c1b,w1]},
+ {cls:'b2',no:'02',name:'Dune',sw:['#F2EFEB','#FFFFFF','#F26B4F','#FFB38A','#1B1512'],
+  text:'Light, warm and editorial, like the first reference. Sand-coloured paper with grain, white frosted tiles, a coral accent and very large light numerals. The orb becomes a glowing marble of warm light.',
+  list:['Date strip and segmented control','Dot-matrix weekly strain chart','Warm-black watch face'],devices:[c2a,c2b,w2]},
+ {cls:'b3',no:'03',name:'Ember',sw:['#0E0D0C','#1C1A18','#E8B76A','#FF7A3D','#F6EFE6'],
+  text:'Premium and nocturnal, like the second reference. Warm charcoal cards, gold detail and a molten orb ringed by drifting embers. Insight tiles use soft blurred colour fields instead of icons.',
+  list:['Gold-ringed hero with a tick scale','Lab-style status chips','Ember ring on the watch'],devices:[c3a,c3b,w3]},
+ {cls:'b4',no:'04',name:'Sage',sw:['#EEF2EA','#FFFFFF','#7C9A6B','#5E7F55','#1E2A1C'],
+  text:'Calm and botanical, like the third reference. Frosted white glass over blurred leaves, a sage palette and soft data tiles. A full-bleed green screen for live stress, with the orb as a heartbeat.',
+  list:['Overview panel with a 2×2 tile grid','Immersive live stress screen','Green glass watch face'],devices:[c4a,c4b,w4]},
+];
+document.getElementById('bands').innerHTML=bands.map(b=>`<section class="band ${b.cls}" id="${b.name.toLowerCase()}">
+ ${b.cls==='b4'?`<div class="leaves">${leafSVG(['#9DBB88','#C7DBB7','#7FA06E','#E3EED9','#A9C59A'])}</div>`:''}
+ <div class="wrap"><div class="about"><div class="no">DIRECTION ${b.no}</div><h2>${b.name}</h2><p>${b.text}</p><ul>${b.list.map(l=>`<li>${l}</li>`).join('')}</ul><div class="swatches">${b.sw.map(c=>`<i style="background:${c}"></i>`).join('')}</div></div>
+ <div class="devices">${b.devices.join('')}</div></div></section>`).join('');
+
+/* ---------------- orb engine */
+const PAL={
+ iris:{mode:'dark',c:['#2EF2A0','#2FD4FF','#7B6CFF','#00A37A','#B8FFE6'],base:['#0b6b55','#06303a','#020306'],pupil:'#010305',flare:'#9FE9FF',halo:'#2EF2A0',fib:'rgba(220,255,245,A)'},
+ dune:{mode:'light',c:['#FF6B4A','#FFB38A','#FF8F6B','#F2C1A3','#FFE6D6'],base:['#FFE9DC','#FF9A78','#E0563A'],pupil:'#5A1A0C',flare:'#FFFFFF',halo:'#FF8A65',fib:'rgba(255,255,255,A)'},
+ duneDark:{mode:'dark',c:['#FF6B4A','#FFB38A','#FF8F6B','#B8452C','#FFE0CC'],base:['#a8452c','#4a1a10','#120806'],pupil:'#0d0402',flare:'#FFD2BF',halo:'#FF6B4A',fib:'rgba(255,225,210,A)'},
+ ember:{mode:'dark',c:['#F5B861','#FF7A2F','#FFD99A','#B35A1F','#FFF0D6'],base:['#8a4a18','#2a1408','#0b0704'],pupil:'#070402',flare:'#FFD9A0',halo:'#F5A54A',fib:'rgba(255,230,190,A)'},
+ sage:{mode:'light',c:['#8DBA74','#C9E3B5','#5E8F55','#E4F2D8','#A6CC92'],base:['#EAF5E0','#9CC28B','#4E7D4A'],pupil:'#1C3A20',flare:'#FFFFFF',halo:'#9CC28B',fib:'rgba(255,255,255,A)'},
+ sageDark:{mode:'dark',c:['#A6D98C','#E3F5D2','#5E9F55','#2F6B35','#C9F0B0'],base:['#4f8a48','#1f3d20','#0a160b'],pupil:'#071108',flare:'#E9FFDD',halo:'#A6D98C',fib:'rgba(235,255,225,A)'},
+};
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const ORBS=[];
+function rand(s){return ()=>{s=(s*16807)%2147483647;return s/2147483647}}
+document.querySelectorAll('[data-orb]').forEach((host,idx)=>{
+  const o=JSON.parse(host.dataset.orb),p=PAL[o.p],S=o.size;
+  host.className='orb '+p.mode;
+  host.style.setProperty('--halo',p.halo);host.style.setProperty('--pupil',p.pupil);host.style.setProperty('--flare',p.flare);
+  host.style.setProperty('--blur',Math.max(3,S*.05)+'px');host.style.setProperty('--hb',Math.max(10,S*.14)+'px');
+  host.innerHTML=`<div class="halo"></div>${o.sparks?'<canvas class="sparks"></canvas>':''}<div class="ball"><canvas class="blobs"></canvas><canvas class="fib"></canvas><div class="limbus"></div><div class="pupil"></div><div class="spec"></div><div class="spec2"></div></div><div class="streak wide"></div><div class="streak"></div>${o.center?`<div class="center">${o.center}</div>`:''}`;
+  const dpr=Math.min(2,devicePixelRatio||1);
+  // blobs: low resolution, blurred by CSS
+  const bc=host.querySelector('canvas.blobs');const bw=Math.round(S*.56);bc.width=bc.height=bw;
+  // iris fibres: drawn once, rotated by CSS
+  const fc=host.querySelector('canvas.fib');const fw=Math.round(S*dpr);fc.width=fc.height=fw;
+  const fx=fc.getContext('2d'),R=fw/2,r=rand(idx*977+13);
+  fx.translate(R,R);
+  for(let i=0;i<420;i++){const a=r()*Math.PI*2,r0=R*(.2+r()*.08),r1=R*(.62+r()*.34),wob=(r()-.5)*.12;
+    fx.strokeStyle=p.fib.replace('A',(.04+r()*.16).toFixed(3));fx.lineWidth=(.4+r()*1.1)*dpr;
+    fx.beginPath();fx.moveTo(Math.cos(a)*r0,Math.sin(a)*r0);fx.quadraticCurveTo(Math.cos(a+wob)*(r0+r1)/2,Math.sin(a+wob)*(r0+r1)/2,Math.cos(a+wob*2)*r1,Math.sin(a+wob*2)*r1);fx.stroke()}
+  // collarette ring around the pupil
+  fx.strokeStyle=p.fib.replace('A','.28');fx.lineWidth=1.4*dpr;fx.beginPath();fx.arc(0,0,R*.3,0,Math.PI*2);fx.stroke();
+  const item={o,p,S,bc,bx:bc.getContext('2d'),bw,seed:idx*1.7};
+  if(o.sparks){const sc=host.querySelector('canvas.sparks');const sw=Math.round(S*1.76*dpr);sc.width=sc.height=sw;item.sc=sc;item.sx=sc.getContext('2d');
+    const rr=rand(idx*31+7);item.parts=Array.from({length:Math.round(S*1.1)},()=>({a:rr()*Math.PI*2,rad:.52+rr()*.2,sp:(rr()-.3)*.25,sz:.4+rr()*1.6,ph:rr()*6,out:rr()<.25}))}
+  ORBS.push(item);
+});
+function drawOrb(it,t){
+  const {bx:ctx,bw:W,p,seed}=it,R=W/2;
+  ctx.globalCompositeOperation='source-over';ctx.clearRect(0,0,W,W);
+  const g0=ctx.createRadialGradient(R,R,R*.08,R,R,R);g0.addColorStop(0,p.base[0]);g0.addColorStop(.6,p.base[1]);g0.addColorStop(1,p.base[2]);
+  ctx.fillStyle=g0;ctx.beginPath();ctx.arc(R,R,R,0,Math.PI*2);ctx.fill();
+  ctx.globalCompositeOperation=p.mode==='dark'?'lighter':'source-over';
+  const sp=[.55,-.42,.33,-.61,.27];
+  for(let k=0;k<5;k++){
+    const ang=t*sp[k]+k*1.26+seed, rr=R*(.28+.16*Math.sin(t*.7+k*1.9+seed));
+    const x=R+Math.cos(ang)*rr, y=R+Math.sin(ang)*rr*.9, s=R*(.5+.16*Math.sin(t*1.1+k*2.3));
+    const g=ctx.createRadialGradient(x,y,0,x,y,s);
+    const a=p.mode==='dark'?.62:.55;
+    g.addColorStop(0,hexA(p.c[k],a));g.addColorStop(1,hexA(p.c[k],0));
+    ctx.fillStyle=g;ctx.beginPath();ctx.arc(x,y,s,0,Math.PI*2);ctx.fill();
+  }
+  if(it.sx){const c=it.sx,SW=it.sc.width,C=SW/2,RR=it.S*Math.min(2,devicePixelRatio||1)*.5;
+    c.clearRect(0,0,SW,SW);c.globalCompositeOperation='lighter';
+    for(const q of it.parts){const a=q.a+t*q.sp*.4, flick=.5+.5*Math.sin(t*3+q.ph);
+      let rad=q.rad*SW/1.76*1.0; if(q.out) rad+=((t*12+q.ph*20)%40)*(SW/400);
+      const x=C+Math.cos(a)*rad, y=C+Math.sin(a)*rad;const al=(q.out?.5:.85)*flick;
+      c.fillStyle=`rgba(255,${190+Math.round(40*flick)},${120+Math.round(60*flick)},${al.toFixed(3)})`;
+      c.beginPath();c.arc(x,y,q.sz*(SW/400)*1.2,0,Math.PI*2);c.fill()}
+  }
+}
+function hexA(h,a){const n=parseInt(h.slice(1),16);return `rgba(${n>>16&255},${n>>8&255},${n&255},${a})`}
+const visible=new Set();
+const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting?visible.add(e.target):visible.delete(e.target)));
+ORBS.forEach(it=>{it.el=it.bc.closest('.orb');io.observe(it.el);drawOrb(it,0)});
+if(!reduce){const loop=ts=>{const t=ts/1000;for(const it of ORBS)if(visible.has(it.el))drawOrb(it,t);requestAnimationFrame(loop)};requestAnimationFrame(loop)}
+</script>
