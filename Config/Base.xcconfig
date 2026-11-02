@@ -1,0 +1,8 @@
+// Shared build settings. Do not put personal values here.
+// Copy Config/Local.xcconfig.example to Config/Local.xcconfig and fill in your own team + bundle prefix.
+
+BUNDLE_ID_PREFIX = com.example
+DEVELOPMENT_TEAM =
+CODE_SIGN_STYLE = Automatic
+
+#include? "Local.xcconfig"

@@ -1,0 +1,560 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		05DA94D1238BB164139D05E8 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884670F875BF70E9D3A6776F /* Theme.swift */; };
+		0723DE4362B2EA2C5B61AB33 /* ScoreEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F291876A8F7833BC02A3D37A /* ScoreEngine.swift */; };
+		161F4253252BB404CAD1FC05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3594AE72833921A5315D4E41 /* Assets.xcassets */; };
+		19D7B923814935E90F9F59EF /* LumenWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E031957D37409F1D39733532 /* LumenWatchApp.swift */; };
+		1FB6778B71D201D90C445134 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2187705A841421A84E07F7C /* TodayView.swift */; };
+		1FE2808835A8BF189F583F03 /* HealthKitSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D247479306582F7869C3F622 /* HealthKitSource.swift */; };
+		2095709DFFD84D2104EDDBE9 /* HealthKitSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D247479306582F7869C3F622 /* HealthKitSource.swift */; };
+		23B7D4C989775C680AF47CE5 /* LumenApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A8583F1BD94B9A8B414F94 /* LumenApp.swift */; };
+		244FE29A34146D2D6E8AF1BA /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0089657706240C2858A839D /* Components.swift */; };
+		395B2A58A060088DF471C4AB /* DetailViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBC29A6AFA87AE74E551D6A3 /* DetailViews.swift */; };
+		45EE0A0A8EAEB7C1EB9B40BA /* TrendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98455FFA267D9EB112E78E19 /* TrendsView.swift */; };
+		4D9CE21C317984948ACCCB11 /* ScoreEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F291876A8F7833BC02A3D37A /* ScoreEngine.swift */; };
+		4FF12E99DEC482570A025E15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4AE43B77187410F4CB0214C /* Assets.xcassets */; };
+		5EDC9A28094793665C2F19FF /* LumenWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = A773B7C6A52038CC6E59E76F /* LumenWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		5FA40B6AE844071575CD2FA5 /* Insights.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5E06A10A52CCA3A62F277B /* Insights.swift */; };
+		5FC65A77DA505F7B8A66D634 /* Insights.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5E06A10A52CCA3A62F277B /* Insights.swift */; };
+		70AC2215C9D361168467FDB7 /* DemoSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6238525E6C1D498A626B0A55 /* DemoSource.swift */; };
+		7D33AE1C8AE1505786E84388 /* StressAndBodyAgeViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF7BD9A5637A13E7CB31BAF /* StressAndBodyAgeViews.swift */; };
+		920DE51ECBABCE68970CF088 /* CoachView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5661655FCBC347466A26A1 /* CoachView.swift */; };
+		9E805BD7A205537CF23F1771 /* DemoSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6238525E6C1D498A626B0A55 /* DemoSource.swift */; };
+		ACB49A6CC3AA9A684A7BEED4 /* MetricsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13FB1A750F782E9805361FA /* MetricsStore.swift */; };
+		BF80A8486D3A47D6CB5F1E3B /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB5FCC15E3331482109A8AC /* Models.swift */; };
+		D26F50F3A05D119E4F899467 /* JournalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F37CB804062F071D126013 /* JournalView.swift */; };
+		D4E8BDA8601060D8E07627A3 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FC9333EA56D8A7C33616B16 /* OnboardingView.swift */; };
+		DDE0832ED354A947E1456D28 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D78E21A2470D8A5E34AC17 /* SettingsView.swift */; };
+		EB7FAE50350B9DFD7BE9036E /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884670F875BF70E9D3A6776F /* Theme.swift */; };
+		F028F62BDC17F8E9E84DE2F5 /* MetricsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F13FB1A750F782E9805361FA /* MetricsStore.swift */; };
+		F7DE83937CC851D9FE04ECEA /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB5FCC15E3331482109A8AC /* Models.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C352A1BDD38DB0041740E834 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B6B7785E344ACFF4DA083092 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C6B063F1FB1BA82CC4370FBC;
+			remoteInfo = LumenWatch;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		57A931853E6D5367C1B8CAB5 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				5EDC9A28094793665C2F19FF /* LumenWatch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		1B5E06A10A52CCA3A62F277B /* Insights.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Insights.swift; sourceTree = "<group>"; };
+		315D343DF292C5CEE2CC87C9 /* Lumen.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Lumen.entitlements; sourceTree = "<group>"; };
+		337A3269E47126DC851115EE /* Lumen.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Lumen.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3594AE72833921A5315D4E41 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3A229ECF951EF78F87524A73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		54A8583F1BD94B9A8B414F94 /* LumenApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LumenApp.swift; sourceTree = "<group>"; };
+		5B5661655FCBC347466A26A1 /* CoachView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachView.swift; sourceTree = "<group>"; };
+		5FC9333EA56D8A7C33616B16 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		6238525E6C1D498A626B0A55 /* DemoSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoSource.swift; sourceTree = "<group>"; };
+		79D78E21A2470D8A5E34AC17 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		7BB5FCC15E3331482109A8AC /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		7CF7BD9A5637A13E7CB31BAF /* StressAndBodyAgeViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StressAndBodyAgeViews.swift; sourceTree = "<group>"; };
+		8814469CF174D3B69EBD535D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		884670F875BF70E9D3A6776F /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		98455FFA267D9EB112E78E19 /* TrendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendsView.swift; sourceTree = "<group>"; };
+		99F37CB804062F071D126013 /* JournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalView.swift; sourceTree = "<group>"; };
+		A2187705A841421A84E07F7C /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
+		A5C42348683D3C080A5BB0A4 /* Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Base.xcconfig; sourceTree = "<group>"; };
+		A773B7C6A52038CC6E59E76F /* LumenWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LumenWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D247479306582F7869C3F622 /* HealthKitSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitSource.swift; sourceTree = "<group>"; };
+		E031957D37409F1D39733532 /* LumenWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LumenWatchApp.swift; sourceTree = "<group>"; };
+		F0089657706240C2858A839D /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
+		F13FB1A750F782E9805361FA /* MetricsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsStore.swift; sourceTree = "<group>"; };
+		F291876A8F7833BC02A3D37A /* ScoreEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreEngine.swift; sourceTree = "<group>"; };
+		F32DA9A2F84B4632C9C8F6FA /* LumenWatch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LumenWatch.entitlements; sourceTree = "<group>"; };
+		F4AE43B77187410F4CB0214C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FBC29A6AFA87AE74E551D6A3 /* DetailViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViews.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		2214CE7AD49E4B0EAA622D59 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5B5661655FCBC347466A26A1 /* CoachView.swift */,
+				F0089657706240C2858A839D /* Components.swift */,
+				FBC29A6AFA87AE74E551D6A3 /* DetailViews.swift */,
+				99F37CB804062F071D126013 /* JournalView.swift */,
+				5FC9333EA56D8A7C33616B16 /* OnboardingView.swift */,
+				79D78E21A2470D8A5E34AC17 /* SettingsView.swift */,
+				7CF7BD9A5637A13E7CB31BAF /* StressAndBodyAgeViews.swift */,
+				A2187705A841421A84E07F7C /* TodayView.swift */,
+				98455FFA267D9EB112E78E19 /* TrendsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3D6C9A073723A54628361039 = {
+			isa = PBXGroup;
+			children = (
+				BC478E0C75651E474237D1C9 /* Config */,
+				647E00957EB0FFFA94DEF091 /* iOS */,
+				D6A4F247132006FD44A4688D /* Shared */,
+				4019847F03198C4D0B0E76EE /* Watch */,
+				70C838A3277A6AAF3F2B0484 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4019847F03198C4D0B0E76EE /* Watch */ = {
+			isa = PBXGroup;
+			children = (
+				3594AE72833921A5315D4E41 /* Assets.xcassets */,
+				8814469CF174D3B69EBD535D /* Info.plist */,
+				F32DA9A2F84B4632C9C8F6FA /* LumenWatch.entitlements */,
+				E031957D37409F1D39733532 /* LumenWatchApp.swift */,
+			);
+			path = Watch;
+			sourceTree = "<group>";
+		};
+		647E00957EB0FFFA94DEF091 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				54A8583F1BD94B9A8B414F94 /* LumenApp.swift */,
+				D68739BA69A54A506EA99548 /* Resources */,
+				2214CE7AD49E4B0EAA622D59 /* Views */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		70C838A3277A6AAF3F2B0484 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				337A3269E47126DC851115EE /* Lumen.app */,
+				A773B7C6A52038CC6E59E76F /* LumenWatch.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BC478E0C75651E474237D1C9 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				A5C42348683D3C080A5BB0A4 /* Base.xcconfig */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		D68739BA69A54A506EA99548 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F4AE43B77187410F4CB0214C /* Assets.xcassets */,
+				3A229ECF951EF78F87524A73 /* Info.plist */,
+				315D343DF292C5CEE2CC87C9 /* Lumen.entitlements */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		D6A4F247132006FD44A4688D /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				6238525E6C1D498A626B0A55 /* DemoSource.swift */,
+				D247479306582F7869C3F622 /* HealthKitSource.swift */,
+				1B5E06A10A52CCA3A62F277B /* Insights.swift */,
+				F13FB1A750F782E9805361FA /* MetricsStore.swift */,
+				7BB5FCC15E3331482109A8AC /* Models.swift */,
+				F291876A8F7833BC02A3D37A /* ScoreEngine.swift */,
+				884670F875BF70E9D3A6776F /* Theme.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3604D51825E37895FA8BE7E6 /* Lumen */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1B1DA35D7489FDDE3E5094CF /* Build configuration list for PBXNativeTarget "Lumen" */;
+			buildPhases = (
+				04E1F8E02FA22F0432CCEA4F /* Sources */,
+				2F1ADCC8D621EDFBF2163C5B /* Resources */,
+				57A931853E6D5367C1B8CAB5 /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D97821BD56252613DCDF16BE /* PBXTargetDependency */,
+			);
+			name = Lumen;
+			packageProductDependencies = (
+			);
+			productName = Lumen;
+			productReference = 337A3269E47126DC851115EE /* Lumen.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C6B063F1FB1BA82CC4370FBC /* LumenWatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E2001F0A777EE7B47C4BB88E /* Build configuration list for PBXNativeTarget "LumenWatch" */;
+			buildPhases = (
+				44B6DC5B50AB890CA18D9D23 /* Sources */,
+				B3C4253190A2EC44AEBB7516 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LumenWatch;
+			packageProductDependencies = (
+			);
+			productName = LumenWatch;
+			productReference = A773B7C6A52038CC6E59E76F /* LumenWatch.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B6B7785E344ACFF4DA083092 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					3604D51825E37895FA8BE7E6 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+					C6B063F1FB1BA82CC4370FBC = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = CAE5F36F192090F76737D08C /* Build configuration list for PBXProject "Lumen" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 3D6C9A073723A54628361039;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 70C838A3277A6AAF3F2B0484 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3604D51825E37895FA8BE7E6 /* Lumen */,
+				C6B063F1FB1BA82CC4370FBC /* LumenWatch */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2F1ADCC8D621EDFBF2163C5B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4FF12E99DEC482570A025E15 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B3C4253190A2EC44AEBB7516 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				161F4253252BB404CAD1FC05 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		04E1F8E02FA22F0432CCEA4F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				920DE51ECBABCE68970CF088 /* CoachView.swift in Sources */,
+				244FE29A34146D2D6E8AF1BA /* Components.swift in Sources */,
+				70AC2215C9D361168467FDB7 /* DemoSource.swift in Sources */,
+				395B2A58A060088DF471C4AB /* DetailViews.swift in Sources */,
+				2095709DFFD84D2104EDDBE9 /* HealthKitSource.swift in Sources */,
+				5FC65A77DA505F7B8A66D634 /* Insights.swift in Sources */,
+				D26F50F3A05D119E4F899467 /* JournalView.swift in Sources */,
+				23B7D4C989775C680AF47CE5 /* LumenApp.swift in Sources */,
+				ACB49A6CC3AA9A684A7BEED4 /* MetricsStore.swift in Sources */,
+				BF80A8486D3A47D6CB5F1E3B /* Models.swift in Sources */,
+				D4E8BDA8601060D8E07627A3 /* OnboardingView.swift in Sources */,
+				4D9CE21C317984948ACCCB11 /* ScoreEngine.swift in Sources */,
+				DDE0832ED354A947E1456D28 /* SettingsView.swift in Sources */,
+				7D33AE1C8AE1505786E84388 /* StressAndBodyAgeViews.swift in Sources */,
+				EB7FAE50350B9DFD7BE9036E /* Theme.swift in Sources */,
+				1FB6778B71D201D90C445134 /* TodayView.swift in Sources */,
+				45EE0A0A8EAEB7C1EB9B40BA /* TrendsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		44B6DC5B50AB890CA18D9D23 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9E805BD7A205537CF23F1771 /* DemoSource.swift in Sources */,
+				1FE2808835A8BF189F583F03 /* HealthKitSource.swift in Sources */,
+				5FA40B6AE844071575CD2FA5 /* Insights.swift in Sources */,
+				19D7B923814935E90F9F59EF /* LumenWatchApp.swift in Sources */,
+				F028F62BDC17F8E9E84DE2F5 /* MetricsStore.swift in Sources */,
+				F7DE83937CC851D9FE04ECEA /* Models.swift in Sources */,
+				0723DE4362B2EA2C5B61AB33 /* ScoreEngine.swift in Sources */,
+				05DA94D1238BB164139D05E8 /* Theme.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D97821BD56252613DCDF16BE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C6B063F1FB1BA82CC4370FBC /* LumenWatch */;
+			targetProxy = C352A1BDD38DB0041740E834 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		2D2F99B6443D2E21D64FD94E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A5C42348683D3C080A5BB0A4 /* Base.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_STRICT_CONCURRENCY = minimal;
+				SWIFT_VERSION = 5.0;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Release;
+		};
+		495B8F62CC5EA7D99DAD8F2D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = iOS/Resources/Lumen.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = iOS/Resources/Info.plist;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).lumen";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		57F443C1FD78682E612E2F8D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Watch/LumenWatch.entitlements;
+				INFOPLIST_FILE = Watch/Info.plist;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "$(BUNDLE_ID_PREFIX).lumen";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).lumen.watchkitapp";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Debug;
+		};
+		AA076C7BC7C6C45F1BB03F03 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A5C42348683D3C080A5BB0A4 /* Base.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 0.1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = minimal;
+				SWIFT_VERSION = 5.0;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Debug;
+		};
+		D329B18413FF0ACE698566FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Watch/LumenWatch.entitlements;
+				INFOPLIST_FILE = Watch/Info.plist;
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "$(BUNDLE_ID_PREFIX).lumen";
+				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).lumen.watchkitapp";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+			};
+			name = Release;
+		};
+		DB69D605D392822F88A42FB2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = iOS/Resources/Lumen.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = iOS/Resources/Info.plist;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).lumen";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1B1DA35D7489FDDE3E5094CF /* Build configuration list for PBXNativeTarget "Lumen" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				495B8F62CC5EA7D99DAD8F2D /* Debug */,
+				DB69D605D392822F88A42FB2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		CAE5F36F192090F76737D08C /* Build configuration list for PBXProject "Lumen" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA076C7BC7C6C45F1BB03F03 /* Debug */,
+				2D2F99B6443D2E21D64FD94E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		E2001F0A777EE7B47C4BB88E /* Build configuration list for PBXNativeTarget "LumenWatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				57F443C1FD78682E612E2F8D /* Debug */,
+				D329B18413FF0ACE698566FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B6B7785E344ACFF4DA083092 /* Project object */;
+}
