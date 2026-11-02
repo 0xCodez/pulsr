@@ -121,6 +121,15 @@ footer{padding-block:40px 70px;color:var(--page-dim);font-size:14px;line-height:
 .orb{position:relative;flex:none;display:block}
 .orb canvas{position:absolute;left:-9%;top:-9%;width:118%;height:118%;filter:var(--orb-shadow);will-change:transform}
 .orb.watchorb canvas{filter:none}
+.orb .pool{position:absolute;left:50%;top:50%;width:260%;height:200%;transform:translate(-50%,-46%);border-radius:50%;background:radial-gradient(closest-side,rgba(var(--tint),.34),rgba(var(--tint),.10) 55%,transparent 75%);filter:blur(18px);animation:pool 1.154s ease-out infinite;pointer-events:none}
+.orb .rip{position:absolute;inset:0;pointer-events:none}
+.orb .rip i{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(var(--tint),.4);opacity:0;animation:rip 3.462s cubic-bezier(.2,.6,.3,1) infinite}
+.orb .rip i:nth-child(2){animation-delay:1.154s}.orb .rip i:nth-child(3){animation-delay:2.308s}
+@keyframes rip{0%{transform:scale(.98);opacity:.0}6%{opacity:.45}100%{transform:scale(2.3);opacity:0}}
+@keyframes pool{0%{opacity:.75}8%{opacity:1}30%{opacity:.85}100%{opacity:.75}}
+.scr .bg::before{content:"";position:absolute;inset:-30%;background:radial-gradient(30% 22% at 30% 40%,var(--leak-c),transparent 70%),radial-gradient(28% 20% at 72% 62%,var(--leak-b),transparent 70%);filter:blur(10px);animation:aurora 26s ease-in-out infinite alternate}
+@keyframes aurora{0%{transform:translate(-4%,-3%) rotate(0deg)}50%{transform:translate(5%,4%) rotate(8deg)}100%{transform:translate(-2%,6%) rotate(-6deg)}}
+@media (prefers-reduced-motion:reduce){.orb .pool,.orb .rip i,.scr .bg::before{animation:none}}
 
 @media (max-width:900px){.hero{grid-template-columns:minmax(0,1fr)}.states{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
@@ -138,7 +147,7 @@ footer{padding-block:40px 70px;color:var(--page-dim);font-size:14px;line-height:
 <header class="wrap hero">
   <div>
     <h1>The orb is your recovery.</h1>
-    <p>A glass sphere with ribbons of light moving through it. It beats at a resting heart rhythm, and its colours shift with your recovery zone. Every screen below works in light and dark. Switch the theme in the top right corner.</p>
+    <p>A liquid glass sphere with light flowing through it. Its surface breathes, it beats at a resting heart rhythm and sends a faint ripple across the screen on every beat, and its colours shift with your recovery zone. Every screen below works in light and dark. Switch the theme in the top right corner.</p>
   </div>
   <div class="states" id="states"></div>
 </header>
@@ -175,7 +184,7 @@ const ic={
 };
 const I=(n,s=16,c='currentColor')=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" aria-hidden="true">${ic[n].replaceAll('"C"','"'+c+'"')}</svg>`;
 const sb=()=>`<div class="sb"><span>9:41</span><span class="ic">${I('signal',15)}${I('wifi',15)}${I('batt',24)}</span></div>`;
-const orb=(pal,size,o={})=>`<span class="orb ${o.watch?'watchorb':''}" data-pal="${pal}" data-size="${size}" data-energy="${o.energy??0.5}" data-speed="${o.speed??1}" ${o.watch?'data-dark="1"':''} style="width:${size}px;height:${size}px"></span>`;
+const orb=(pal,size,o={})=>`<span class="orb ${o.watch?'watchorb':''}" ${o.hero?'data-hero="1"':''} data-pal="${pal}" data-size="${size}" data-energy="${o.energy??0.5}" data-speed="${o.speed??1}" ${o.watch?'data-dark="1"':''} style="width:${size}px;height:${size}px"></span>`;
 const phone=inner=>`<div class="phone"><div class="scr"><div class="bg"></div>${sb()}${inner}<div class="island"></div></div></div>`;
 const watch=inner=>`<div class="watch"><div class="ws">${inner}</div></div>`;
 const tabs=on=>`<div class="tabs gl">${[['orb','Today'],['chart','Trends'],['book','Journal'],['spark','Coach']].map(([i,n])=>`<div class="tab ${n===on?'on':''}">${I(i,20)}${n}</div>`).join('')}</div>`;
@@ -193,7 +202,7 @@ const zoneVar=v=>v>=67?'var(--green)':v>=34?'var(--yellow)':'var(--red)';
 /* ================= screens */
 const S={};
 S.onboarding=phone(`<div class="body" style="display:flex;flex-direction:column;align-items:center;height:620px">
- <div style="margin-top:34px">${orb('spectral',220,{energy:.9})}</div>
+ <div style="margin-top:34px">${orb('spectral',220,{energy:.9,hero:1})}</div>
  <div style="font:500 12px var(--font-mono);letter-spacing:.4em;margin-top:30px;color:var(--dim)">LUMEN</div>
  <div style="font-size:30px;font-weight:300;letter-spacing:-.03em;line-height:1.1;text-align:center;margin-top:10px;text-wrap:balance">Your Apple Watch,<br>fully understood.</div>
  <div style="font-size:13px;color:var(--dim);text-align:center;margin-top:12px;line-height:1.5;max-width:250px">Recovery, strain and sleep from the data your watch already records. Open source, and nothing leaves your iPhone.</div>
@@ -204,7 +213,7 @@ S.onboarding=phone(`<div class="body" style="display:flex;flex-direction:column;
 
 S.today=phone(`<div class="body">
  <div class="bar"><div class="circ gl">ME</div><div class="cap gl">${I('chevL',12)}<span>Sunday, Nov 2</span><span style="opacity:.35">${I('chevR',12)}</span></div><div class="circ gl">${I('watch',17)}</div></div>
- <div style="display:flex;flex-direction:column;align-items:center;margin-top:14px">${orb('green',212)}
+ <div style="display:flex;flex-direction:column;align-items:center;margin-top:14px">${orb('green',212,{hero:1})}
   <div class="big" style="font-size:72px;margin-top:16px">71<small style="font-size:26px">%</small></div>
   <div class="eyebrow" style="margin-top:8px">Recovery · primed</div></div>
  <div style="display:flex;gap:10px;margin-top:18px">
@@ -244,7 +253,7 @@ S.sleep=phone(`<div class="body">${header('Sleep')}
 </div>`);
 
 S.strain=phone(`<div class="body">${header('Strain')}
- <div style="display:flex;flex-direction:column;align-items:center;margin-top:10px">${orb('strain',150,{energy:.85,speed:1.3})}
+ <div style="display:flex;flex-direction:column;align-items:center;margin-top:10px">${orb('strain',150,{energy:.85,speed:1.3,hero:1})}
   <div class="big" style="font-size:64px;margin-top:10px">16.9</div><div class="eyebrow" style="margin-top:6px">Day strain · target 14–18</div></div>
  <div class="card gl" style="margin-top:12px"><div class="eyebrow" style="margin-bottom:8px">Time in heart-rate zones</div>
   ${[[5,18],[4,35],[3,25],[2,22],[1,48]].map(([z,m])=>`<div style="display:flex;align-items:center;gap:8px;margin:5px 0;font-size:11px"><span style="width:20px;font-weight:600">Z${z}</span><span style="flex:1;height:8px;border-radius:4px;background:var(--track);position:relative;overflow:hidden"><i style="position:absolute;left:0;top:0;bottom:0;width:${m/48*100}%;border-radius:4px;background:var(--strain);opacity:${.3+z*.14}"></i></span><span style="width:34px;text-align:right;color:var(--dim)">${Math.floor(m/60)}:${String(m%60).padStart(2,'0')}</span></div>`).join('')}
@@ -272,7 +281,7 @@ S.stress=phone(`<div class="body">${header('Stress')}
 </div>`);
 
 S.healthspan=phone(`<div class="body">${header('Healthspan')}
- <div style="display:flex;flex-direction:column;align-items:center;margin-top:12px">${orb('green',176,{energy:.35,speed:.45})}
+ <div style="display:flex;flex-direction:column;align-items:center;margin-top:12px">${orb('green',176,{energy:.35,speed:.45,hero:1})}
   <div class="big" style="font-size:62px;margin-top:12px">30.0</div><div class="eyebrow" style="margin-top:6px">Body age · 1.0 year younger</div></div>
  <div class="card gl" style="margin-top:14px;padding:6px 15px 8px">
   <div style="display:flex;justify-content:space-between;padding:6px 0 2px"><span class="eyebrow" style="color:var(--helps)">Younger</span><span class="eyebrow">Years</span><span class="eyebrow" style="color:var(--hurts)">Older</span></div>
@@ -322,7 +331,7 @@ S.coach=phone(`<div class="body" style="display:flex;flex-direction:column;gap:1
 /* ---- watch */
 const W={};
 W.today=watch(`<div style="display:flex;justify-content:space-between;padding:12px 18px 0;font:600 13px var(--font-ui)"><span style="color:#2EF2A0">Recovery</span><span>9:41</span></div>
- <div style="display:flex;justify-content:center;margin-top:2px">${orb('green',118,{watch:1})}</div>
+ <div style="display:flex;justify-content:center;margin-top:2px">${orb('green',118,{watch:1,hero:1})}</div>
  <div style="text-align:center;font:200 40px var(--font-ui);letter-spacing:-.05em;line-height:1;margin-top:4px">71<span style="font-size:16px;font-weight:300">%</span></div>
  <div style="display:flex;justify-content:center;gap:14px;font-size:10px;color:rgba(255,255,255,.6);margin-top:4px"><span><b style="color:#B4ADFF;font-weight:600">78%</b> sleep</span><span><b style="color:#5BDDFF;font-weight:600">16.9</b> strain</span></div>`);
 W.strain=watch(`<div style="display:flex;justify-content:space-between;padding:12px 18px 0;font:600 13px var(--font-ui)"><span style="color:#2FD4FF">Strain</span><span>9:41</span></div>
@@ -369,64 +378,77 @@ const FS=`precision highp float;
 varying vec2 vUv;
 uniform vec2 uRes;uniform float uTime,uBeat,uLight,uEnergy;
 uniform vec3 uC0,uC1,uC2,uC3;
+float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+float noise(vec2 p){vec2 i=floor(p),f=fract(p);vec2 u=f*f*(3.-2.*f);
+  return mix(mix(hash(i),hash(i+vec2(1,0)),u.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),u.x),u.y);}
+float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<2;i++){v+=a*noise(p);p=p*2.03+vec2(1.7,9.2);a*=.5;}return v/.75;}
 float band(vec2 q,float t,float amp,float fr,float sp,float ph,float th){
   float x=q.x;
-  float env=pow(clamp(1.-x*x,0.,1.),1.35);
-  float y0=env*(amp*sin(fr*x+t*sp+ph)+amp*.38*sin(fr*2.1*x-t*sp*1.37+ph*1.7));
-  float h=(th*(.55+.45*sin(1.3*x+t*.8+ph))+.012)*env+.002;
+  float env=pow(clamp(1.-x*x*.85,0.,1.),.7);
+  float y0=env*(amp*sin(fr*x+t*sp+ph)+amp*.45*sin(fr*1.9*x-t*sp*1.3+ph*1.7));
+  float h=th*(.7+.3*sin(1.3*x+t*.7+ph))*(.45+.55*env)+.02;
   float d=(q.y-y0)/h;
-  float crest=exp(-d*d*1.5);
-  float under=q.y<y0?exp((q.y-y0)/(h*3.8+.03))*.55:0.;
-  return (crest+under)*env;
+  float crest=exp(-d*d*1.15);
+  float under=q.y<y0?exp((q.y-y0)/(h*3.+.04))*.32:exp(-(q.y-y0)/(h*1.3))*.1;
+  return (crest+under)*(.35+.65*env);
 }
 void main(){
   vec2 p=(vUv*2.-1.)*1.18;
-  float r=length(p);
-  float px=2.36/uRes.x;
-  float inside=1.-smoothstep(1.-px*1.6,1.,r);
-  float rr=min(r,1.);
   float t=uTime;
-  vec2 q=p*(1.+.30*rr*rr);
-  float e=.72+.3*uEnergy+.32*uBeat;
-  float amp=.19*e;
-  vec3 L=uC0*band(q,t,amp,2.4,.9,0.,.14)
-        +uC1*band(q,t,amp*.85,3.0,-.75,1.9,.12)
-        +uC2*band(q,t,amp*1.1,2.0,.55,3.7,.10)
-        +uC3*band(q,t,amp*.6,3.6,1.15,5.2,.05)*.8;
-  float lum=dot(L,vec3(.3333));
-  L+=vec3(1.)*smoothstep(.8,2.,lum)*.9;
-  L*=.88+.42*uBeat;
-  float z=sqrt(max(1.-rr*rr,0.));
-  float fres=pow(1.-z,2.2);
   float ang=atan(p.y,p.x);
+  // liquid silhouette: the rim breathes and ripples
+  float wob=1.+.013*sin(3.*ang+t*.7)+.009*sin(5.*ang-t*1.1+1.3)+.005*sin(8.*ang+t*1.7)+.012*uBeat;
+  float r=length(p)/wob;
+  float px=2.36/uRes.x;
+  float inside=1.-smoothstep(1.-px*2.2,1.,r);
+  float rr=min(r,1.);
+  vec2 q=p*(1.+.26*rr*rr)/wob;
+  // domain warp makes the light flow like liquid
+  vec2 w=vec2(fbm(q*.85+vec2(t*.16,-t*.1)),fbm(q*.85+vec2(-t*.12,t*.14)+4.));
+  q+=(w-.5)*(.42+.1*uEnergy);
+  float e=.75+.3*uEnergy+.3*uBeat;
+  float amp=.2*e;
+  vec3 L=uC0*band(q,t,amp,2.2,.8,0.,.14)
+        +uC1*band(q,t,amp*.85,2.8,-.65,1.9,.115)
+        +uC2*band(q,t,amp*1.1,1.8,.5,3.7,.10)
+        +uC3*band(q,t,amp*.7,3.3,1.,5.2,.07)*.7;
+  // soft volumetric fog of colour drifting inside the glass
+  for(int k=0;k<3;k++){float fk=float(k);
+    vec2 c=vec2(.45*sin(t*.31+fk*2.1),.3*cos(t*.27+fk*1.7)-.05);
+    vec3 ck=k==0?uC0:(k==1?uC1:uC2);
+    L+=ck*exp(-dot(q-c,q-c)*2.4)*.09;}
+  float lum=dot(L,vec3(.3333));
+  L+=vec3(1.)*smoothstep(1.2,2.8,lum)*.5;
+  L*=(.74+.34*uBeat);
+  float z=sqrt(max(1.-rr*rr,0.));
+  float fres=pow(1.-z,2.);
   vec3 spectral=.55+.45*cos(6.2831*(vec3(0.,.33,.67)+ang*.32+t*.03));
-  float edge=smoothstep(.86,.995,r)*(1.-smoothstep(.995,1.,r));
-  float side=exp(-pow(p.y*2.6,2.));
+  float edge=smoothstep(.8,.99,r)*(1.-smoothstep(.99,1.,r));
+  float side=exp(-pow(p.y*2.2,2.));
   vec3 tint=(uC0+uC1+uC2)*.3333;
   vec3 col;
   if(uLight<.5){
-    vec3 body=vec3(.010,.012,.018)+vec3(.02,.025,.04)*fres;
-    vec3 rimCol=mix(vec3(.75),spectral,.6)*.32+tint*side*1.1;
-    col=body+L*(1.-.3*fres)+rimCol*edge*(.55+.7*fres);
+    vec3 body=vec3(.012,.014,.02)+vec3(.02,.025,.04)*fres;
+    vec3 rimCol=mix(vec3(.7),spectral,.6)*.26+tint*side*1.;
+    col=body+L*(1.-.25*fres)+rimCol*edge*(.5+.6*fres);
     float cres=smoothstep(.55,.95,r)*smoothstep(.1,-.75,p.y)*(1.-smoothstep(.96,1.,r));
-    col+=vec3(.09,.10,.12)*cres*.7;
-    vec2 hp=p-vec2(-.32,.55);
-    col+=vec3(1.)*.07*exp(-dot(hp,hp)*9.);
+    col+=vec3(.08,.09,.11)*cres*.7;
+    vec2 hp=p-vec2(-.3,.52);
+    col+=vec3(1.)*.06*exp(-dot(hp,hp)*7.);
   }else{
-    float s=smoothstep(.35,-.45,q.y-amp*sin(2.4*q.x+t*.9));
-    vec3 body=mix(vec3(.30,.31,.35),vec3(.93,.94,.96),s);
-    body=mix(body,body*.86,fres*.5);
-    vec3 Ls=L*.85;
-    col=body*(1.-clamp(lum*.35,0.,.45))+Ls;
-    col+=(vec3(1.)*.55+spectral*.45)*edge*(.5+.6*fres)+tint*side*edge*.6;
-    vec2 hp=p-vec2(-.3,.58);
-    col+=vec3(1.)*.22*exp(-dot(hp,hp)*7.);
+    float s=smoothstep(.45,-.5,q.y-amp*sin(2.2*q.x+t*.8));
+    vec3 body=mix(vec3(.26,.27,.31),vec3(.80,.82,.86),s);
+    body=mix(body,body*.88,fres*.5);
+    col=body*(1.-clamp(lum*.45,0.,.55))+L*.85;
+    col+=(vec3(1.)*.55+spectral*.45)*edge*(.45+.55*fres)+tint*side*edge*.5;
+    vec2 hp=p-vec2(-.3,.56);
+    col+=vec3(1.)*.2*exp(-dot(hp,hp)*6.);
     float cres=smoothstep(.6,.97,r)*smoothstep(0.,-.8,p.y)*(1.-smoothstep(.97,1.,r));
-    col+=vec3(1.)*.25*cres;
+    col+=vec3(1.)*.16*cres;
   }
   col=min(col,vec3(1.));
-  float g=exp(-max(r-1.,0.)*10.)*step(1.,r)*(1.-smoothstep(1.04,1.16,r))*(uLight<.5?1.:.55);
-  float ga=g*.32*(.65+.6*uBeat);
+  float g=exp(-max(r-1.,0.)*7.)*step(1.,r)*(1.-smoothstep(1.02,1.12,length(p)/1.0))*(uLight<.5?1.:.5);
+  float ga=g*.38*(.6+.6*uBeat);
   vec3 outCol=col*inside+tint*ga*(1.-inside);
   float a=inside+ga*(1.-inside);
   gl_FragColor=vec4(outCol,a);
@@ -445,6 +467,8 @@ if(gl){
 const rgb=h=>{const n=parseInt(h.slice(1),16);return [(n>>16&255)/255,(n>>8&255)/255,(n&255)/255]};
 const orbs=[...document.querySelectorAll('.orb')].map((el,i)=>{
   const size=+el.dataset.size,dpr=Math.min(2,window.devicePixelRatio||1);
+  const pal=PAL[el.dataset.pal].map(rgb);el.style.setProperty('--tint',[0,1,2].map(k=>Math.round((pal[0][k]+pal[1][k]+pal[2][k])/3*255)).join(','));
+  if(el.dataset.hero)el.insertAdjacentHTML('beforeend','<span class="pool"></span><span class="rip"><i></i><i></i><i></i></span>');
   const c=document.createElement('canvas');const px=Math.min(MAX,Math.round(size*1.18*dpr));c.width=c.height=px;el.appendChild(c);
   return {el,c,ctx:c.getContext('2d'),px,pal:PAL[el.dataset.pal].map(rgb),energy:+el.dataset.energy,speed:+el.dataset.speed,dark:!!el.dataset.dark,off:i*.37};
 });
