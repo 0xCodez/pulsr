@@ -43,7 +43,7 @@ struct SettingsView: View {
                     Text("To change individual permissions open Settings → Health → Data Access & Devices → Lumen.")
                 }
                 Section("About") {
-                    Link(destination: URL(string: "https://github.com")!) {
+                    Link(destination: URL(string: "https://github.com/0xCodez/lumen")!) {
                         Label("Source code on GitHub", systemImage: "chevron.left.forwardslash.chevron.right")
                     }
                     LabeledContent("Version", value: Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "–")

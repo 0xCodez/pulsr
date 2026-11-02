@@ -41,7 +41,7 @@ Lumen is not on the App Store — you build it yourself with Xcode. It takes abo
 
 1. Clone the repo
    ```bash
-   git clone https://github.com/<you>/lumen.git && cd lumen
+   git clone https://github.com/0xCodez/lumen.git && cd lumen
    ```
 2. Set your signing identity
    ```bash
