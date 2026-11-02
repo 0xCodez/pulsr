@@ -111,11 +111,14 @@ private struct OrbLayer: View {
                     for step in 0...40 {
                         let x = -1 + 2 * Double(step) / 40
                         let env = pow(max(0, 1 - x * x), 1.35)
-                        let y0 = env * (amp * sin(s.0 * x + time * s.1 + s.2) + amp * 0.38 * sin(s.0 * 2.1 * x - time * s.1 * 1.35 + s.2 * 1.7))
-                        let h = (s.3 * env + 0.012) * 0.9
-                        let pt = CGPoint(x: c.x + x * r, y: c.y - (y0 + h) * r)
+                        let wave1: Double = sin(s.0 * x + time * s.1 + s.2)
+                        let wave2: Double = sin(s.0 * 2.1 * x - time * s.1 * 1.35 + s.2 * 1.7)
+                        let y0: Double = env * amp * (wave1 + 0.38 * wave2)
+                        let h: Double = (s.3 * env + 0.012) * 0.9
+                        let px: CGFloat = c.x + CGFloat(x) * r
+                        let pt = CGPoint(x: px, y: c.y - CGFloat(y0 + h) * r)
                         if step == 0 { top.move(to: pt) } else { top.addLine(to: pt) }
-                        bottom.append(CGPoint(x: c.x + x * r, y: c.y - (y0 - h) * r))
+                        bottom.append(CGPoint(x: px, y: c.y - CGFloat(y0 - h) * r))
                     }
                     for pt in bottom.reversed() { top.addLine(to: pt) }
                     top.closeSubpath()
