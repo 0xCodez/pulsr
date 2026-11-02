@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		05DA94D1238BB164139D05E8 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884670F875BF70E9D3A6776F /* Theme.swift */; };
 		0723DE4362B2EA2C5B61AB33 /* ScoreEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F291876A8F7833BC02A3D37A /* ScoreEngine.swift */; };
+		135D1EE54621B26939DC6C94 /* HaloOrb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E844B5C0DD46A5D8676F77 /* HaloOrb.swift */; };
 		161F4253252BB404CAD1FC05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3594AE72833921A5315D4E41 /* Assets.xcassets */; };
 		19D7B923814935E90F9F59EF /* LumenWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E031957D37409F1D39733532 /* LumenWatchApp.swift */; };
 		1FB6778B71D201D90C445134 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2187705A841421A84E07F7C /* TodayView.swift */; };
@@ -22,7 +23,9 @@
 		4FF12E99DEC482570A025E15 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4AE43B77187410F4CB0214C /* Assets.xcassets */; };
 		5EDC9A28094793665C2F19FF /* LumenWatch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = A773B7C6A52038CC6E59E76F /* LumenWatch.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5FA40B6AE844071575CD2FA5 /* Insights.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5E06A10A52CCA3A62F277B /* Insights.swift */; };
+		5FB6541949EE6B2B222E3685 /* HaloOrb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E844B5C0DD46A5D8676F77 /* HaloOrb.swift */; };
 		5FC65A77DA505F7B8A66D634 /* Insights.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B5E06A10A52CCA3A62F277B /* Insights.swift */; };
+		667D9E494C789A0A147C9382 /* Orb.metal in Sources */ = {isa = PBXBuildFile; fileRef = B4D2610DCCCED321F9C510F9 /* Orb.metal */; };
 		70AC2215C9D361168467FDB7 /* DemoSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6238525E6C1D498A626B0A55 /* DemoSource.swift */; };
 		7D33AE1C8AE1505786E84388 /* StressAndBodyAgeViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF7BD9A5637A13E7CB31BAF /* StressAndBodyAgeViews.swift */; };
 		920DE51ECBABCE68970CF088 /* CoachView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5661655FCBC347466A26A1 /* CoachView.swift */; };
@@ -81,8 +84,10 @@
 		A2187705A841421A84E07F7C /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
 		A5C42348683D3C080A5BB0A4 /* Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Base.xcconfig; sourceTree = "<group>"; };
 		A773B7C6A52038CC6E59E76F /* LumenWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LumenWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B4D2610DCCCED321F9C510F9 /* Orb.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Orb.metal; sourceTree = "<group>"; };
 		D247479306582F7869C3F622 /* HealthKitSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitSource.swift; sourceTree = "<group>"; };
 		E031957D37409F1D39733532 /* LumenWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LumenWatchApp.swift; sourceTree = "<group>"; };
+		E5E844B5C0DD46A5D8676F77 /* HaloOrb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaloOrb.swift; sourceTree = "<group>"; };
 		F0089657706240C2858A839D /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
 		F13FB1A750F782E9805361FA /* MetricsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsStore.swift; sourceTree = "<group>"; };
 		F291876A8F7833BC02A3D37A /* ScoreEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreEngine.swift; sourceTree = "<group>"; };
@@ -130,11 +135,20 @@
 			path = Watch;
 			sourceTree = "<group>";
 		};
+		62FE8F2DFA7D4F621F932254 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				B4D2610DCCCED321F9C510F9 /* Orb.metal */,
+			);
+			path = Shaders;
+			sourceTree = "<group>";
+		};
 		647E00957EB0FFFA94DEF091 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
 				54A8583F1BD94B9A8B414F94 /* LumenApp.swift */,
 				D68739BA69A54A506EA99548 /* Resources */,
+				62FE8F2DFA7D4F621F932254 /* Shaders */,
 				2214CE7AD49E4B0EAA622D59 /* Views */,
 			);
 			path = iOS;
@@ -171,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				6238525E6C1D498A626B0A55 /* DemoSource.swift */,
+				E5E844B5C0DD46A5D8676F77 /* HaloOrb.swift */,
 				D247479306582F7869C3F622 /* HealthKitSource.swift */,
 				1B5E06A10A52CCA3A62F277B /* Insights.swift */,
 				F13FB1A750F782E9805361FA /* MetricsStore.swift */,
@@ -289,6 +304,7 @@
 				244FE29A34146D2D6E8AF1BA /* Components.swift in Sources */,
 				70AC2215C9D361168467FDB7 /* DemoSource.swift in Sources */,
 				395B2A58A060088DF471C4AB /* DetailViews.swift in Sources */,
+				5FB6541949EE6B2B222E3685 /* HaloOrb.swift in Sources */,
 				2095709DFFD84D2104EDDBE9 /* HealthKitSource.swift in Sources */,
 				5FC65A77DA505F7B8A66D634 /* Insights.swift in Sources */,
 				D26F50F3A05D119E4F899467 /* JournalView.swift in Sources */,
@@ -296,6 +312,7 @@
 				ACB49A6CC3AA9A684A7BEED4 /* MetricsStore.swift in Sources */,
 				BF80A8486D3A47D6CB5F1E3B /* Models.swift in Sources */,
 				D4E8BDA8601060D8E07627A3 /* OnboardingView.swift in Sources */,
+				667D9E494C789A0A147C9382 /* Orb.metal in Sources */,
 				4D9CE21C317984948ACCCB11 /* ScoreEngine.swift in Sources */,
 				DDE0832ED354A947E1456D28 /* SettingsView.swift in Sources */,
 				7D33AE1C8AE1505786E84388 /* StressAndBodyAgeViews.swift in Sources */,
@@ -310,6 +327,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E805BD7A205537CF23F1771 /* DemoSource.swift in Sources */,
+				135D1EE54621B26939DC6C94 /* HaloOrb.swift in Sources */,
 				1FE2808835A8BF189F583F03 /* HealthKitSource.swift in Sources */,
 				5FA40B6AE844071575CD2FA5 /* Insights.swift in Sources */,
 				19D7B923814935E90F9F59EF /* LumenWatchApp.swift in Sources */,

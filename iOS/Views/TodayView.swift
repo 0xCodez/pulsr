@@ -78,24 +78,34 @@ struct TodayView: View {
     // MARK: Rings
 
     private func rings(_ d: DayScores) -> some View {
-        GlassEffectContainer(spacing: 10) {
-            HStack(spacing: 10) {
-                NavigationLink(value: Route.sleep) {
-                    RingTile(progress: (d.sleepPerformance ?? 0) / 100, colors: Theme.sleep,
-                             value: d.sleepPerformance.map(\.percent) ?? "–", unit: d.sleepPerformance == nil ? nil : "%", title: "Sleep")
+        VStack(spacing: 0) {
+            NavigationLink(value: Route.recovery) {
+                VStack(spacing: 0) {
+                    HaloOrb(palette: .recovery(d.recovery))
+                        .frame(width: 212, height: 212)
+                        .padding(.top, 22)
+                        .padding(.bottom, 26)
+                    BigNumber(text: d.recovery.map(\.percent) ?? "–", unit: d.recovery == nil ? nil : "%", size: 76)
+                    Eyebrow(text: d.recovery == nil ? "Recovery · waiting for sleep" : "Recovery · \(Insights.headline(d).title)")
+                        .padding(.top, 8)
                 }
-                NavigationLink(value: Route.recovery) {
-                    RingTile(progress: (d.recovery ?? 0) / 100, colors: Theme.recoveryGradient(d.recovery),
-                             value: d.recovery.map(\.percent) ?? "–", unit: d.recovery == nil ? nil : "%", title: "Recovery")
-                }
-                NavigationLink(value: Route.strain) {
-                    RingTile(progress: d.strain / 21, colors: Theme.strain, value: d.strain.oneDecimal, unit: nil, title: "Strain",
-                             marker: ScoreEngine.strainTarget(recovery: d.recovery).lowerBound / 21)
+                .frame(maxWidth: .infinity)
+                .contentShape(.rect)
+            }
+            GlassEffectContainer(spacing: 10) {
+                HStack(spacing: 10) {
+                    NavigationLink(value: Route.sleep) {
+                        MetricCapsule(progress: (d.sleepPerformance ?? 0) / 100, color: Theme.sleep[0],
+                                      value: d.sleepPerformance.map { "\($0.percent)%" } ?? "–", title: "Sleep")
+                    }
+                    NavigationLink(value: Route.strain) {
+                        MetricCapsule(progress: d.strain / 21, color: Theme.strain[0], value: d.strain.oneDecimal, title: "Strain")
+                    }
                 }
             }
-            .buttonStyle(.plain)
+            .padding(.top, 20)
         }
-        .padding(.top, 10)
+        .buttonStyle(.plain)
     }
 
     // MARK: Cards
@@ -226,7 +236,7 @@ struct TodayView: View {
             NavigationLink(value: Route.bodyAge) {
                 GlassCard(tint: Theme.green) {
                     HStack(spacing: 16) {
-                        ParticleSphere(color: Theme.green, count: 160).frame(width: 64, height: 64)
+                        HaloOrb(palette: .recovery(80), energy: 0.2, speed: 0.45).frame(width: 56, height: 56).padding(4)
                         VStack(alignment: .leading, spacing: 4) {
                             Eyebrow(text: "Body Age")
                             BigNumber(text: age.bodyAge.oneDecimal, size: 28)
@@ -257,6 +267,33 @@ struct TodayView: View {
 }
 
 // MARK: - Pieces
+
+struct MetricCapsule: View {
+    var progress: Double
+    var color: Color
+    var value: String
+    var title: String
+
+    var body: some View {
+        HStack(spacing: 10) {
+            ZStack {
+                Circle().stroke(Theme.track, lineWidth: 4)
+                Circle().trim(from: 0, to: max(0.01, min(progress, 1)))
+                    .stroke(color, style: StrokeStyle(lineWidth: 4, lineCap: .round))
+                    .rotationEffect(.degrees(-90))
+            }
+            .frame(width: 34, height: 34)
+            VStack(alignment: .leading, spacing: 1) {
+                Text(value).font(.system(size: 19, weight: .medium)).monospacedDigit()
+                Eyebrow(text: title)
+            }
+            Spacer(minLength: 0)
+        }
+        .padding(.horizontal, 12)
+        .padding(.vertical, 11)
+        .glassEffect(.regular.interactive(), in: .rect(cornerRadius: 24))
+    }
+}
 
 struct RingTile: View {
     var progress: Double

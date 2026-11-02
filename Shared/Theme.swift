@@ -1,14 +1,22 @@
 import SwiftUI
 
 enum Theme {
-    static let sleep = [Color(hex: 0x8FB4FF), Color(hex: 0xB49BFF)]
-    static let strain = [Color(hex: 0x2FD4FF), Color(hex: 0x4F7BFF)]
-    static let stress = [Color(hex: 0x5AC8FA), Color(hex: 0x30E0A1), Color(hex: 0xFFB340)]
-    static let green = Color(hex: 0x2EF2A0)
-    static let yellow = Color(hex: 0xFFD84D)
-    static let red = Color(hex: 0xFF5A6E)
-    static let helps = Color(hex: 0x2EF2A0)
-    static let hurts = Color(hex: 0xFFA845)
+    // Every colour has a light and a dark value; the watch always uses the dark one.
+    static let sleep = [Color.adaptive(0x6B5CE6, 0xA9A0FF), Color.adaptive(0x8B6CF0, 0xB49BFF)]
+    static let strain = [Color.adaptive(0x0A8FD1, 0x2FD4FF), Color.adaptive(0x2F5BE0, 0x4F7BFF)]
+    static let stress = [Color.adaptive(0x1E9BD7, 0x5AC8FA), Color.adaptive(0x0DB877, 0x30E0A1), Color.adaptive(0xD98200, 0xFFB340)]
+    static let green = Color.adaptive(0x0DB877, 0x2EF2A0)
+    static let yellow = Color.adaptive(0xC98F00, 0xFFD84D)
+    static let red = Color.adaptive(0xE0364F, 0xFF5A6E)
+    static let helps = Color.adaptive(0x0DB877, 0x2EF2A0)
+    static let hurts = Color.adaptive(0xD9731A, 0xFFA845)
+    static let screen = Color.adaptive(0xF2F4F7, 0x020306)
+    static let track = Color.adaptive(0x0B0F14, 0xFFFFFF).opacity(0.09)
+    // Sleep stages run light to dark by depth.
+    static let awake = Color.adaptive(0xC9A27A, 0xE2B98E)
+    static let rem = Color.adaptive(0xA39FF5, 0xC3C0FF)
+    static let lightSleep = Color.adaptive(0x6F69E8, 0x8A85FF)
+    static let deep = Color.adaptive(0x3F37B8, 0x5B54F0)
     static let backgroundTop = Color(hex: 0x0B1220)
     static let backgroundBottom = Color(hex: 0x05070D)
 
@@ -32,6 +40,14 @@ enum Theme {
 }
 
 extension Color {
+    static func adaptive(_ light: UInt32, _ dark: UInt32) -> Color {
+        #if os(iOS)
+        return Color(UIColor { $0.userInterfaceStyle == .dark ? UIColor(Color(hex: dark)) : UIColor(Color(hex: light)) })
+        #else
+        return Color(hex: dark)
+        #endif
+    }
+
     init(hex: UInt32, opacity: Double = 1) {
         self.init(.sRGB,
                   red: Double((hex >> 16) & 0xFF) / 255,

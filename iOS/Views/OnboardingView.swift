@@ -14,9 +14,14 @@ struct OnboardingView: View {
 
     var body: some View {
         ZStack {
-            AuroraBackground(accent: Theme.green)
+            AuroraBackground(accent: Color(hex: 0x3D7BFF), secondary: Color(hex: 0xFF4FD8))
             ScrollView {
                 VStack(alignment: .leading, spacing: 22) {
+                    HaloOrb(palette: .spectral, energy: 0.9)
+                        .frame(width: 190, height: 190)
+                        .frame(maxWidth: .infinity)
+                        .padding(.top, 70)
+                        .padding(.bottom, 10)
                     VStack(alignment: .leading, spacing: 8) {
                         Text("LUMEN").font(.subheadline.weight(.semibold)).tracking(6).foregroundStyle(.secondary)
                         Text("Your Apple Watch,\nfully understood.")
@@ -25,7 +30,6 @@ struct OnboardingView: View {
                             .font(.callout)
                             .foregroundStyle(.secondary)
                     }
-                    .padding(.top, 60)
 
                     GlassEffectContainer(spacing: 12) {
                         VStack(spacing: 12) {

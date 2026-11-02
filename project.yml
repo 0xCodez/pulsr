@@ -36,7 +36,6 @@ targets:
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         UILaunchScreen: {}
-        UIUserInterfaceStyle: Dark
         UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
         NSHealthShareUsageDescription: Lumen reads heart rate, HRV, sleep, respiratory rate, workouts and steps recorded by your Apple Watch to calculate your Recovery, Strain and Sleep scores. Everything stays on your device.
         NSHealthUpdateUsageDescription: Lumen does not write any data to Apple Health.

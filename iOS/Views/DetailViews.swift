@@ -10,7 +10,7 @@ struct RecoveryDetailView: View {
         DetailScaffold(title: store.isToday ? "Today" : store.selected?.date.dayLabel ?? "", accent: Theme.recoveryColor(store.selected?.recovery)) {
             if let d = store.selected {
                 HeroRing(progress: (d.recovery ?? 0) / 100, colors: Theme.recoveryGradient(d.recovery),
-                         value: d.recovery.map(\.percent) ?? "–", unit: d.recovery == nil ? nil : "%", caption: "Recovery")
+                         value: d.recovery.map(\.percent) ?? "–", unit: d.recovery == nil ? nil : "%", caption: "Recovery", orb: .recovery(d.recovery))
                 GlassCard {
                     VStack(spacing: 0) {
                         if let hrv = d.raw.hrv, let base = Insights.hrvBaselineValue(d) {
@@ -88,7 +88,7 @@ struct SleepDetailView: View {
         DetailScaffold(title: store.isToday ? "Today" : store.selected?.date.dayLabel ?? "", accent: Theme.sleep[1]) {
             if let d = store.selected {
                 HeroRing(progress: (d.sleepPerformance ?? 0) / 100, colors: Theme.sleep,
-                         value: d.sleepPerformance.map(\.percent) ?? "–", unit: d.sleepPerformance == nil ? nil : "%", caption: "Sleep Performance")
+                         value: d.sleepPerformance.map(\.percent) ?? "–", unit: d.sleepPerformance == nil ? nil : "%", caption: "Sleep Performance", orb: .sleep, speed: 0.6)
                 GlassCard {
                     VStack(spacing: 0) {
                         row("clock", "Hours vs. Needed", d.hoursVsNeeded)
@@ -164,10 +164,10 @@ struct SleepDetailView: View {
 
 func stageColor(_ stage: SleepStage) -> Color {
     switch stage {
-    case .awake: Color(hex: 0xFFB37A)
-    case .rem: Color(hex: 0x5AD8FF)
-    case .core, .asleep: Color(hex: 0x6E8BFF)
-    case .deep: Color(hex: 0x8B5CFF)
+    case .awake: Theme.awake
+    case .rem: Theme.rem
+    case .core, .asleep: Theme.lightSleep
+    case .deep: Theme.deep
     }
 }
 
@@ -195,7 +195,7 @@ struct StrainDetailView: View {
             if let d = store.selected {
                 let target = ScoreEngine.strainTarget(recovery: d.recovery)
                 HeroRing(progress: d.strain / 21, colors: Theme.strain, value: d.strain.oneDecimal, unit: nil, caption: "Day Strain",
-                         marker: target.lowerBound / 21)
+                         marker: target.lowerBound / 21, orb: .strain, speed: 1.3)
                 Text("Target \(Int(target.lowerBound))–\(Int(target.upperBound)) based on your recovery")
                     .font(.caption).foregroundStyle(.secondary)
                 GlassCard {
@@ -245,7 +245,8 @@ struct StrainDetailView: View {
     }
 }
 
-let zoneColors: [Color] = [.gray, Color(hex: 0x8FA3B8), Color(hex: 0x2FD4FF), Color(hex: 0x2EF2A0), Color(hex: 0xFFB340), Color(hex: 0xFF5A6E)]
+/// Zones are one sequential ramp of the strain colour, from light effort to all-out.
+let zoneColors: [Color] = (0...5).map { Theme.strain[0].opacity(0.25 + Double($0) * 0.15) }
 
 struct ZoneBar: View {
     var zone: Int
@@ -257,7 +258,7 @@ struct ZoneBar: View {
             GeometryReader { geo in
                 ZStack(alignment: .leading) {
                     Capsule().fill(.white.opacity(0.06))
-                    Capsule().fill(zoneColors[zone].gradient).frame(width: max(4, geo.size.width * minutes / total))
+                    Capsule().fill(zoneColors[zone]).frame(width: max(4, geo.size.width * minutes / total))
                 }
             }
             .frame(height: 10)
@@ -281,7 +282,7 @@ struct HeartRateChart: View {
                 LineMark(x: .value("Time", p.date), y: .value("BPM", p.bpm))
                     .interpolationMethod(.monotone)
                     .lineStyle(StrokeStyle(lineWidth: 1.6))
-                    .foregroundStyle(LinearGradient(colors: [zoneColors[2], zoneColors[3], zoneColors[4], zoneColors[5]], startPoint: .bottom, endPoint: .top))
+                    .foregroundStyle(Theme.strain[0])
             }
         }
         .chartYScale(domain: 40...maxHR)
@@ -324,48 +325,42 @@ struct TrendLine: View {
     }
 }
 
-/// Strain (blue, 0–21) and Recovery (zone-colored, 0–100 %) on one chart.
+/// Strain (0–21) and Recovery (0–100 %) as two stacked charts, each on its own axis.
 struct StrainRecoveryChart: View {
     var days: [DayScores]
     var compact = false
 
+    private var xAxis: some AxisContent {
+        AxisMarks(values: .stride(by: .day, count: days.count > 10 ? 5 : 1)) { _ in
+            AxisValueLabel(format: days.count > 10 ? .dateTime.month(.abbreviated).day() : .dateTime.weekday(.narrow))
+        }
+    }
+
     var body: some View {
-        Chart {
-            ForEach(days) { d in
-                LineMark(x: .value("Day", d.date, unit: .day), y: .value("Strain", d.strain), series: .value("Series", "Strain"))
-                    .foregroundStyle(Theme.strain[0])
-                    .lineStyle(StrokeStyle(lineWidth: 2))
-                PointMark(x: .value("Day", d.date, unit: .day), y: .value("Strain", d.strain))
-                    .foregroundStyle(Theme.strain[0])
-                    .symbolSize(compact ? 30 : 50)
-                    .annotation(position: .bottom, spacing: 4) {
-                        if !compact { Text(d.strain.oneDecimal).font(.caption2.weight(.bold)).foregroundStyle(Theme.strain[0]) }
-                    }
+        VStack(alignment: .leading, spacing: 10) {
+            Text("STRAIN · 0–21").font(.system(size: 9.5, weight: .medium, design: .monospaced)).tracking(1.2).foregroundStyle(.secondary)
+            Chart(days) { d in
+                BarMark(x: .value("Day", d.date, unit: .day), y: .value("Strain", d.strain), width: .ratio(0.55))
+                    .foregroundStyle(Theme.strain[0].opacity(d.id == days.last?.id ? 1 : 0.5))
+                    .cornerRadius(4)
             }
-            ForEach(days.filter { $0.recovery != nil }) { d in
+            .chartYScale(domain: 0...21)
+            .chartYAxis { AxisMarks(values: [0, 7, 14, 21]) { _ in AxisGridLine().foregroundStyle(Theme.track); AxisValueLabel() } }
+            .chartXAxis { xAxis }
+            .frame(maxHeight: .infinity)
+            Text("RECOVERY · 0–100%").font(.system(size: 9.5, weight: .medium, design: .monospaced)).tracking(1.2).foregroundStyle(.secondary)
+            Chart(days.filter { $0.recovery != nil }) { d in
                 let r = d.recovery ?? 0
-                LineMark(x: .value("Day", d.date, unit: .day), y: .value("Recovery", r / 100 * 21), series: .value("Series", "Recovery"))
-                    .foregroundStyle(.white.opacity(0.35))
-                    .lineStyle(StrokeStyle(lineWidth: 1.5))
-                PointMark(x: .value("Day", d.date, unit: .day), y: .value("Recovery", r / 100 * 21))
+                LineMark(x: .value("Day", d.date, unit: .day), y: .value("Recovery", r))
+                    .foregroundStyle(.secondary.opacity(0.5))
+                PointMark(x: .value("Day", d.date, unit: .day), y: .value("Recovery", r))
                     .foregroundStyle(Theme.recoveryColor(r))
-                    .symbolSize(compact ? 30 : 50)
-                    .annotation(position: .top, spacing: 4) {
-                        Text("\(r.percent)%").font(.caption2.weight(.bold)).foregroundStyle(Theme.recoveryColor(r))
-                    }
+                    .symbolSize(compact ? 40 : 60)
             }
-        }
-        .chartYScale(domain: 0...23)
-        .chartYAxis {
-            AxisMarks(position: .leading, values: [0, 7, 14, 21]) { _ in
-                AxisGridLine().foregroundStyle(.white.opacity(0.08))
-                AxisValueLabel().foregroundStyle(Theme.strain[0])
-            }
-        }
-        .chartXAxis {
-            AxisMarks(values: .stride(by: .day, count: days.count > 10 ? 5 : 1)) { _ in
-                AxisValueLabel(format: days.count > 10 ? .dateTime.month(.abbreviated).day() : .dateTime.weekday(.abbreviated))
-            }
+            .chartYScale(domain: 0...100)
+            .chartYAxis { AxisMarks(values: [0, 50, 100]) { _ in AxisGridLine().foregroundStyle(Theme.track); AxisValueLabel() } }
+            .chartXAxis { xAxis }
+            .frame(maxHeight: .infinity)
         }
     }
 }

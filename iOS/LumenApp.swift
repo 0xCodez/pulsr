@@ -13,7 +13,6 @@ struct LumenApp: App {
                 .environment(store)
                 .environment(journal)
                 .environment(coach)
-                .preferredColorScheme(.dark)
                 .task { if store.hasOnboarded { await store.load() } }
                 .onChange(of: scenePhase) { _, phase in
                     if phase == .active, store.hasOnboarded { Task { await store.load() } }
@@ -38,7 +37,7 @@ struct RootView: View {
                 Tab("Coach", systemImage: "sparkles") { NavigationStack { CoachView() } }
             }
             .tabBarMinimizeBehavior(.onScrollDown)
-            .tint(.white)
+            .tint(.primary)
         } else {
             OnboardingView()
         }

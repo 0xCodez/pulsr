@@ -16,30 +16,43 @@ struct GlassCard<Content: View>: View {
     }
 }
 
-/// Slowly drifting aurora behind every screen. The glass layers above refract it.
+/// Screen background: near-black (or pale grey) with slowly drifting colour light and fine grain.
+/// The accent tints the light so each screen picks up its orb's colour.
 struct AuroraBackground: View {
     var accent: Color = Theme.green
     var secondary: Color = Color(hex: 0x4F7BFF)
+    @Environment(\.colorScheme) private var scheme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
-        TimelineView(.animation(minimumInterval: 1 / 20)) { context in
-            let t = Float(context.date.timeIntervalSinceReferenceDate)
-            let points: [SIMD2<Float>] = [
-                SIMD2(0, 0), SIMD2(0.5, 0), SIMD2(1, 0),
-                SIMD2(0, 0.45 + 0.08 * sin(t * 0.30)),
-                SIMD2(0.5 + 0.18 * sin(t * 0.21), 0.40 + 0.10 * cos(t * 0.17)),
-                SIMD2(1, 0.50 + 0.08 * cos(t * 0.27)),
-                SIMD2(0, 1), SIMD2(0.5, 1), SIMD2(1, 1),
-            ]
-            let colors: [Color] = [
-                accent.opacity(0.55), secondary.opacity(0.35), Theme.backgroundTop,
-                Theme.backgroundTop, accent.opacity(0.18), secondary.opacity(0.25),
-                Theme.backgroundBottom, Theme.backgroundBottom, Theme.backgroundBottom,
-            ]
-            MeshGradient(width: 3, height: 3, points: points, colors: colors)
+        let dark = scheme == .dark
+        TimelineView(.animation(minimumInterval: 1 / 15, paused: reduceMotion)) { context in
+            let t = context.date.timeIntervalSinceReferenceDate.truncatingRemainder(dividingBy: 3600)
+            GeometryReader { geo in
+                let w = geo.size.width, h = geo.size.height
+                ZStack {
+                    Theme.screen
+                    blob(accent, dark ? 0.20 : 0.16, x: 0.5 + 0.06 * sin(t * 0.05), y: 0.24, r: w * 0.9)
+                    blob(secondary, dark ? 0.20 : 0.12, x: 0.0 + 0.05 * cos(t * 0.04), y: 0.0, r: w * 0.8)
+                    blob(Color(hex: 0x7B6CFF), dark ? 0.22 : 0.10, x: 1.0, y: 0.06 + 0.04 * sin(t * 0.06), r: w * 0.8)
+                    blob(accent, dark ? 0.10 : 0.10, x: 0.5, y: 1.1, r: w)
+                }
+                .frame(width: w, height: h)
+                .drawingGroup()
+                Rectangle().fill(.white)
+                    .colorEffect(ShaderLibrary.filmGrain(.float(dark ? 0.10 : 0.05)))
+                    .blendMode(dark ? .overlay : .multiply)
+                    .allowsHitTesting(false)
+            }
         }
-        .background(Theme.backgroundBottom)
         .ignoresSafeArea()
+    }
+
+    private func blob(_ color: Color, _ opacity: Double, x: Double, y: Double, r: CGFloat) -> some View {
+        GeometryReader { geo in
+            RadialGradient(colors: [color.opacity(opacity), .clear], center: UnitPoint(x: x, y: y), startRadius: 0, endRadius: r)
+                .frame(width: geo.size.width, height: geo.size.height)
+        }
     }
 }
 
@@ -49,7 +62,7 @@ struct Eyebrow: View {
     var text: String
     var body: some View {
         Text(text.uppercased())
-            .font(.caption.weight(.semibold))
+            .font(.system(size: 10.5, weight: .medium, design: .monospaced))
             .tracking(1.4)
             .foregroundStyle(.secondary)
     }
@@ -63,10 +76,11 @@ struct BigNumber: View {
     var body: some View {
         HStack(alignment: .firstTextBaseline, spacing: 1) {
             Text(text)
-                .font(.system(size: size, weight: .bold, design: .rounded))
+                .font(.system(size: size, weight: size > 40 ? .thin : .regular))
+                .tracking(size > 40 ? -size * 0.04 : 0)
                 .contentTransition(.numericText())
             if let unit {
-                Text(unit).font(.system(size: size * 0.45, weight: .bold, design: .rounded))
+                Text(unit).font(.system(size: size * 0.4, weight: .light))
             }
         }
         .monospacedDigit()
@@ -162,7 +176,7 @@ struct InsightCallout: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text(text).font(.callout).foregroundStyle(.white.opacity(0.9))
+            Text(text).font(.callout).foregroundStyle(.primary)
             if let action {
                 Button {
                     onAction?()
@@ -192,7 +206,7 @@ struct TrailingIconLabelStyle: LabelStyle {
     }
 }
 
-/// A big ring header shared by Recovery, Sleep and Strain detail screens.
+/// The big orb header shared by Recovery, Sleep and Strain detail screens.
 struct HeroRing: View {
     var progress: Double
     var colors: [Color]
@@ -200,18 +214,23 @@ struct HeroRing: View {
     var unit: String?
     var caption: String
     var marker: Double? = nil
+    var orb: OrbPalette = .spectral
+    var speed: Double = 1
 
     var body: some View {
-        ScoreRing(progress: progress, colors: colors, lineWidth: 22, marker: marker) {
-            VStack(spacing: 4) {
-                Text("LUMEN").font(.caption.weight(.medium)).tracking(4).foregroundStyle(.secondary)
-                BigNumber(text: value, unit: unit, size: 64)
-                Text(caption.uppercased()).font(.footnote.weight(.semibold)).tracking(1.5)
-            }
+        VStack(spacing: 8) {
+            HaloOrb(palette: orb, speed: speed)
+                .frame(width: 168, height: 168)
+                .padding(.top, 26)
+                .padding(.bottom, 18)
+            BigNumber(text: value, unit: unit, size: 66)
+            Text(caption.uppercased())
+                .font(.system(size: 11, weight: .medium, design: .monospaced))
+                .tracking(1.8)
+                .foregroundStyle(.secondary)
         }
-        .frame(width: 260, height: 260)
         .frame(maxWidth: .infinity)
-        .padding(.vertical, 8)
+        .padding(.bottom, 8)
     }
 }
 

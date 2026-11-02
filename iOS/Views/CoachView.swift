@@ -106,6 +106,9 @@ struct CoachView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     VStack(spacing: 6) {
+                        HaloOrb(palette: .spectral, energy: 1, speed: coach.isThinking ? 2.2 : 1.3)
+                            .frame(width: 96, height: 96)
+                            .padding(.vertical, 26)
                         Text("LUMEN COACH").font(.subheadline.weight(.semibold)).tracking(3)
                         Text(coach.isOnDevice ? "ON-DEVICE · APPLE INTELLIGENCE" : "OFFLINE MODE")
                             .font(.caption2.weight(.bold)).tracking(1)

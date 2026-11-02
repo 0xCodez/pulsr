@@ -41,18 +41,21 @@ private struct SummaryPage: View {
 
     var body: some View {
         VStack(spacing: 8) {
-            ScoreRing(progress: (day?.recovery ?? 0) / 100, colors: Theme.recoveryGradient(day?.recovery), lineWidth: 9) {
-                VStack(spacing: 0) {
-                    Text(day?.recovery.map { "\($0.percent)%" } ?? "–")
-                        .font(.system(size: 30, weight: .bold, design: .rounded))
-                    Text("RECOVERY").font(.system(size: 9, weight: .semibold)).tracking(1)
-                }
+            ZStack {
+                HaloOrb(palette: .recovery(day?.recovery), forceDark: true)
+                    .frame(width: 92, height: 92)
             }
-            .frame(width: 104, height: 104)
-            HStack(spacing: 14) {
-                mini(progress: (day?.sleepPerformance ?? 0) / 100, colors: Theme.sleep, value: day?.sleepPerformance.map { "\($0.percent)%" } ?? "–", title: "SLEEP")
-                mini(progress: (day?.strain ?? 0) / 21, colors: Theme.strain, value: day?.strain.oneDecimal ?? "–", title: "STRAIN")
+            .frame(width: 104, height: 96)
+            VStack(spacing: 0) {
+                Text(day?.recovery.map { "\($0.percent)%" } ?? "–")
+                    .font(.system(size: 30, weight: .thin))
+                Text("RECOVERY").font(.system(size: 9, weight: .medium, design: .monospaced)).tracking(1).foregroundStyle(.secondary)
             }
+            HStack(spacing: 12) {
+                Text("Sleep ").foregroundStyle(.secondary) + Text(day?.sleepPerformance.map { "\($0.percent)%" } ?? "–").foregroundStyle(Theme.sleep[0])
+                Text("Strain ").foregroundStyle(.secondary) + Text(day?.strain.oneDecimal ?? "–").foregroundStyle(Theme.strain[0])
+            }
+            .font(.system(size: 12, weight: .medium))
         }
         .navigationTitle("Lumen")
     }

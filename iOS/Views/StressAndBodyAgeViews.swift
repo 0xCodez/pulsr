@@ -110,8 +110,10 @@ struct BodyAgeView: View {
         DetailScaffold(title: "Healthspan", accent: Theme.green) {
             if let age = store.bodyAge {
                 ZStack {
-                    ParticleSphere(color: Theme.green, count: 900)
-                        .frame(width: 290, height: 290)
+                    HaloOrb(palette: .recovery(80), energy: 0.3, speed: 0.45)
+                        .frame(width: 200, height: 200)
+                        .padding(.vertical, 45)
+                        .opacity(0.9)
                     VStack(spacing: 6) {
                         BigNumber(text: age.bodyAge.oneDecimal, size: 60)
                         Text("BODY AGE").font(.headline).tracking(2).foregroundStyle(.white.opacity(0.8))
