@@ -1,0 +1,240 @@
+<title>Lumen Orb Variants</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@200;300;400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one row per orb variant, each showing the Today screen in dark and light side by side, so the orb is judged in context. */
+:root{
+  --page:#F4F5F7; --page-ink:#0C1015; --page-dim:#5D6570; --page-line:rgba(12,16,21,.09); --page-card:#FFFFFF; --page-accent:#0A8FD1;
+  --font-ui:-apple-system,BlinkMacSystemFont,"SF Pro Display","Geist","Helvetica Neue",sans-serif;
+  --font-page:"Geist",-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif;
+  --font-mono:"Geist Mono","SF Mono",ui-monospace,Menlo,monospace;
+  --grain:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 .6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--page:#07080A;--page-ink:#ECEFF3;--page-dim:#8B93A0;--page-line:rgba(255,255,255,.08);--page-card:#0E1014;--page-accent:#2FD4FF;color-scheme:dark}}
+:root[data-theme="dark"]{--page:#07080A;--page-ink:#ECEFF3;--page-dim:#8B93A0;--page-line:rgba(255,255,255,.08);--page-card:#0E1014;--page-accent:#2FD4FF;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--page-ink);font-family:var(--font-page);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1360px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header{padding-block:48px 28px}
+header .k{font:500 12px var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--page-dim)}
+header h1{font-weight:200;font-size:clamp(40px,5.5vw,74px);letter-spacing:-.045em;line-height:.98;margin:14px 0 16px;text-wrap:balance}
+header p{font-size:16px;line-height:1.6;color:var(--page-dim);max-width:62ch;margin:0}
+.variant{border-top:1px solid var(--page-line);padding-block:38px}
+.variant .wrap{display:grid;grid-template-columns:minmax(0,280px) minmax(0,1fr);gap:36px;align-items:center}
+.about{display:flex;flex-direction:column;gap:12px;min-width:0}
+.about .no{font:500 12px var(--font-mono);letter-spacing:.12em;color:var(--page-accent)}
+.about h2{font-weight:300;font-size:40px;letter-spacing:-.03em;margin:0;line-height:1}
+.about p{margin:0;font-size:15px;line-height:1.55;color:var(--page-dim)}
+.about ul{margin:0;padding-left:18px;font-size:14px;line-height:1.6;color:var(--page-dim)}
+.pair{display:flex;gap:28px;overflow-x:auto;padding:6px 4px 14px;min-width:0}
+footer{border-top:1px solid var(--page-line);padding-block:36px 64px;color:var(--page-dim);font-size:14px;line-height:1.6}
+footer b{color:var(--page-ink);font-weight:500}
+
+/* phone themes are fixed per phone so dark and light sit side by side */
+.th-dark{--scr-bg:#020306;--ink:#F2F5F8;--dim:rgba(242,245,248,.58);
+  --glass:linear-gradient(155deg,rgba(255,255,255,.13),rgba(255,255,255,.03) 50%,rgba(255,255,255,.07));--glass-line:rgba(255,255,255,.13);--glass-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 12px 30px rgba(0,0,0,.35);
+  --leak-a:rgba(46,242,160,.10);--leak-b:rgba(47,212,255,.12);--leak-c:rgba(123,108,255,.14);--grain-op:.2;--grain-blend:overlay;--track:rgba(255,255,255,.10);--tab-on:rgba(255,255,255,.12);
+  --sleep:#A9A0FF;--strain:#2FD4FF}
+.th-light{--scr-bg:#F2F4F7;--ink:#0B0F14;--dim:rgba(11,15,20,.56);
+  --glass:linear-gradient(155deg,rgba(255,255,255,.88),rgba(255,255,255,.55) 52%,rgba(255,255,255,.72));--glass-line:rgba(255,255,255,.95);--glass-shadow:inset 0 1px 0 #fff,0 10px 28px rgba(20,32,52,.08);
+  --leak-a:rgba(13,184,119,.14);--leak-b:rgba(10,143,209,.10);--leak-c:rgba(107,92,230,.10);--grain-op:.09;--grain-blend:multiply;--track:rgba(11,15,20,.08);--tab-on:rgba(11,15,20,.07);
+  --sleep:#6B5CE6;--strain:#0A8FD1}
+.phone{flex:none;width:340px;height:712px;border-radius:58px;padding:10px;background:linear-gradient(150deg,#4a4d52,#16171a 30%,#0b0b0c 70%,#3a3c40);box-shadow:0 40px 80px rgba(10,14,20,.25),inset 0 0 0 1px rgba(255,255,255,.06)}
+.scr{position:relative;width:320px;height:692px;border-radius:48px;overflow:hidden;background:var(--scr-bg);color:var(--ink);font-family:var(--font-ui)}
+.scr .bg{position:absolute;inset:0;background:radial-gradient(55% 30% at 0% 0%,var(--leak-b),transparent 70%),radial-gradient(60% 30% at 100% 6%,var(--leak-c),transparent 70%),radial-gradient(80% 40% at 50% 112%,var(--leak-a),transparent 70%)}
+.scr .bg::after{content:"";position:absolute;inset:0;background-image:var(--grain);opacity:var(--grain-op);mix-blend-mode:var(--grain-blend)}
+.island{position:absolute;top:11px;left:50%;width:104px;height:30px;margin-left:-52px;border-radius:20px;background:#000;z-index:20}
+.sb{position:relative;z-index:10;display:flex;justify-content:space-between;align-items:center;height:50px;padding:6px 28px 0 34px;font:600 15px var(--font-ui)}
+.sb .ic{display:flex;gap:5px;align-items:center}
+.body{position:relative;z-index:2;padding:0 16px}
+.gl{background:var(--glass);border:1px solid var(--glass-line);box-shadow:var(--glass-shadow);backdrop-filter:blur(24px) saturate(170%);-webkit-backdrop-filter:blur(24px) saturate(170%)}
+.bar{display:flex;justify-content:space-between;align-items:center;margin-top:4px}
+.circ{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex:none}
+.cap{display:flex;align-items:center;gap:10px;border-radius:99px;padding:9px 14px;font-size:13px;font-weight:500}
+.eyebrow{font:500 9.5px var(--font-mono);letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.big{font-weight:200;letter-spacing:-.05em;line-height:.9}
+.big small{font-weight:300;letter-spacing:0;margin-left:2px}
+.card{border-radius:24px;padding:14px 15px}
+.card h4{margin:0 0 5px;font-weight:600;font-size:15px}
+.card p{margin:0;font-size:12.5px;line-height:1.45;color:var(--dim)}
+.tabs{position:absolute;left:14px;right:14px;bottom:18px;height:58px;border-radius:30px;display:flex;justify-content:space-around;align-items:center;z-index:5}
+.tab{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:9.5px;font-weight:500;width:66px;padding:6px 0;border-radius:22px;color:var(--dim)}
+.tab.on{color:var(--ink);background:var(--tab-on)}
+.orbslot{position:relative;width:212px;height:212px;margin:14px auto 0;z-index:1}
+.orbslot canvas{position:absolute;left:-40%;top:-40%;width:180%;height:180%;pointer-events:none}
+.cap-label{position:absolute;left:0;right:0;bottom:-34px;text-align:center;font:500 11px var(--font-mono);letter-spacing:.16em;color:var(--page-dim)}
+@media (max-width:900px){.variant .wrap{grid-template-columns:minmax(0,1fr);gap:18px}}
+</style>
+
+<header class="wrap">
+  <div class="k">Lumen · Iris · orb variants</div>
+  <h1>Four ways to let the orb breathe</h1>
+  <p>All four drop the dark body, the drop shadow, the outline ring and the ripples. The orb is only light, and it fades into the screen with no edge. Each variant is shown on the Today screen in dark and light so you can judge it in place.</p>
+</header>
+
+<main id="variants"></main>
+
+<footer class="wrap">
+  Tell me the number you like (<b>1 Halo</b>, <b>2 Aura</b>, <b>3 Mist</b> or <b>4 Liquid</b>). You can also mix them, for example Halo's ribbons with Mist's glow. The chosen one replaces the orb on every screen and on the watch.
+</footer>
+
+<script>
+const ic={
+ chevL:'<path d="M15 5l-7 7 7 7" fill="none" stroke="C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>',
+ chevR:'<path d="M9 5l7 7-7 7" fill="none" stroke="C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>',
+ watch:'<rect x="7" y="5" width="10" height="14" rx="3" fill="none" stroke="C" stroke-width="1.8"/><path d="M9 5l.6-3h4.8l.6 3M9 19l.6 3h4.8l.6-3" fill="none" stroke="C" stroke-width="1.8"/>',
+ orb:'<circle cx="12" cy="12" r="8.5" fill="none" stroke="C" stroke-width="1.9"/><path d="M4.5 12.5c2.5-3 5-3 7.5 0s5 3 7.5 0" fill="none" stroke="C" stroke-width="1.9" stroke-linecap="round"/>',
+ chart:'<path d="M3 20h18M5 16l4-5 4 3 6-8" fill="none" stroke="C" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>',
+ book:'<path d="M5 4h11a3 3 0 013 3v13H8a3 3 0 01-3-3zM5 17a3 3 0 013-3h11" fill="none" stroke="C" stroke-width="1.8" stroke-linejoin="round"/>',
+ spark:'<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z" fill="C"/>',
+ signal:'<rect x="2" y="15" width="3.5" height="5" rx="1" fill="C"/><rect x="7.5" y="11" width="3.5" height="9" rx="1" fill="C"/><rect x="13" y="7" width="3.5" height="13" rx="1" fill="C"/><rect x="18.5" y="3" width="3.5" height="17" rx="1" fill="C"/>',
+ wifi:'<path d="M2 9a14 14 0 0120 0M5.5 12.5a9 9 0 0113 0M9 16a4 4 0 016 0" fill="none" stroke="C" stroke-width="2.4" stroke-linecap="round"/><circle cx="12" cy="19.5" r="1.6" fill="C"/>',
+ batt:'<rect x="1" y="6" width="21" height="12" rx="3.5" fill="none" stroke="C" stroke-opacity=".45" stroke-width="1.3"/><rect x="3" y="8" width="15" height="8" rx="2" fill="C"/>',
+};
+const I=(n,s=16,c='currentColor')=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" aria-hidden="true">${ic[n].replaceAll('"C"','"'+c+'"')}</svg>`;
+function arc(size,w,p,col){const r=(size-w)/2,L=2*Math.PI*r;return `<svg width="${size}" height="${size}" aria-hidden="true"><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" style="stroke:var(--track)" stroke-width="${w}"/><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" style="stroke:${col}" stroke-width="${w}" stroke-linecap="round" stroke-dasharray="${L*p} ${L}" transform="rotate(-90 ${size/2} ${size/2})"/></svg>`}
+
+const today=(theme,variant)=>`<div class="phone"><div class="scr th-${theme}"><div class="bg"></div>
+ <div class="sb"><span>9:41</span><span class="ic">${I('signal',15)}${I('wifi',15)}${I('batt',24)}</span></div>
+ <div class="body">
+  <div class="bar"><div class="circ gl">ME</div><div class="cap gl">${I('chevL',12)}<span>Sunday, Nov 2</span><span style="opacity:.35">${I('chevR',12)}</span></div><div class="circ gl">${I('watch',17)}</div></div>
+  <div class="orbslot" data-variant="${variant}" data-theme="${theme}"></div>
+  <div style="text-align:center;position:relative;z-index:2"><div class="big" style="font-size:72px;margin-top:16px">71<small style="font-size:26px">%</small></div><div class="eyebrow" style="margin-top:8px">Recovery · primed</div></div>
+  <div style="display:flex;gap:10px;margin-top:18px;position:relative;z-index:2">
+   <div class="gl" style="flex:1;border-radius:24px;padding:11px 12px;display:flex;align-items:center;gap:10px">${arc(36,4,.78,'var(--sleep)')}<div><div style="font-size:19px;font-weight:500;letter-spacing:-.02em">78%</div><div class="eyebrow">Sleep</div></div></div>
+   <div class="gl" style="flex:1;border-radius:24px;padding:11px 12px;display:flex;align-items:center;gap:10px">${arc(36,4,16.9/21,'var(--strain)')}<div><div style="font-size:19px;font-weight:500;letter-spacing:-.02em">16.9</div><div class="eyebrow">Strain</div></div></div>
+  </div>
+  <div class="card gl" style="margin-top:10px;position:relative;z-index:2"><h4>Primed to perform</h4><p>HRV is 14% above your baseline. Aim for a strain of 14–18 and be in bed by 10:48 PM.</p></div>
+ </div>
+ <div class="tabs gl">${[['orb','Today'],['chart','Trends'],['book','Journal'],['spark','Coach']].map(([i,n])=>`<div class="tab ${n==='Today'?'on':''}">${I(i,20)}${n}</div>`).join('')}</div>
+ <div class="island"></div></div></div>`;
+
+/* Variant settings feed the shader:
+   warp   0 = smooth sine ribbons, 1 = liquid flow
+   body   how much frosted / dark glass is visible (0 = pure light)
+   feather how soft the sphere's edge is (bigger = dissolves further)
+   spread how far the coloured glow reaches into the screen
+   fog    how much soft colour cloud fills the inside */
+const V=[
+ {id:'halo',no:'01',name:'Halo',warp:0,body:0,feather:.35,spread:.6,fog:.08,ribbon:1,volume:.22,rim:.38,width:1,
+  text:'The ribbons you liked, kept crisp and bright, with the glass removed around them. Light hangs in the air with a wide, soft halo.',
+  list:['Closest to the version you liked','Sharpest, most legible','Works at watch size']},
+ {id:'aura',no:'02',name:'Aura',warp:.3,body:0,feather:.9,spread:1.15,fog:.1,ribbon:.95,volume:0,rim:0,width:.62,
+  text:'No sphere at all. A band of light floats in the middle of the screen, and its colour reaches all the way to the edges.',
+  list:['Most minimal','The screen itself glows','Colour of the whole screen follows recovery']},
+ {id:'mist',no:'03',name:'Mist',warp:.5,body:0,feather:.7,spread:.85,fog:.5,ribbon:.4,volume:.3,rim:.12,width:1,
+  text:'A soft cloud of colour, like a nebula, with faint ribbons moving through it. The round form is only suggested.',
+  list:['Calmest and most atmospheric','Shape implied, never drawn','Best for sleep and rest days']},
+ {id:'liquid',no:'04',name:'Liquid',warp:1,body:0,feather:.45,spread:.7,fog:.14,ribbon:1,volume:.18,rim:.22,width:1,
+  text:'The flowing liquid light from the last version, but with no edge, rim or shadow. It melts into the background.',
+  list:['Most motion and energy','Organic, never static','Good for coach and strain']},
+];
+document.getElementById('variants').innerHTML=V.map(v=>`<section class="variant" id="${v.id}"><div class="wrap">
+ <div class="about"><div class="no">VARIANT ${v.no}</div><h2>${v.name}</h2><p>${v.text}</p><ul>${v.list.map(l=>`<li>${l}</li>`).join('')}</ul></div>
+ <div class="pair">${today('dark',v.id)}${today('light',v.id)}</div></div></section>`).join('');
+
+/* ================= shared WebGL renderer */
+const SCALE=1.8;
+const VS=`attribute vec2 a;varying vec2 vUv;void main(){vUv=a*.5+.5;gl_Position=vec4(a,0.,1.);}`;
+const FS=`precision highp float;
+varying vec2 vUv;
+uniform vec2 uRes;uniform float uTime,uBeat,uLight,uWarp,uBody,uFeather,uSpread,uFog,uRibbon,uVolume,uRim,uWidth;
+uniform vec3 uC0,uC1,uC2,uC3;
+float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+float noise(vec2 p){vec2 i=floor(p),f=fract(p);vec2 u=f*f*(3.-2.*f);
+  return mix(mix(hash(i),hash(i+vec2(1.,0.)),u.x),mix(hash(i+vec2(0.,1.)),hash(i+vec2(1.,1.)),u.x),u.y);}
+float fbm(vec2 p){return (noise(p)*.5+noise(p*2.03+vec2(1.7,9.2))*.25)/.75;}
+float band(vec2 q,float t,float amp,float fr,float sp,float ph,float th,float w){
+  float x=q.x;
+  float env=pow(clamp(1.-x*x*mix(1.,.85,w),0.,1.),mix(1.35,.7,w));
+  float y0=env*(amp*sin(fr*x+t*sp+ph)+amp*mix(.38,.45,w)*sin(fr*mix(2.1,1.9,w)*x-t*sp*1.35+ph*1.7));
+  float h=th*mix(1.,1.25,w)*(.6+.4*sin(1.3*x+t*.75+ph))*mix(env,.45+.55*env,w)+mix(.012,.02,w);
+  float d=(q.y-y0)/h;
+  float crest=exp(-d*d*mix(1.5,1.15,w));
+  float under=q.y<y0?exp((q.y-y0)/(h*3.2+.03))*mix(.42,.32,w):exp(-(q.y-y0)/(h*1.4))*.1*w;
+  return (crest+under)*mix(env,.35+.65*env,w);
+}
+void main(){
+  vec2 p=(vUv*2.-1.)*${SCALE.toFixed(2)};
+  float t=uTime;
+  float r=length(p);
+  vec2 q=p*(1.+.22*min(r,1.)*min(r,1.));
+  vec2 wv=vec2(fbm(q*.85+vec2(t*.16,-t*.1)),fbm(q*.85+vec2(-t*.12,t*.14)+4.));
+  q+=(wv-.5)*.42*uWarp;
+  vec2 qb=vec2(q.x*uWidth,q.y);
+  float e=.75+.3*uBeat;
+  float amp=mix(.24,.26,uWarp)*e;
+  vec3 L=uC0*band(qb,t,amp,2.3,.85,0.,.15,uWarp)
+        +uC1*band(qb,t,amp*.85,2.9,-.7,1.9,.13,uWarp)
+        +uC2*band(qb,t,amp*1.1,1.9,.52,3.7,.11,uWarp)
+        +uC3*band(qb,t,amp*.65,3.4,1.05,5.2,.075,uWarp)*.7;
+  L*=uRibbon;
+  // drifting colour clouds
+  vec3 F=vec3(0.);
+  for(int k=0;k<3;k++){float fk=float(k);
+    vec2 c=vec2(.42*sin(t*.29+fk*2.1),.26*cos(t*.25+fk*1.7)-.04);
+    vec3 ck=k==0?uC0:(k==1?uC1:uC2);
+    F+=ck*exp(-dot(q-c,q-c)*mix(2.2,1.3,step(.3,uFog)));}
+  L+=F*uFog;
+  float lum=dot(L,vec3(.3333));
+  L+=vec3(1.)*smoothstep(1.15,2.6,lum)*.55*uRibbon;
+  L*=.78+.36*uBeat;
+  // soft spherical mask: no hard rim, it dissolves
+  float m=1.-smoothstep(1.-uFeather*.55,1.+uFeather,r);
+  vec3 tint=(uC0+uC1+uC2)*.3333;
+  // the sphere exists only as light: a luminous volume and a soft coloured edge glow, no outline
+  float ang=atan(p.y,p.x);
+  vec3 spectral=.55+.45*cos(6.2831*(vec3(0.,.33,.67)+ang*.32+t*.03));
+  float side=exp(-pow(p.y*2.2,2.));
+  float vol=pow(clamp(1.-r/(1.+uFeather*.35),0.,1.),1.15)*(.75-.25*p.y);
+  L+=mix(tint,vec3(1.),.15)*vol*uVolume;
+  L+=mix(spectral,tint,.4)*exp(-pow((r-.96)/.11,2.))*uRim*(.35+.65*side)*(.8+.4*uBeat);
+  // the glow that leaks into the screen
+  float glow=exp(-pow(max(r-.15,0.)/uSpread,1.6))*(1.-smoothstep(${(SCALE*.78).toFixed(2)},${SCALE.toFixed(2)},r));
+  float gA=glow*mix(.30,.22,uLight)*(.7+.5*uBeat);
+  vec3 light=L*m;
+  float lA=clamp(max(max(light.r,light.g),light.b),0.,1.);
+  if(uLight>.5){ light*=1.05; lA=clamp(lA*1.1,0.,1.); }
+  // premultiplied: light over glow
+  vec3 col=light+tint*gA*(1.-lA);
+  float a=lA+gA*(1.-lA);
+  gl_FragColor=vec4(min(col,vec3(1.)),clamp(a,0.,1.));
+}`;
+const MAX=800;
+const glc=document.createElement('canvas');glc.width=glc.height=MAX;
+const gl=glc.getContext('webgl',{premultipliedAlpha:true,preserveDrawingBuffer:true,alpha:true,antialias:false});
+const U={};
+if(gl){
+  const sh=(type,src)=>{const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(s));return s};
+  const prog=gl.createProgram();gl.attachShader(prog,sh(gl.VERTEX_SHADER,VS));gl.attachShader(prog,sh(gl.FRAGMENT_SHADER,FS));gl.linkProgram(prog);gl.useProgram(prog);
+  const buf=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buf);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,1,-1,-1,1,1,1]),gl.STATIC_DRAW);
+  const loc=gl.getAttribLocation(prog,'a');gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,2,gl.FLOAT,false,0,0);
+  ['uRes','uTime','uBeat','uLight','uWarp','uBody','uFeather','uSpread','uFog','uRibbon','uVolume','uRim','uWidth','uC0','uC1','uC2','uC3'].forEach(n=>U[n]=gl.getUniformLocation(prog,n));
+}
+const rgb=h=>{const n=parseInt(h.slice(1),16);return [(n>>16&255)/255,(n>>8&255)/255,(n&255)/255]};
+const PAL={dark:['#2FD4FF','#2EF2A0','#7B6CFF','#FFB25B'].map(rgb),light:['#0FA8E0','#0FCB86','#6A5BF0','#F59A3A'].map(rgb)};
+const orbs=[...document.querySelectorAll('.orbslot')].map((el,i)=>{
+  const v=V.find(x=>x.id===el.dataset.variant),light=el.dataset.theme==='light';
+  const dpr=Math.min(2,window.devicePixelRatio||1),px=Math.min(MAX,Math.round(212*SCALE*dpr));
+  const c=document.createElement('canvas');c.width=c.height=px;el.appendChild(c);
+  return {el,c,ctx:c.getContext('2d'),px,v,light,pal:light?PAL.light:PAL.dark,off:i*.21};
+});
+const PERIOD=60/52;
+function beat(t){const ph=((t%PERIOD)+PERIOD)%PERIOD;const g=(x,c,w)=>Math.exp(-Math.pow((x-c)/w,2));return Math.min(1,g(ph,0,.07)+g(ph,PERIOD,.07)+.55*g(ph,.3,.08))}
+function render(o,t){
+  if(!gl)return;
+  const w=o.px,v=o.v,b=beat(t);
+  gl.viewport(0,0,w,w);gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT);
+  gl.uniform2f(U.uRes,w,w);gl.uniform1f(U.uTime,t+o.off*7);gl.uniform1f(U.uBeat,b);gl.uniform1f(U.uLight,o.light?1:0);
+  gl.uniform1f(U.uWarp,v.warp);gl.uniform1f(U.uBody,v.body);gl.uniform1f(U.uFeather,v.feather);gl.uniform1f(U.uSpread,v.spread);gl.uniform1f(U.uFog,v.fog);gl.uniform1f(U.uRibbon,v.ribbon);gl.uniform1f(U.uVolume,v.volume);gl.uniform1f(U.uRim,v.rim);gl.uniform1f(U.uWidth,v.width);
+  gl.uniform3fv(U.uC0,o.pal[0]);gl.uniform3fv(U.uC1,o.pal[1]);gl.uniform3fv(U.uC2,o.pal[2]);gl.uniform3fv(U.uC3,o.pal[3]);
+  gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
+  o.ctx.clearRect(0,0,w,w);o.ctx.drawImage(glc,0,MAX-w,w,w,0,0,w,w);
+}
+const vis=new Set();
+const io=new IntersectionObserver(es=>es.forEach(e=>{const o=orbs.find(x=>x.el===e.target);if(e.isIntersecting)vis.add(o);else vis.delete(o)}),{rootMargin:'120px'});
+orbs.forEach(o=>{io.observe(o.el);render(o,2.2)});
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){let last=0;const loop=ts=>{if(ts-last>30){last=ts;vis.forEach(o=>render(o,ts/1000))}requestAnimationFrame(loop)};requestAnimationFrame(loop)}
+</script>
