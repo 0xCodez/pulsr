@@ -29,11 +29,9 @@ final class MetricsStore {
 
     private var rawDays: [RawDay] = []
     private let historyDays: Int
-    private let detailedDays: Int
 
-    init(historyDays: Int = 60, detailedDays: Int = 14) {
+    init(historyDays: Int = 60) {
         self.historyDays = historyDays
-        self.detailedDays = detailedDays
         profile = UserProfile.load()
         let defaultSource: Source = HealthKitSource.isAvailable ? .health : .demo
         source = Source(rawValue: UserDefaults.standard.string(forKey: "pulsr.source") ?? "") ?? defaultSource
@@ -73,7 +71,7 @@ final class MetricsStore {
         isLoading = true
         defer { isLoading = false }
         do {
-            rawDays = try await dataSource.loadDays(count: historyDays, detailedDays: detailedDays)
+            rawDays = try await dataSource.loadDays(count: historyDays)
             errorMessage = nil
             rescore()
             selectedIndex = max(days.count - 1, 0)

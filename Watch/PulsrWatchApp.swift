@@ -2,7 +2,7 @@ import SwiftUI
 
 @main
 struct PulsrWatchApp: App {
-    @State private var store = MetricsStore(historyDays: 30, detailedDays: 2)
+    @State private var store = MetricsStore(historyDays: 30)
     @Environment(\.scenePhase) private var scenePhase
 
     var body: some Scene {
