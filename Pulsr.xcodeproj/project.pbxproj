@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		01C052FFFD704EB44AC8728B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D1911B3838185E5D08DA5386 /* Assets.xcassets */; };
 		1D9692AE9530EB9BCA19543D /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4700BD87A91928C4BF2B2CEB /* Theme.swift */; };
+		79AE0683EFE3E75349D4E807 /* Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18CEDC5896E7C3CB6C5E1C9 /* Formatting.swift */; };
+		13674421FDC4511682FE92E1 /* Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = A18CEDC5896E7C3CB6C5E1C9 /* Formatting.swift */; };
 		1E1E60A603DEFFAE6F501338 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 961D76E3941776B8625A7A28 /* Assets.xcassets */; };
 		21451346808F8BDFBA2DE29C /* PulsrWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC325946F69CF79A78C5042C /* PulsrWatchApp.swift */; };
 		24F19C74B7DE8DB14833A2A7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F58D092DB15B2013AC96B6 /* SettingsView.swift */; };
@@ -29,6 +31,8 @@
 		8EE319E0AAFDAE49A54ABDA9 /* HaloOrb.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5C612607AED358BA04C90CE /* HaloOrb.swift */; };
 		944B892B55F2D20D5BEC6F15 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9993480CBB0283542FD7E9 /* OnboardingView.swift */; };
 		A39690B3AEE0487675A2B4B0 /* Insights.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EF541C71B18425D3D82E04A /* Insights.swift */; };
+		D1298F7876F8048184C5A957 /* HealthMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5323A11EE32C4805FC2F9BFC /* HealthMonitor.swift */; };
+		B9EBF042125C693F8CB81708 /* HealthMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5323A11EE32C4805FC2F9BFC /* HealthMonitor.swift */; };
 		A79A8B95D44BA43F86A3F7EB /* MetricsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98A386BB46328CE80A5C343 /* MetricsStore.swift */; };
 		A807E8DE7994361BC7D9AE3F /* HealthKitSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FA7E55E304445EB5230359D /* HealthKitSource.swift */; };
 		A826FC2B7A8D6A847001D37F /* TrendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8ACC48FCDD47F5FA1A38D8 /* TrendsView.swift */; };
@@ -73,6 +77,7 @@
 		21363E0B3FF9BE85ADA3C69A /* ScoreEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreEngine.swift; sourceTree = "<group>"; };
 		29BF4C72A80BF1E4BB2157E6 /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
 		4700BD87A91928C4BF2B2CEB /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		A18CEDC5896E7C3CB6C5E1C9 /* Formatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatting.swift; sourceTree = "<group>"; };
 		49089BEB42391EDA3F288D42 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
 		4F0338D6E02163BA411643B5 /* JournalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalView.swift; sourceTree = "<group>"; };
 		50BCEBC1477E3FFF25136146 /* CoachView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachView.swift; sourceTree = "<group>"; };
@@ -80,6 +85,7 @@
 		61F90C0A3BF83A9CBDB72A37 /* PulsrWatch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PulsrWatch.entitlements; sourceTree = "<group>"; };
 		6F6936143473B00E29F9FDC9 /* Orb.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = Orb.metal; sourceTree = "<group>"; };
 		7EF541C71B18425D3D82E04A /* Insights.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Insights.swift; sourceTree = "<group>"; };
+		5323A11EE32C4805FC2F9BFC /* HealthMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthMonitor.swift; sourceTree = "<group>"; };
 		961D76E3941776B8625A7A28 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9C9993480CBB0283542FD7E9 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		A98A386BB46328CE80A5C343 /* MetricsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsStore.swift; sourceTree = "<group>"; };
@@ -153,10 +159,12 @@
 				E5C612607AED358BA04C90CE /* HaloOrb.swift */,
 				5FA7E55E304445EB5230359D /* HealthKitSource.swift */,
 				7EF541C71B18425D3D82E04A /* Insights.swift */,
+				5323A11EE32C4805FC2F9BFC /* HealthMonitor.swift */,
 				A98A386BB46328CE80A5C343 /* MetricsStore.swift */,
 				FECFE6D85D8B7AB7576B31BB /* Models.swift */,
 				21363E0B3FF9BE85ADA3C69A /* ScoreEngine.swift */,
 				4700BD87A91928C4BF2B2CEB /* Theme.swift */,
+				A18CEDC5896E7C3CB6C5E1C9 /* Formatting.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -304,11 +312,13 @@
 				8EE319E0AAFDAE49A54ABDA9 /* HaloOrb.swift in Sources */,
 				5B9F03DD73CE419FE7B903F1 /* HealthKitSource.swift in Sources */,
 				A39690B3AEE0487675A2B4B0 /* Insights.swift in Sources */,
+				B9EBF042125C693F8CB81708 /* HealthMonitor.swift in Sources */,
 				A79A8B95D44BA43F86A3F7EB /* MetricsStore.swift in Sources */,
 				DF9F4E5CAD7E461050601174 /* Models.swift in Sources */,
 				21451346808F8BDFBA2DE29C /* PulsrWatchApp.swift in Sources */,
 				C6BE53F20C494CD62AB3B346 /* ScoreEngine.swift in Sources */,
 				1D9692AE9530EB9BCA19543D /* Theme.swift in Sources */,
+				13674421FDC4511682FE92E1 /* Formatting.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,6 +333,7 @@
 				46029FA734BB010E9FC5C210 /* HaloOrb.swift in Sources */,
 				A807E8DE7994361BC7D9AE3F /* HealthKitSource.swift in Sources */,
 				F151EF89CA6EB8B848038847 /* Insights.swift in Sources */,
+				D1298F7876F8048184C5A957 /* HealthMonitor.swift in Sources */,
 				3925149408481006B379EC10 /* JournalView.swift in Sources */,
 				4F76F6CD23B1F2680A019FCE /* MetricsStore.swift in Sources */,
 				567ED6A19F59B6DBFF4866D7 /* Models.swift in Sources */,
@@ -333,6 +344,7 @@
 				24F19C74B7DE8DB14833A2A7 /* SettingsView.swift in Sources */,
 				F725C5533C1952A88AF39690 /* StressAndBodyAgeViews.swift in Sources */,
 				541B568689164783DF7E47DC /* Theme.swift in Sources */,
+				79AE0683EFE3E75349D4E807 /* Formatting.swift in Sources */,
 				8497B7A61EAF95F99481BA5D /* TodayView.swift in Sources */,
 				A826FC2B7A8D6A847001D37F /* TrendsView.swift in Sources */,
 			);

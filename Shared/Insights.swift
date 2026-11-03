@@ -43,7 +43,8 @@ enum Insights {
     }
 
     static func strainSummary(_ d: DayScores) -> String {
-        switch d.strain {
+        guard let strain = d.strain else { return "No heart-rate measurements for this day. Strain is unavailable." }
+        return switch strain {
         case ..<10: "Strain under 10 is light — good for active recovery days."
         case ..<14: "Strain between 10 and 14 is moderate, building fitness while leaving room to recover."
         case ..<18: "Strain between 14 and 17.9 is strenuous — your cardiovascular system has been working hard."
@@ -76,10 +77,10 @@ enum Insights {
         if let hrv = d.raw.hrv, let base = hrvBaselineValue(d) { lines.append("HRV \(Int(hrv)) ms (baseline \(Int(base)) ms).") }
         if let rhr = d.raw.restingHR { lines.append("Resting HR \(Int(rhr)) bpm.") }
         if let s = d.raw.sleep { lines.append("Slept \(s.asleep.hoursMinutes) h, sleep performance \(Int(d.sleepPerformance ?? 0))%, need \(d.sleepNeed.hoursMinutes) h.") }
-        lines.append("Strain so far today: \(d.strain.oneDecimal) of 21.")
+        lines.append("Strain so far today: \(d.strain?.oneDecimal ?? "unavailable") of 21.")
         let week = days.suffix(7)
         lines.append("Last 7 days recovery: " + week.map { $0.recovery.map { "\(Int($0))" } ?? "-" }.joined(separator: ", ") + ".")
-        lines.append("Last 7 days strain: " + week.map { $0.strain.oneDecimal }.joined(separator: ", ") + ".")
+        lines.append("Last 7 days strain: " + week.map { $0.strain?.oneDecimal ?? "unavailable" }.joined(separator: ", ") + ".")
         for w in d.raw.workouts { lines.append("Workout today: \(w.name), \(Int(w.duration / 60)) min.") }
         if let vo2 = d.raw.vo2Max { lines.append("VO2 max \(vo2.oneDecimal).") }
         if let bodyAge { lines.append("Estimated body age \(bodyAge.bodyAge.oneDecimal) vs real age \(Int(bodyAge.chronological)).") }

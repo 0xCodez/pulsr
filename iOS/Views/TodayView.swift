@@ -99,7 +99,7 @@ struct TodayView: View {
                                       value: d.sleepPerformance.map { "\($0.percent)%" } ?? "–", title: "Sleep")
                     }
                     NavigationLink(value: Route.strain) {
-                        MetricCapsule(progress: d.strain / 21, color: Theme.strain[0], value: d.strain.oneDecimal, title: "Strain")
+                        MetricCapsule(progress: (d.strain ?? 0) / 21, color: Theme.strain[0], value: d.strain?.oneDecimal ?? "–", title: "Strain")
                     }
                 }
             }
@@ -130,7 +130,9 @@ struct TodayView: View {
 
     private func monitors(_ d: DayScores) -> some View {
         let health = HealthMonitor.metrics(for: d)
-        let inRange = health.filter(\.inRange).count
+        let inRange = health.filter { $0.inRange == true }.count
+        let healthStatus = HealthMonitor.status(for: health)
+        let healthColor: Color = healthStatus == .withinRange ? Theme.green : healthStatus == .outOfRange ? Theme.yellow : .secondary
         let stress = d.latestStress
         return HStack(spacing: 12) {
             NavigationLink(value: Route.healthMonitor) {
@@ -138,14 +140,14 @@ struct TodayView: View {
                     VStack(alignment: .leading, spacing: 12) {
                         HStack { Eyebrow(text: "Health Monitor"); Spacer(); Image(systemName: "chevron.right").font(.caption).foregroundStyle(.secondary) }
                         HStack(spacing: 10) {
-                            Image(systemName: inRange == health.count ? "checkmark" : "exclamationmark")
+                            Image(systemName: healthStatus == .withinRange ? "checkmark" : healthStatus == .outOfRange ? "exclamationmark" : "minus")
                                 .font(.caption.weight(.bold))
                                 .frame(width: 26, height: 26)
-                                .background((inRange == health.count ? Theme.green : Theme.yellow).opacity(0.25), in: .rect(cornerRadius: 7))
+                                .background(healthColor.opacity(0.25), in: .rect(cornerRadius: 7))
                             VStack(alignment: .leading, spacing: 2) {
-                                Text(inRange == health.count ? "WITHIN RANGE" : "OUT OF RANGE")
+                                Text(healthStatus.rawValue)
                                     .font(.caption.weight(.bold)).tracking(0.8)
-                                    .foregroundStyle(inRange == health.count ? Theme.green : Theme.yellow)
+                                    .foregroundStyle(healthColor)
                                 Text("\(inRange)/\(health.count) metrics").font(.caption).foregroundStyle(.secondary)
                             }
                         }
@@ -187,7 +189,7 @@ struct TodayView: View {
                 }
                 ForEach(d.raw.workouts) { w in
                     NavigationLink(value: Route.strain) {
-                        ActivityRow(symbol: w.symbol, tint: Theme.strain[0], badge: (d.workoutStrain[w.id] ?? 0).oneDecimal, title: w.name,
+                        ActivityRow(symbol: w.symbol, tint: Theme.strain[0], badge: d.workoutStrain[w.id]?.oneDecimal ?? "–", title: w.name,
                                     detail: "\(w.start.shortTime) · \(Int(w.duration / 60)) min")
                     }
                 }
@@ -345,49 +347,6 @@ struct ActivityRow: View {
     }
 }
 
-/// Health Monitor: overnight vitals compared to your own normal range.
-enum HealthMonitor {
-    struct Metric: Identifiable {
-        var id: String { name }
-        var name: String
-        var symbol: String
-        var value: String
-        var range: String
-        var inRange: Bool
-    }
-
-    static func metrics(for d: DayScores) -> [Metric] {
-        var out: [Metric] = []
-        func add(_ name: String, _ symbol: String, _ value: Double?, _ base: Baseline?, _ format: (Double) -> String) {
-            guard let value else { return }
-            if let base {
-                let lo = base.mean - 2 * base.sd, hi = base.mean + 2 * base.sd
-                out.append(Metric(name: name, symbol: symbol, value: format(value), range: "\(format(lo))–\(format(hi))", inRange: (lo...hi).contains(value)))
-            } else {
-                out.append(Metric(name: name, symbol: symbol, value: format(value), range: "learning", inRange: true))
-            }
-        }
-        if let hrv = d.raw.hrv, let b = d.hrvBaseline {
-            let lo = exp(b.mean - 2 * b.sd), hi = exp(b.mean + 2 * b.sd)
-            out.append(Metric(name: "Heart Rate Variability", symbol: "waveform.path.ecg", value: "\(Int(hrv)) ms", range: "\(Int(lo))–\(Int(hi))", inRange: (lo...hi).contains(hrv)))
-        }
-        add("Resting Heart Rate", "heart", d.raw.restingHR, d.rhrBaseline) { "\(Int($0.rounded()))" }
-        add("Respiratory Rate", "lungs", d.raw.respiratoryRate, d.respBaseline) { $0.oneDecimal }
-        if let spo2 = d.raw.spo2 {
-            out.append(Metric(name: "Blood Oxygen", symbol: "drop", value: "\(Int(spo2 * 100))%", range: "95–100%", inRange: spo2 >= 0.94))
-        }
-        if let temp = d.raw.wristTemperature {
-            if let b = d.tempBaseline {
-                let delta = temp - b.mean
-                out.append(Metric(name: "Skin Temperature", symbol: "thermometer.medium", value: String(format: "%+.1f°", delta), range: "±0.5°", inRange: abs(delta) <= 0.5))
-            } else {
-                out.append(Metric(name: "Skin Temperature", symbol: "thermometer.medium", value: String(format: "%.1f°", temp), range: "learning", inRange: true))
-            }
-        }
-        return out
-    }
-}
-
 struct HealthMonitorView: View {
     @Environment(MetricsStore.self) private var store
 
@@ -406,11 +365,15 @@ struct HealthMonitorView: View {
                                 }
                                 Spacer()
                                 Text(m.value).font(.system(.title3, design: .rounded).weight(.semibold))
-                                Image(systemName: m.inRange ? "checkmark.circle.fill" : "exclamationmark.circle.fill")
-                                    .foregroundStyle(m.inRange ? Theme.green : Theme.yellow)
+                                Image(systemName: m.inRange == nil ? "clock" : m.inRange == true ? "checkmark.circle.fill" : "exclamationmark.circle.fill")
+                                    .foregroundStyle(m.inRange == nil ? Color.secondary : m.inRange == true ? Theme.green : Theme.yellow)
                             }
                             .padding(.vertical, 12)
                             if m.id != metrics.last?.id { Divider().opacity(0.4) }
+                        }
+                        if metrics.isEmpty {
+                            Text("No overnight measurements available. Check Health permissions and wear your watch to sleep.")
+                                .foregroundStyle(.secondary)
                         }
                     }
                 }

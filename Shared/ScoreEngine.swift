@@ -87,13 +87,16 @@ enum ScoreEngine {
     // MARK: Strain (0–21)
 
     struct StrainResult {
-        var strain: Double
+        var strain: Double?
         var zoneMinutes: [Double]
         var perWorkout: [UUID: Double]
     }
 
     /// Banister TRIMP accumulated per minute, mapped onto a 0–21 logarithmic scale.
     static func strain(heartRate: [HeartRatePoint], restingHR: Double, profile: UserProfile, workouts: [WorkoutSummary]) -> StrainResult {
+        guard !heartRate.isEmpty else {
+            return StrainResult(strain: nil, zoneMinutes: Array(repeating: 0, count: 6), perWorkout: [:])
+        }
         let minutes = fillGaps(heartRate)
         let maxHR = profile.maxHeartRate
         let (a, b) = profile.sex == .female ? (0.86, 1.67) : (0.64, 1.92)
@@ -105,8 +108,7 @@ enum ScoreEngine {
             let zone = zoneIndex(bpm: p.bpm, maxHR: maxHR)
             zones[zone] += 1
             let hrr = ((p.bpm - restingHR) / (maxHR - restingHR)).clamped(0, 1)
-            guard hrr >= 0.25 else { continue }   // sitting and light movement count as rest
-            let load = hrr * a * exp(b * hrr)
+            let load = hrr >= 0.25 ? hrr * a * exp(b * hrr) : 0 // measured rest has zero load
             trimp += load
             if let w = workouts.first(where: { $0.start <= p.date && p.date <= $0.end }) {
                 perWorkoutTrimp[w.id, default: 0] += load
@@ -226,7 +228,6 @@ enum ScoreEngine {
 
     static func bodyAge(days: [DayScores], profile: UserProfile) -> BodyAgeResult? {
         let recent = days.suffix(30)
-        guard recent.count >= 7 else { return nil }
         let age = Double(profile.age)
         var factors: [BodyAgeFactor] = []
 
@@ -235,31 +236,39 @@ enum ScoreEngine {
             factors.append(.init(name: "VO₂ Max", value: String(format: "%.1f", vo2), years: (-(vo2 - norm) * 0.45).clamped(-6, 6)))
         }
         let rhrs = recent.compactMap(\.raw.restingHR)
-        if !rhrs.isEmpty {
+        if rhrs.count >= 7 {
             let rhr = rhrs.reduce(0, +) / Double(rhrs.count)
             factors.append(.init(name: "Resting Heart Rate", value: "\(Int(rhr.rounded())) bpm", years: ((rhr - 62) * 0.15).clamped(-3, 4)))
         }
         let hrvs = recent.compactMap(\.raw.hrv)
-        if !hrvs.isEmpty {
+        if hrvs.count >= 7 {
             let hrv = hrvs.reduce(0, +) / Double(hrvs.count)
             let norm = max(55 - 0.6 * (age - 20), 20)
             factors.append(.init(name: "Heart Rate Variability", value: "\(Int(hrv.rounded())) ms", years: (-(hrv - norm) * 0.06).clamped(-3, 3)))
         }
         let sleeps = recent.compactMap { $0.raw.sleep?.asleep }.map { $0 / 3600 }
-        if !sleeps.isEmpty {
+        if sleeps.count >= 7 {
             let avg = sleeps.reduce(0, +) / Double(sleeps.count)
             factors.append(.init(name: "Sleep Duration", value: String(format: "%.1f h", avg), years: avg < 7 ? (7 - avg) * 1.2 : -0.5))
         }
         let consistency = recent.compactMap(\.sleepConsistency)
-        if !consistency.isEmpty {
+        if consistency.count >= 7 {
             let c = consistency.reduce(0, +) / Double(consistency.count)
             factors.append(.init(name: "Sleep Consistency", value: "\(Int(c * 100)) %", years: (0.8 - c) * 4))
         }
-        let steps = recent.map(\.raw.steps)
-        let avgSteps = steps.reduce(0, +) / Double(steps.count)
-        factors.append(.init(name: "Daily Steps", value: avgSteps.formatted(.number.precision(.fractionLength(0))), years: (-(avgSteps - 7000) / 1000 * 0.25).clamped(-1.5, 2)))
-        let zone2 = recent.map { $0.zoneMinutes[2...3].reduce(0, +) }.reduce(0, +) / Double(recent.count) * 7
-        factors.append(.init(name: "Zone 2–3 per week", value: "\(Int(zone2)) min", years: (-(zone2 - 150) / 60 * 0.4).clamped(-2, 2)))
+        let steps = recent.compactMap(\.raw.steps)
+        if steps.count >= 7 {
+            let avgSteps = steps.reduce(0, +) / Double(steps.count)
+            factors.append(.init(name: "Daily Steps", value: avgSteps.formatted(.number.precision(.fractionLength(0))), years: (-(avgSteps - 7000) / 1000 * 0.25).clamped(-1.5, 2)))
+        }
+        let activityDays = recent.filter { $0.strain != nil }
+        if activityDays.count >= 7 {
+            let zone2 = activityDays.map { $0.zoneMinutes[2...3].reduce(0, +) }.reduce(0, +) / Double(activityDays.count) * 7
+            factors.append(.init(name: "Zone 2–3 per week", value: "\(Int(zone2)) min", years: (-(zone2 - 150) / 60 * 0.4).clamped(-2, 2)))
+        }
+
+        // A carried-forward VO₂ value or empty calendar rows do not constitute a week of data.
+        guard factors.contains(where: { $0.name != "VO₂ Max" }) else { return nil }
 
         let delta = factors.map(\.years).reduce(0, +).clamped(-12, 12)
         return BodyAgeResult(chronological: age, bodyAge: age + delta, factors: factors.sorted { $0.years < $1.years })

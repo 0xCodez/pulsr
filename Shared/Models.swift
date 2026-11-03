@@ -79,8 +79,8 @@ struct RawDay: Hashable {
     var wristTemperature: Double?     // °C, absolute sleeping wrist temperature
     var spo2: Double?                 // 0...1
     var heartRate: [HeartRatePoint] = []  // ~1 per minute; only loaded for recent days
-    var steps: Double = 0
-    var activeEnergy: Double = 0      // kcal
+    var steps: Double?               // nil = no measurement, 0 = measured zero
+    var activeEnergy: Double?        // kcal; nil = no measurement
     var workouts: [WorkoutSummary] = []
     var vo2Max: Double?               // ml/kg/min, latest known value
 }
@@ -135,7 +135,7 @@ struct DayScores: Hashable, Identifiable {
     var sleepEfficiency: Double?
 
     // Strain
-    var strain: Double = 0
+    var strain: Double?              // nil = no heart-rate measurements
     var zoneMinutes: [Double] = Array(repeating: 0, count: 6)   // index 0 = below zone 1
     var strengthMinutes: Double = 0
     var workoutStrain: [UUID: Double] = [:]
