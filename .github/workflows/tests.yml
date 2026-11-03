@@ -1,0 +1,11 @@
+name: Tests
+on: [push, pull_request]
+jobs:
+  core:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test scoring and data processing
+        run: sh Tests/run.sh
+      - name: Parse app sources
+        run: swiftc -frontend -parse Shared/*.swift iOS/*.swift iOS/Views/*.swift Watch/*.swift

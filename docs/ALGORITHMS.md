@@ -16,6 +16,8 @@ All formulas live in [`Shared/ScoreEngine.swift`](../Shared/ScoreEngine.swift). 
 
 A night belongs to the day you woke up (sleep samples starting between 15:00 the previous day and 15:00). If several sources recorded the same night, the one with the most staged sleep wins. Nights under 2 h are treated as naps and ignored.
 
+Sleep intervals are normalized before durations or scores are calculated: duplicate and overlapping samples count each instant once. Awake overrides sleep; specific stages override generic asleep records. Conflicting specific stages use a fixed priority (deep, REM, core), independently of input order. Adjacent intervals of the same stage merge; invalid intervals are discarded and gaps are not counted as sleep.
+
 ## Baselines
 
 For each day, the previous 30 days form the baseline (mean and SD). While there are few nights, the baseline is shrunk toward a population prior with a weight of 4 nights:

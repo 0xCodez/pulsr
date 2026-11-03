@@ -32,7 +32,7 @@ enum ScoreEngine {
             if let sleep = raw.sleep {
                 let priorSleeps = history.suffix(4).compactMap(\.sleep)
                 s.hoursVsNeeded = min(1, sleep.asleep / s.sleepNeed)
-                s.sleepEfficiency = sleep.inBed > 0 ? sleep.asleep / sleep.inBed : nil
+                s.sleepEfficiency = sleep.inBed > 0 ? (sleep.asleep / sleep.inBed).clamped(0, 1) : nil
                 s.sleepConsistency = consistency(sleep, previous: priorSleeps)
                 s.sleepPerformance = 100 * (0.6 * (s.hoursVsNeeded ?? 0)
                                             + 0.2 * (s.sleepConsistency ?? 0.7)
