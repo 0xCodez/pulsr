@@ -8,15 +8,15 @@ final class DemoSource: HealthDataSource {
     func requestAuthorization() async throws {}
     func profileHints() -> (age: Int?, sex: Sex?) { (31, .male) }
 
-    func loadDays(count: Int, detailedDays: Int) async throws -> [RawDay] {
+    func loadDays(count: Int) async throws -> [RawDay] {
         let today = cal.startOfDay(for: .now)
         return (0..<count).map { i in
             let day = cal.date(byAdding: .day, value: i - count + 1, to: today)!
-            return makeDay(day, detailed: i >= count - detailedDays, isToday: day == today)
+            return makeDay(day, isToday: day == today)
         }
     }
 
-    private func makeDay(_ day: Date, detailed: Bool, isToday: Bool) -> RawDay {
+    private func makeDay(_ day: Date, isToday: Bool) -> RawDay {
         var rng = SeededRandom(seed: UInt64(day.timeIntervalSinceReferenceDate / 86400))
         let weekday = cal.component(.weekday, from: day)
         let fitnessTrend = Double(cal.ordinality(of: .day, in: .era, for: day) ?? 0).truncatingRemainder(dividingBy: 60) / 60
@@ -60,9 +60,7 @@ final class DemoSource: HealthDataSource {
         }
         raw.workouts = workouts.filter { $0.start.timeIntervalSince(day) / 60 < Double(currentMinute) }
 
-        if detailed {
-            raw.heartRate = makeHeartRate(day: day, sleep: sleep, wake: wake, rhr: raw.restingHR ?? 55, workouts: raw.workouts, upTo: currentMinute, rng: &rng)
-        }
+        raw.heartRate = makeHeartRate(day: day, sleep: sleep, wake: wake, rhr: raw.restingHR ?? 55, workouts: raw.workouts, upTo: currentMinute, rng: &rng)
         if isToday {
             raw.steps *= Double(currentMinute) / 1440
             raw.activeEnergy *= Double(currentMinute) / 1440

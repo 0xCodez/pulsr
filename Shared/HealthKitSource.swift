@@ -1,13 +1,6 @@
 import Foundation
 import HealthKit
 
-protocol HealthDataSource {
-    func requestAuthorization() async throws
-    /// Returns `count` days ending today, oldest first. Only the last `detailedDays` include minute heart rate.
-    func loadDays(count: Int, detailedDays: Int) async throws -> [RawDay]
-    func profileHints() -> (age: Int?, sex: Sex?)
-}
-
 /// Reads everything your Apple Watch writes to Apple Health. Nothing is ever written back.
 final class HealthKitSource: HealthDataSource {
     private let store = HKHealthStore()
@@ -47,7 +40,7 @@ final class HealthKitSource: HealthDataSource {
         return (age, sex)
     }
 
-    func loadDays(count: Int, detailedDays: Int) async throws -> [RawDay] {
+    func loadDays(count: Int) async throws -> [RawDay] {
         let today = cal.startOfDay(for: .now)
         let first = cal.date(byAdding: .day, value: -(count - 1), to: today)!
         let end = cal.date(byAdding: .day, value: 1, to: today)!
@@ -63,8 +56,7 @@ final class HealthKitSource: HealthDataSource {
         async let steps = dailySums(.stepCount, from: first, to: end, unit: .count())
         async let energy = dailySums(.activeEnergyBurned, from: first, to: end, unit: .kilocalorie())
         async let workouts = workoutSamples(from: first, to: end)
-        let detailStart = cal.date(byAdding: .day, value: -(detailedDays - 1), to: today)!
-        async let heartRate = minuteHeartRate(from: detailStart, to: end)
+        async let heartRate = minuteHeartRate(from: first, to: end)
 
         let nights = groupSleep(try await sleepSamples)
         let hrvAll = try await hrv, respAll = try await resp, tempAll = try await temp, spo2All = try await spo2
