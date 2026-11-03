@@ -35,7 +35,35 @@ struct SleepSegment: Hashable, Identifiable {
 }
 
 struct SleepSession: Hashable {
-    var segments: [SleepSegment]
+    let segments: [SleepSegment]
+
+    /// Each instant contributes once. Awake takes precedence, then specific stages,
+    /// then generic asleep samples. Adjacent intervals of the same stage are merged.
+    init(segments: [SleepSegment]) {
+        let valid = segments.filter { $0.end > $0.start }
+        let boundaries = Set(valid.flatMap { [$0.start, $0.end] }).sorted()
+        func priority(_ stage: SleepStage) -> Int {
+            switch stage {
+            case .awake: return 5
+            case .deep: return 4
+            case .rem: return 3
+            case .core: return 2
+            case .asleep: return 1
+            }
+        }
+        var normalized: [SleepSegment] = []
+        for (start, end) in zip(boundaries, boundaries.dropFirst()) {
+            let stage = valid.filter { $0.start < end && $0.end > start }
+                .map(\.stage).max { priority($0) < priority($1) }
+            guard let stage else { continue }
+            if let last = normalized.last, last.stage == stage, last.end == start {
+                normalized[normalized.count - 1].end = end
+            } else {
+                normalized.append(SleepSegment(stage: stage, start: start, end: end))
+            }
+        }
+        self.segments = normalized
+    }
 
     var start: Date { segments.map(\.start).min() ?? .distantPast }
     var end: Date { segments.map(\.end).max() ?? .distantPast }
