@@ -87,8 +87,8 @@ final class HealthKitSource: HealthDataSource {
             raw.wristTemperature = tempAll.last { $0.date >= day.addingTimeInterval(-9 * 3600) && $0.date < next }?.value
             raw.restingHR = rhrAll.last { $0.date >= day && $0.date < next }?.value
             raw.vo2Max = vo2All.last { $0.date < next }?.value
-            raw.steps = stepsByDay[day] ?? 0
-            raw.activeEnergy = energyByDay[day] ?? 0
+            raw.steps = stepsByDay[day]
+            raw.activeEnergy = energyByDay[day]
             raw.workouts = workoutList.filter { $0.start >= day && $0.start < next }
             raw.heartRate = hrAll.filter { $0.date >= day && $0.date < next }
             days.append(raw)
@@ -125,7 +125,7 @@ final class HealthKitSource: HealthDataSource {
         let collection = try await descriptor.result(for: store)
         var out: [Date: Double] = [:]
         for s in collection.statistics() {
-            out[cal.startOfDay(for: s.startDate)] = s.sumQuantity()?.doubleValue(for: unit) ?? 0
+            out[cal.startOfDay(for: s.startDate)] = s.sumQuantity()?.doubleValue(for: unit)
         }
         return out
     }

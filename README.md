@@ -78,6 +78,7 @@ project.yml    XcodeGen spec (the .xcodeproj is generated from it and committed)
 ```
 
 Run with the `-demo` launch argument to see demo data in the Simulator.
+Run `sh Tests/run.sh` to check the platform-independent scoring and data-processing regressions. These checks also run in GitHub Actions and work with macOS Command Line Tools; they do not replace an iPhone/watch build in Xcode.
 
 If you add or move files, regenerate the project with [XcodeGen](https://github.com/yonaskolb/XcodeGen): `brew install xcodegen && xcodegen`.
 

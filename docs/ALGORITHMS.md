@@ -75,6 +75,8 @@ Outside workouts, every heart-rate sample becomes `3 · clamp((HR − RHR − 5)
 
 ## Body Age
 
+Empty calendar days do not count as measurements. Daily factors need at least 7 measured days in the last 30 days and are omitted when unavailable. Missing step or heart-rate data is excluded from averages rather than treated as zero. A carried-forward VO₂ max value alone is insufficient to produce Body Age.
+
 Starts at your age and adds years for each factor (each clamped):
 
 | Factor | Years |
@@ -88,6 +90,10 @@ Starts at your age and adds years for each factor (each clamped):
 | Zone 2–3 minutes / week | −0.4 per hour above 150 min |
 
 Total is capped at ±12 years. This is a motivational estimate, not a clinical biomarker.
+
+## Missing measurements
+
+A day without heart-rate measurements has no Strain score, is omitted from Strain averages, and has no chart bar. A measured resting day can still have zero Strain. Steps and active energy likewise distinguish unavailable data from measured zero. Health Monitor shows **No data** without vitals and **Learning** until a personal baseline has at least 7 measurements; neither state is classified as within range.
 
 ## Journal impact
 

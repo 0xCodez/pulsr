@@ -9,10 +9,13 @@ struct StressView: View {
     var body: some View {
         DetailScaffold(title: "Stress Monitor", accent: Theme.stress[1]) {
             if let d = store.selected {
-                let current = d.latestStress ?? 0
-                StressGauge(value: current, updated: d.stress.last?.date)
-                    .frame(height: 210)
-                    .padding(.top, 10)
+                if let current = d.latestStress {
+                    StressGauge(value: current, updated: d.stress.last?.date)
+                        .frame(height: 210)
+                        .padding(.top, 10)
+                } else {
+                    GlassCard { Text("No heart-rate measurements available to estimate stress.").foregroundStyle(.secondary) }
+                }
                 GlassCard {
                     VStack(alignment: .leading, spacing: 12) {
                         Eyebrow(text: "Through the day")
@@ -39,27 +42,29 @@ struct StressView: View {
                     }
                 }
                 InsightCallout(text: Insights.stressSummary(d))
-                GlassCard {
-                    VStack(alignment: .leading, spacing: 12) {
-                        Eyebrow(text: "Total day")
-                        let total = Double(max(d.stress.count, 1))
-                        let shares = [d.stress.filter { $0.level < 1 }.count, d.stress.filter { (1..<2).contains($0.level) }.count, d.stress.filter { $0.level >= 2 }.count]
-                            .map { Double($0) / total }
-                        GeometryReader { geo in
-                            HStack(spacing: 3) {
-                                ForEach(0..<3) { i in
-                                    Capsule().fill(Theme.stress[i]).frame(width: max(2, geo.size.width * shares[i] - 3))
+                if !d.stress.isEmpty {
+                    GlassCard {
+                        VStack(alignment: .leading, spacing: 12) {
+                            Eyebrow(text: "Total day")
+                            let total = Double(d.stress.count)
+                            let shares = [d.stress.filter { $0.level < 1 }.count, d.stress.filter { (1..<2).contains($0.level) }.count, d.stress.filter { $0.level >= 2 }.count]
+                                .map { Double($0) / total }
+                            GeometryReader { geo in
+                                HStack(spacing: 3) {
+                                    ForEach(0..<3) { i in
+                                        Capsule().fill(Theme.stress[i]).frame(width: max(2, geo.size.width * shares[i] - 3))
+                                    }
                                 }
                             }
-                        }
-                        .frame(height: 10)
-                        HStack {
-                            ForEach(0..<3) { i in
-                                VStack(alignment: .leading, spacing: 2) {
-                                    Text(["LOW", "MEDIUM", "HIGH"][i]).font(.caption2.weight(.bold)).tracking(1).foregroundStyle(Theme.stress[i])
-                                    Text("\(Int(shares[i] * 100))%").font(.system(.callout, design: .rounded).weight(.semibold))
+                            .frame(height: 10)
+                            HStack {
+                                ForEach(0..<3) { i in
+                                    VStack(alignment: .leading, spacing: 2) {
+                                        Text(["LOW", "MEDIUM", "HIGH"][i]).font(.caption2.weight(.bold)).tracking(1).foregroundStyle(Theme.stress[i])
+                                        Text("\(Int(shares[i] * 100))%").font(.system(.callout, design: .rounded).weight(.semibold))
+                                    }
+                                    .frame(maxWidth: .infinity, alignment: .leading)
                                 }
-                                .frame(maxWidth: .infinity, alignment: .leading)
                             }
                         }
                     }
@@ -142,7 +147,7 @@ struct BodyAgeView: View {
                     .font(.caption).foregroundStyle(.tertiary)
                     .padding(.horizontal, 6)
             } else {
-                GlassCard { Text("Body Age needs at least a week of data.").foregroundStyle(.secondary) }
+                GlassCard { Text("Body Age needs at least seven measured days for a factor. Missing data is excluded.").foregroundStyle(.secondary) }
                     .padding(.top, 60)
             }
         }

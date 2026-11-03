@@ -194,21 +194,21 @@ struct StrainDetailView: View {
         DetailScaffold(title: store.isToday ? "Today" : store.selected?.date.dayLabel ?? "", accent: Theme.strain[1]) {
             if let d = store.selected {
                 let target = ScoreEngine.strainTarget(recovery: d.recovery)
-                HeroRing(progress: d.strain / 21, colors: Theme.strain, value: d.strain.oneDecimal, unit: nil, caption: "Day Strain",
+                HeroRing(progress: (d.strain ?? 0) / 21, colors: Theme.strain, value: d.strain?.oneDecimal ?? "–", unit: nil, caption: "Day Strain",
                          marker: target.lowerBound / 21, orb: .strain, speed: 1.3)
                 Text("Target \(Int(target.lowerBound))–\(Int(target.upperBound)) based on your recovery")
                     .font(.caption).foregroundStyle(.secondary)
                 GlassCard {
                     VStack(spacing: 0) {
-                        ContributorRow(symbol: "heart", title: "Heart Rate Zones 1–3", value: (d.zoneMinutes[1...3].reduce(0, +) * 60).hoursMinutes)
+                        ContributorRow(symbol: "heart", title: "Heart Rate Zones 1–3", value: d.strain == nil ? "–" : (d.zoneMinutes[1...3].reduce(0, +) * 60).hoursMinutes)
                         Divider().opacity(0.4)
-                        ContributorRow(symbol: "heart.fill", title: "Heart Rate Zones 4–5", value: (d.zoneMinutes[4...5].reduce(0, +) * 60).hoursMinutes)
+                        ContributorRow(symbol: "heart.fill", title: "Heart Rate Zones 4–5", value: d.strain == nil ? "–" : (d.zoneMinutes[4...5].reduce(0, +) * 60).hoursMinutes)
                         Divider().opacity(0.4)
                         ContributorRow(symbol: "dumbbell", title: "Strength Activity Time", value: (d.strengthMinutes * 60).hoursMinutes)
                         Divider().opacity(0.4)
-                        ContributorRow(symbol: "shoeprints.fill", title: "Steps", value: d.raw.steps.formatted(.number.precision(.fractionLength(0))))
+                        ContributorRow(symbol: "shoeprints.fill", title: "Steps", value: d.raw.steps?.formatted(.number.precision(.fractionLength(0))) ?? "–")
                         Divider().opacity(0.4)
-                        ContributorRow(symbol: "flame", title: "Active Calories", value: d.raw.activeEnergy.formatted(.number.precision(.fractionLength(0))))
+                        ContributorRow(symbol: "flame", title: "Active Calories", value: d.raw.activeEnergy?.formatted(.number.precision(.fractionLength(0))) ?? "–")
                     }
                 }
                 InsightCallout(text: Insights.strainSummary(d))
@@ -234,7 +234,7 @@ struct StrainDetailView: View {
                         VStack(alignment: .leading, spacing: 10) {
                             Eyebrow(text: "Activities")
                             ForEach(d.raw.workouts) { w in
-                                ActivityRow(symbol: w.symbol, tint: Theme.strain[0], badge: (d.workoutStrain[w.id] ?? 0).oneDecimal,
+                                ActivityRow(symbol: w.symbol, tint: Theme.strain[0], badge: d.workoutStrain[w.id]?.oneDecimal ?? "–",
                                             title: w.name, detail: "\(w.start.shortTime) · \(Int(w.duration / 60)) min")
                             }
                         }
@@ -330,6 +330,12 @@ struct StrainRecoveryChart: View {
     var days: [DayScores]
     var compact = false
 
+    private var dateDomain: ClosedRange<Date> {
+        let start = days.first?.date ?? Calendar.current.startOfDay(for: .now)
+        let end = Calendar.current.date(byAdding: .day, value: 1, to: days.last?.date ?? start)!
+        return start...end
+    }
+
     private var xAxis: some AxisContent {
         AxisMarks(values: .stride(by: .day, count: days.count > 10 ? 5 : 1)) { _ in
             AxisValueLabel(format: days.count > 10 ? .dateTime.month(.abbreviated).day() : .dateTime.weekday(.narrow))
@@ -340,11 +346,14 @@ struct StrainRecoveryChart: View {
         VStack(alignment: .leading, spacing: 10) {
             Text("STRAIN · 0–21").font(.system(size: 9.5, weight: .medium, design: .monospaced)).tracking(1.2).foregroundStyle(.secondary)
             Chart(days) { d in
-                BarMark(x: .value("Day", d.date, unit: .day), y: .value("Strain", d.strain), width: .ratio(0.55))
-                    .foregroundStyle(Theme.strain[0].opacity(d.id == days.last?.id ? 1 : 0.5))
-                    .cornerRadius(4)
+                if let strain = d.strain {
+                    BarMark(x: .value("Day", d.date, unit: .day), y: .value("Strain", strain), width: .ratio(0.55))
+                        .foregroundStyle(Theme.strain[0].opacity(d.id == days.last?.id ? 1 : 0.5))
+                        .cornerRadius(4)
+                }
             }
             .chartYScale(domain: 0...21)
+            .chartXScale(domain: dateDomain)
             .chartYAxis { AxisMarks(values: [0, 7, 14, 21]) { _ in AxisGridLine().foregroundStyle(Theme.track); AxisValueLabel() } }
             .chartXAxis { xAxis }
             .frame(maxHeight: .infinity)
@@ -358,6 +367,7 @@ struct StrainRecoveryChart: View {
                     .symbolSize(compact ? 40 : 60)
             }
             .chartYScale(domain: 0...100)
+            .chartXScale(domain: dateDomain)
             .chartYAxis { AxisMarks(values: [0, 50, 100]) { _ in AxisGridLine().foregroundStyle(Theme.track); AxisValueLabel() } }
             .chartXAxis { xAxis }
             .frame(maxHeight: .infinity)

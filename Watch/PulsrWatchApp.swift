@@ -53,7 +53,7 @@ private struct SummaryPage: View {
             }
             HStack(spacing: 12) {
                 Text("Sleep ").foregroundStyle(.secondary) + Text(day?.sleepPerformance.map { "\($0.percent)%" } ?? "–").foregroundStyle(Theme.sleep[0])
-                Text("Strain ").foregroundStyle(.secondary) + Text(day?.strain.oneDecimal ?? "–").foregroundStyle(Theme.strain[0])
+                Text("Strain ").foregroundStyle(.secondary) + Text(day?.strain?.oneDecimal ?? "–").foregroundStyle(Theme.strain[0])
             }
             .font(.system(size: 12, weight: .medium))
         }
@@ -100,12 +100,12 @@ private struct StrainPage: View {
         VStack(spacing: 6) {
             ScoreRing(progress: (day?.strain ?? 0) / 21, colors: Theme.strain, lineWidth: 8,
                       marker: ScoreEngine.strainTarget(recovery: day?.recovery).lowerBound / 21) {
-                Text(day?.strain.oneDecimal ?? "–").font(.system(size: 28, weight: .bold, design: .rounded))
+                Text(day?.strain?.oneDecimal ?? "–").font(.system(size: 28, weight: .bold, design: .rounded))
             }
             .frame(width: 100, height: 100)
             if let day {
-                row("Zones 4–5", (day.zoneMinutes[4...5].reduce(0, +) * 60).hoursMinutes)
-                row("Steps", day.raw.steps.formatted(.number.precision(.fractionLength(0))))
+                row("Zones 4–5", day.strain == nil ? nil : (day.zoneMinutes[4...5].reduce(0, +) * 60).hoursMinutes)
+                row("Steps", day.raw.steps?.formatted(.number.precision(.fractionLength(0))))
             }
         }
         .navigationTitle("Strain")

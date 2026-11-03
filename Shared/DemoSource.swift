@@ -42,8 +42,9 @@ final class DemoSource: HealthDataSource {
         let hasLift = [3, 5].contains(weekday)
         let wake = sleep.end
         let currentMinute = isToday ? max(0, Int(Date.now.timeIntervalSince(day) / 60)) : 24 * 60
-        raw.steps = (hasRun ? 12_500 : 7_800) + rng.normal() * 1500
-        raw.activeEnergy = raw.steps * 0.045 + (hasRun ? 450 : hasLift ? 280 : 0)
+        let steps = (hasRun ? 12_500 : 7_800) + rng.normal() * 1500
+        raw.steps = steps
+        raw.activeEnergy = steps * 0.045 + (hasRun ? 450 : hasLift ? 280 : 0)
 
         var workouts: [WorkoutSummary] = []
         if hasRun {
@@ -64,8 +65,8 @@ final class DemoSource: HealthDataSource {
             raw.heartRate = makeHeartRate(day: day, sleep: sleep, wake: wake, rhr: raw.restingHR ?? 55, workouts: raw.workouts, upTo: currentMinute, rng: &rng)
         }
         if isToday {
-            raw.steps *= Double(currentMinute) / 1440
-            raw.activeEnergy *= Double(currentMinute) / 1440
+            raw.steps = raw.steps.map { $0 * Double(currentMinute) / 1440 }
+            raw.activeEnergy = raw.activeEnergy.map { $0 * Double(currentMinute) / 1440 }
         }
         return raw
     }
